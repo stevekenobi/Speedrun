@@ -1,0 +1,5 @@
+rootProject.name='Speedrun'
+include ':app'
+include ':network'
+include ':data'
+include ':storage'
