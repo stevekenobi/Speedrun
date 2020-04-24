@@ -5,6 +5,6 @@ import retrofit2.http.GET
 
 interface SpeedrunService {
 
-    @GET
+    @GET("/api/resources")
     suspend fun getResources(): ResourcesResponse
 }

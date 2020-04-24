@@ -1,11 +1,13 @@
 package com.example.speedrun.ui.base
 
 import android.content.Context
+import android.content.DialogInterface
 import android.os.Bundle
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import com.example.data.Datamanager
+import com.example.speedrun.R
 import com.example.speedrun.application.SpeedrunApplication
 import com.example.speedrun.injection.components.ActivityComponent
 import com.example.speedrun.injection.components.ApplicationComponent
@@ -21,7 +23,7 @@ open class BaseActivity : AppCompatActivity() {
     @Inject
     lateinit var dataManager: Datamanager
 
-    private var activityComponent: ActivityComponent? = null
+    var activityComponent: ActivityComponent? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +40,19 @@ open class BaseActivity : AppCompatActivity() {
 
             activityComponent?.inject(this)
         }
+    }
+
+    override fun onBackPressed() {
+        BaseAlertDialog.builder(
+            this,
+            R.string.base_alert_title,
+            R.string.base_alert_message,
+            R.string.base_alert_positive,
+            DialogInterface.OnClickListener { _, _ -> finish() },
+            R.string.base_alert_negative,
+            DialogInterface.OnClickListener { dialog, _ -> dialog.dismiss()},
+            true
+        ).show()
     }
 
     override fun attachBaseContext(newBase: Context?) {
