@@ -1,6 +1,7 @@
 package com.example.speedrun.injection.components;
 
 import com.example.speedrun.injection.PerViewHolder;
+import com.example.speedrun.ui.main.LatestRunViewHolder;
 
 import dagger.Component;
 
@@ -8,5 +9,6 @@ import dagger.Component;
 @Component(dependencies = {ApplicationComponent.class} )
 public interface ViewHolderComponent {
 
+    void inject(LatestRunViewHolder holder);
 
 }

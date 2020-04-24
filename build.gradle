@@ -20,6 +20,7 @@ buildscript {
             'lifecycle'          : '2.2.0',
             'liveDataKtxVersion' : '2.2.0',
             'okhttp'             : '4.5.0',
+            'prettytime'         : '4.0.4.Final',
             'recyclerview'       : '1.1.0',
             'restring'           : '1.0.0',
             'retrofit'           : '2.8.1',
@@ -82,6 +83,7 @@ buildscript {
                     'butterknife'        : "com.jakewharton:butterknife:${versions.butterknife}",
                     'butterknifeCompiler': "com.jakewharton:butterknife-compiler:${versions.butterknife}",
                     'viewpump'           : "io.github.inflationx:viewpump:${versions.viewpump}",
+                    'prettytime'         : "org.ocpsoft.prettytime:prettytime:${versions.prettytime}"
             ]
     ]
 

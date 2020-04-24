@@ -1,6 +1,7 @@
 package com.example.network.injection
 
 import com.example.network.SpeedrunService
+import com.example.network.utils.DateConverter
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
@@ -8,6 +9,7 @@ import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.*
 import javax.inject.Named
 import javax.inject.Singleton
 
@@ -23,6 +25,7 @@ class NetworkModule {
     @Singleton
     fun provideGsonConverterFactory(): GsonConverterFactory {
         val builder = GsonBuilder()
+        builder.registerTypeAdapter(Date::class.java, DateConverter())
         return GsonConverterFactory.create(builder.create())
     }
 
@@ -33,6 +36,7 @@ class NetworkModule {
         val builder = OkHttpClient.Builder()
         return builder.build()
     }
+
     @Provides
     @Singleton
     @Named("SpeedrunServiceRetrofitBuilder")
@@ -45,6 +49,7 @@ class NetworkModule {
             .addCallAdapterFactory(adapterFactory)
             .addConverterFactory(gsonConverterFactory)
     }
+
     @Provides
     @Singleton
     fun provideSpeedrunService(@Named("SpeedrunServiceRetrofitBuilder") retrofitBuilder: Retrofit.Builder): SpeedrunService {

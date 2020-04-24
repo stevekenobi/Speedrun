@@ -62,6 +62,7 @@ dependencies {
     api deps.additional.butterknife
     kapt deps.additional.butterknifeCompiler
     api deps.additional.viewpump
+    api deps.additional.prettytime
 
     api project(':network')
     api project(':storage')
