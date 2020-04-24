@@ -1,11 +1,11 @@
 package com.example.speedrun.ui.splash
 
 import android.os.Bundle
+import android.view.View
 import com.example.speedrun.R
 import com.example.speedrun.ui.base.BaseActivity
 import com.example.speedrun.viewmodel.SpeedrunViewModelFactory
-import com.ice.restring.Restring
-import java.util.*
+import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
 class SplashActivity : BaseActivity() {
@@ -34,9 +34,9 @@ class SplashActivity : BaseActivity() {
                 return@Observer
 
             if (it){
-                //TODO make loader
+                splash_loader.visibility = View.VISIBLE
             } else {
-                //TODO open main activity
+                splash_loader.visibility = View.GONE
             }
         })
     }
