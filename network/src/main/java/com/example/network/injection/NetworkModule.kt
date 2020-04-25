@@ -6,6 +6,7 @@ import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -31,18 +32,26 @@ class NetworkModule {
 
     @Provides
     @Singleton
+    fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor {
+        return HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY)
+    }
+
+    @Provides
+    @Singleton
     @Named("SpeedrunServiceHttpClient")
-    fun provideSpeedrunServiceHttpClient(): OkHttpClient {
+    fun provideSpeedrunServiceHttpClient(logging: HttpLoggingInterceptor): OkHttpClient {
         val builder = OkHttpClient.Builder()
+            .addNetworkInterceptor(logging)
         return builder.build()
     }
 
     @Provides
     @Singleton
     @Named("SpeedrunServiceRetrofitBuilder")
-    fun provideSpeedrunServiceRetrofitBuilder(@Named("SpeedrunServiceHttpClient") client: OkHttpClient,
-                                        adapterFactory: RxJava2CallAdapterFactory,
-                                        gsonConverterFactory: GsonConverterFactory
+    fun provideSpeedrunServiceRetrofitBuilder(
+        @Named("SpeedrunServiceHttpClient") client: OkHttpClient,
+        adapterFactory: RxJava2CallAdapterFactory,
+        gsonConverterFactory: GsonConverterFactory
     ): Retrofit.Builder {
         return Retrofit.Builder()
             .client(client)
