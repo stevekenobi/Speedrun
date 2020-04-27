@@ -15,8 +15,8 @@ class SplashViewModel @Inject constructor(private val datamanager: Datamanager):
         viewModelScope.launch(Dispatchers.IO) {
             isLoadingLiveData.postValue(true)
 
-            val updatedMap = datamanager.getResources()
-            Restring.setStrings(Locale.getDefault().language, updatedMap)
+//            val updatedMap = datamanager.getResources()
+//            Restring.setStrings(Locale.getDefault().language, updatedMap)
 
             isLoadingLiveData.postValue(false)
         }

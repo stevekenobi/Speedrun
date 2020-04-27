@@ -1,6 +1,7 @@
 package com.example.network.model.messages
 
+import com.example.network.model.Pagination
+
 open class BaseResponse {
-    val success: Boolean = false
-    val message: String? = null
+    val pagination: Pagination? = null
 }

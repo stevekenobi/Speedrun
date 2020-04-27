@@ -15,17 +15,17 @@ class Datamanager @Inject constructor(
     private val session: Session
 ) {
 
-    suspend fun getResources(): Map<String, String> {
-        val resourcesFromServer = service.getResources().data
-
-        val resourcesForDatabase = resourcesFromServer.map {
-            ResourceDataMapper.from(it)
-        }
-
-        database.resourcesDao().update(resourcesForDatabase)
-
-        return database.resourcesDao().getResourcesAsMap()
-    }
+//    suspend fun getResources(): Map<String, String> {
+//        val resourcesFromServer = service.getResources().data
+//
+//        val resourcesForDatabase = resourcesFromServer.map {
+//            ResourceDataMapper.from(it)
+//        }
+//
+//        database.resourcesDao().update(resourcesForDatabase)
+//
+//        return database.resourcesDao().getResourcesAsMap()
+//    }
 
     suspend fun getLatestRuns(): List<LatestRunDto> {
         return service.getLatestRun().data

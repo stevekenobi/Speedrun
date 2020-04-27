@@ -6,9 +6,9 @@ import retrofit2.http.GET
 
 interface SpeedrunService {
 
-    @GET("/api/resources")
-    suspend fun getResources(): ResourcesResponse
+//    @GET("/api/resources")
+//    suspend fun getResources(): ResourcesResponse
 
-    @GET("/api/runs/latest")
+    @GET("runs?orderby=date&direction=desc&embed=game,category,players")
     suspend fun getLatestRun(): LatestRunResponse
 }

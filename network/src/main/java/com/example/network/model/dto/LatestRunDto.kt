@@ -1,12 +1,25 @@
 package com.example.network.model.dto
 
-import java.util.*
+import com.example.network.model.Link
+import com.example.network.model.messages.CategoryResponse
+import com.example.network.model.messages.GameResponse
+import com.example.network.model.messages.PlayersResponse
 
 data class LatestRunDto(
-    val id: Int,
-    val gameName: String,
-    val categoryName: String,
-    val dateCompleted: Date,
-    val timeCompleted: Long,
-    val username: String
+    val id: String,
+    val weblink: String,
+    val game: GameResponse,
+    val level: String?,
+    val category: CategoryResponse,
+    val videos: VideosDto,
+    val comment: String?,
+    val status: StatusDto,
+    val players: PlayersResponse,
+    val date: String,
+    val submitted: String?,
+    val times: TimeDto,
+    val system: SystemDto,
+    val splits: Link,
+    val values: Any,
+    val links: List<Link>
 )

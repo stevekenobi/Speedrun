@@ -62,7 +62,7 @@ class NetworkModule {
     @Provides
     @Singleton
     fun provideSpeedrunService(@Named("SpeedrunServiceRetrofitBuilder") retrofitBuilder: Retrofit.Builder): SpeedrunService {
-        retrofitBuilder.baseUrl("http://192.168.2.16:5000")
+        retrofitBuilder.baseUrl("https://www.speedrun.com/api/v1/")
         return retrofitBuilder.build().create(SpeedrunService::class.java)
     }
 }

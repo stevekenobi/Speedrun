@@ -50,6 +50,8 @@ class MainActivity : BaseActivity() {
             }
 
             main_rv_latest_runs.layoutManager = LinearLayoutManager(this)
+            val itemDecoration = ItemDivideDecorator(80)
+            main_rv_latest_runs.addItemDecoration(itemDecoration)
             main_rv_latest_runs.adapter = LatestRunAdapter(it)
         })
     }

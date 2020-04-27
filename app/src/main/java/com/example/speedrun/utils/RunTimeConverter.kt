@@ -13,4 +13,8 @@ object RunTimeConverter {
 
         return "${hours}h ${mins}m ${secs}s ${mills}ms"
     }
+
+    fun from(time: Double) : String {
+        return time.toString() // TODO Convert properly
+    }
 }
