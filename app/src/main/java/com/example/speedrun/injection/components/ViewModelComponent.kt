@@ -4,6 +4,7 @@ import com.example.speedrun.injection.PerViewModel
 import com.example.speedrun.injection.modules.ViewModelModule
 import com.example.speedrun.ui.main.MainViewModel
 import com.example.speedrun.ui.splash.SplashViewModel
+import com.example.speedrun.ui.user.UserProfileViewModel
 import com.example.speedrun.viewmodel.SpeedrunViewModelFactory
 import dagger.Component
 
@@ -15,4 +16,5 @@ interface ViewModelComponent {
 
     fun inject(viewModel: MainViewModel)
     fun inject(viewModel: SplashViewModel)
+    fun inject(viewModel: UserProfileViewModel)
 }

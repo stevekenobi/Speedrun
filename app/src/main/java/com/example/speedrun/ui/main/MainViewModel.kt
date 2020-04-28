@@ -13,6 +13,8 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(private val datamanager: Datamanager) : BaseViewModel() {
     val latestRunsLiveData = MutableLiveData<List<LatestGameModel>>()
 
+    val latestUserPressedLiveData = MutableLiveData<String>()
+
     fun getLatestRuns() {
         viewModelScope.launch(Dispatchers.IO) {
             isLoadingLiveData.postValue(true)

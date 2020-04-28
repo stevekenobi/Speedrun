@@ -1,11 +1,15 @@
 package com.example.speedrun.ui.main
 
+import android.content.DialogInterface
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.speedrun.R
 import com.example.speedrun.ui.base.BaseActivity
+import com.example.speedrun.ui.user.UserProfileActivity
+import com.example.speedrun.utils.ActivityExtras
 import com.example.speedrun.viewmodel.SpeedrunViewModelFactory
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
@@ -30,6 +34,19 @@ class MainActivity : BaseActivity() {
         viewModel?.getLatestRuns()
     }
 
+    override fun onBackPressed() {
+        buildAlertDialog(
+            this,
+            R.string.base_alert_title,
+            R.string.base_alert_message,
+            R.string.base_alert_positive,
+            DialogInterface.OnClickListener { _, _ -> finish() },
+            R.string.base_alert_negative,
+            DialogInterface.OnClickListener { dialog, _ -> dialog.dismiss()},
+            true
+        ).show()
+    }
+
     private fun initViewModel() {
         viewModel = viewModelFactory.create(MainViewModel::class.java)
 
@@ -52,7 +69,16 @@ class MainActivity : BaseActivity() {
                 return@Observer
             }
 
-            main_rv_latest_runs.adapter = LatestGameAdapter(it)
+            main_rv_latest_runs.adapter = LatestGameAdapter(viewModel, it)
+        })
+
+        viewModel?.latestUserPressedLiveData?.observe(this, Observer {
+            if (it.isNullOrEmpty()) {
+                return@Observer
+            }
+
+            val intent = Intent(this, UserProfileActivity::class.java).putExtra(ActivityExtras.EXTRA_USER_ID, it)
+            startActivity(intent)
         })
     }
 

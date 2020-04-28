@@ -7,7 +7,6 @@ import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import com.example.data.Datamanager
-import com.example.speedrun.R
 import com.example.speedrun.application.SpeedrunApplication
 import com.example.speedrun.injection.components.ActivityComponent
 import com.example.speedrun.injection.components.ApplicationComponent
@@ -42,23 +41,30 @@ open class BaseActivity : AppCompatActivity() {
         }
     }
 
-    override fun onBackPressed() {
-        BaseAlertDialog.builder(
-            this,
-            R.string.base_alert_title,
-            R.string.base_alert_message,
-            R.string.base_alert_positive,
-            DialogInterface.OnClickListener { _, _ -> finish() },
-            R.string.base_alert_negative,
-            DialogInterface.OnClickListener { dialog, _ -> dialog.dismiss()},
-            true
-        ).show()
-    }
-
     override fun attachBaseContext(newBase: Context?) {
 //        super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase));
         Timber.d("attachBaseContext")
         super.attachBaseContext(ViewPumpContextWrapper.wrap(Restring.wrapContext(newBase)))
+    }
+
+    fun buildAlertDialog(activity: BaseActivity,
+                         titleRes: Int,
+                         messageRes: Int,
+                         positiveRes: Int,
+                         positiveClick: DialogInterface.OnClickListener,
+                         negativeRes: Int,
+                         negativeClick: DialogInterface.OnClickListener,
+                         cancelable: Boolean) : android.app.AlertDialog{
+        return BaseAlertDialog.builder(
+            activity,
+            titleRes,
+            messageRes,
+            positiveRes,
+            positiveClick,
+            negativeRes,
+            negativeClick,
+            cancelable
+        )
     }
 
     open fun displayToast(message: CharSequence?, duration: Int) {

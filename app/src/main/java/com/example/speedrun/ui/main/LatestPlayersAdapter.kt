@@ -3,10 +3,14 @@ package com.example.speedrun.ui.main
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.network.model.dto.PlayerDto
+import com.example.network.model.dto.UserDto
 import com.example.speedrun.R
+import kotlinx.android.synthetic.main.item_latest_player.view.*
 
-class LatestPlayersAdapter(val playerList: List<PlayerDto>) :
+class LatestPlayersAdapter(
+    val viewModel: MainViewModel?,
+    val playerList: List<UserDto>
+) :
     RecyclerView.Adapter<LatestPlayersViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LatestPlayersViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_latest_player, parent, false)
@@ -19,6 +23,10 @@ class LatestPlayersAdapter(val playerList: List<PlayerDto>) :
 
     override fun onBindViewHolder(holder: LatestPlayersViewHolder, position: Int) {
         holder.bind(playerList[position])
+
+        holder.itemView.latest_player.setOnClickListener {
+            viewModel?.latestUserPressedLiveData?.value = playerList[position].id
+        }
     }
 
 }
