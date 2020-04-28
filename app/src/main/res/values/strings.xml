@@ -7,5 +7,6 @@
     <string name="base_alert_negative">No</string>
 
     <string name="main_test">Hello World!</string>
+    <string name="main_recent_title">Latest Runs</string>
 
 </resources>

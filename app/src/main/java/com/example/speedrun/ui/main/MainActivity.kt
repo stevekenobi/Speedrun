@@ -39,10 +39,10 @@ class MainActivity : BaseActivity() {
 
             if (it){
                 main_loader.visibility = View.VISIBLE
-                main_rv_latest_runs.visibility = View.GONE
+                main_layout.visibility = View.GONE
             } else {
                 main_refresh.isRefreshing = false
-                main_rv_latest_runs.visibility = View.VISIBLE
+                main_layout.visibility = View.VISIBLE
                 main_loader.visibility = View.GONE
             }
         })
