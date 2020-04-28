@@ -37,7 +37,7 @@ class MainActivity : BaseActivity() {
             if (it == null)
                 return@Observer
 
-            if (it){
+            if (it) {
                 main_loader.visibility = View.VISIBLE
                 main_layout.visibility = View.GONE
             } else {
@@ -52,9 +52,6 @@ class MainActivity : BaseActivity() {
                 return@Observer
             }
 
-            main_rv_latest_runs.layoutManager = LinearLayoutManager(this)
-            val itemDecoration = ItemDivideDecorator(80)
-            main_rv_latest_runs.addItemDecoration(itemDecoration)
             main_rv_latest_runs.adapter = LatestGameAdapter(it)
         })
     }
@@ -62,6 +59,12 @@ class MainActivity : BaseActivity() {
     private fun initUi() {
         main_refresh.setOnRefreshListener {
             viewModel?.getLatestRuns()
+        }
+
+        main_rv_latest_runs.apply {
+            layoutManager = LinearLayoutManager(this@MainActivity)
+            val itemDecoration = ItemDivideDecorator(80)
+            addItemDecoration(itemDecoration)
         }
     }
 
