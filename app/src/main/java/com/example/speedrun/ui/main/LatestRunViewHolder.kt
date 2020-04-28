@@ -1,6 +1,8 @@
 package com.example.speedrun.ui.main
 
+import android.content.res.Configuration
 import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.network.model.dto.LatestRunDto
 import com.example.speedrun.ui.base.BaseViewHolder
 import com.example.speedrun.utils.RunTimeConverter
@@ -15,8 +17,14 @@ class LatestRunViewHolder(itemView: View) : BaseViewHolder(itemView) {
     fun bind(run: LatestRunDto) {
         itemView.apply {
             val info = run.category.data.name + "   " + RunTimeConverter.from(run.times.primary_t)
-
-            latest_game_run_info.text = info
+            if (context.resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
+                latest_game_run_info.text = info
+            } else {
+                land_latest_run_cat.text = run.category.data.name
+                land_latest_run_time.text = RunTimeConverter.from(run.times.primary_t)
+                land_latest_players.adapter = LatestPlayersAdapter(run.players.data)
+                land_latest_players.layoutManager = LinearLayoutManager(context)
+            }
         }
     }
 }
