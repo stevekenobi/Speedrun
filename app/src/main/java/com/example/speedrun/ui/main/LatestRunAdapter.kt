@@ -6,17 +6,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.network.model.dto.LatestRunDto
 import com.example.speedrun.R
 
-class LatestRunAdapter(private val latestRunList: List<LatestRunDto>) :
-    RecyclerView.Adapter<LatestRunViewHolder>() {
+class LatestRunAdapter(val runs: List<LatestRunDto>) : RecyclerView.Adapter<LatestRunViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LatestRunViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_latest_run, parent, false)
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.item_latest_run, parent, false)
         return LatestRunViewHolder(view)
     }
 
-    override fun getItemCount() = latestRunList.size
+    override fun getItemCount() = runs.size
 
     override fun onBindViewHolder(holder: LatestRunViewHolder, position: Int) {
-        holder.bind(latestRunList[position])
+        holder.bind(runs[position])
     }
-
 }

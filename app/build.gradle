@@ -44,6 +44,7 @@ dependencies {
     api deps.android.reactivestreams
     api deps.android.lifecycleExt
     api deps.android.lifecycleRuntime
+    api deps.android.swipeRefresh
 
     api deps.reactivex.rxAndroid
 
@@ -63,6 +64,8 @@ dependencies {
     kapt deps.additional.butterknifeCompiler
     api deps.additional.viewpump
     api deps.additional.prettytime
+    api deps.additional.glide
+    kapt deps.additional.glideProcessor
 
     api project(':network')
     api project(':storage')
