@@ -70,6 +70,7 @@ class MainActivity : BaseActivity() {
             }
 
             main_rv_latest_runs.adapter = LatestGameAdapter(viewModel, it)
+            main_rv_latest_runs.isNestedScrollingEnabled = false
         })
 
         viewModel?.latestUserPressedLiveData?.observe(this, Observer {

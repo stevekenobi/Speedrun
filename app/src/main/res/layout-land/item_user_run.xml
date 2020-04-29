@@ -5,32 +5,38 @@
     android:layout_height="wrap_content">
 
     <LinearLayout
-        android:id="@+id/land_latest_run_info_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/land_latest_run_cat"
+            android:id="@+id/user_run_category"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.25"
-            android:textAlignment="center" />
-
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/land_latest_players"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.25"
+            android:layout_weight="0.13"
             android:textAlignment="center" />
 
         <TextView
-            android:id="@+id/land_latest_run_time"
+            android:id="@+id/user_run_place"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.25"
+            android:layout_weight="0.2"
             android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/user_run_time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/user_run_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.2"
+            android:textAlignment="center" />
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
