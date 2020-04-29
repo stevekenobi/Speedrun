@@ -12,6 +12,7 @@ import com.example.network.model.dto.UserRunDto
 import com.example.speedrun.R
 import com.example.speedrun.model.UserGameModel
 import com.example.speedrun.ui.base.BaseActivity
+import com.example.speedrun.ui.main.ItemDivideDecorator
 import com.example.speedrun.utils.ActivityExtras
 import com.example.speedrun.viewmodel.SpeedrunViewModelFactory
 import kotlinx.android.synthetic.main.activity_user_profile.*
@@ -29,6 +30,8 @@ class UserProfileActivity : BaseActivity() {
         setContentView(R.layout.activity_user_profile)
 
         activityComponent?.inject(this)
+
+        initUI()
 
         initViewModel()
 
@@ -67,6 +70,14 @@ class UserProfileActivity : BaseActivity() {
         })
     }
 
+    private fun initUI() {
+        rv_user_runs.apply {
+            layoutManager = LinearLayoutManager(this@UserProfileActivity)
+            val itemDecoration = ItemDivideDecorator(80)
+            addItemDecoration(itemDecoration)
+        }
+    }
+
     private fun updateUserInfo(user: UserDto) {
         user_name.text = user.names?.international
 
@@ -84,7 +95,6 @@ class UserProfileActivity : BaseActivity() {
     }
 
     private fun updateUserRuns(gameList: List<UserGameModel>) {
-        rv_user_runs.layoutManager = LinearLayoutManager(this)
         rv_user_runs.adapter = UserGamesAdapter(gameList)
     }
 }

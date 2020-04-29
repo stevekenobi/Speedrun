@@ -1,21 +1,17 @@
 package com.example.network.model.dto
 
 import com.example.network.model.Link
-import com.example.network.model.messages.CategoryResponse
-import com.example.network.model.messages.GameResponse
-import com.example.network.model.messages.PlayersResponse
 
-data class UserRunDto(
+data class UserRunShortDto(
     val id: String,
-    var place: Int?,
     val weblink: String,
-    val game: GameResponse,
+    val game: String,
     val level: String?,
-    val category: CategoryResponse,
+    val category: String,
     val videos: VideosDto,
     val comment: String,
     val status: StatusDto,
-    val players: PlayersResponse,
+    val players: List<PlayerDto>,
     val date: String,
     val submitted: String,
     val times: TimeDto,

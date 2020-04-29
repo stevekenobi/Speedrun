@@ -4,6 +4,7 @@ import com.example.network.Session
 import com.example.network.SpeedrunService
 import com.example.network.model.dto.LatestRunDto
 import com.example.network.model.dto.UserDto
+import com.example.network.model.dto.UserPBDto
 import com.example.network.model.dto.UserRunDto
 import com.example.storage.DatabaseSpeedrun
 import javax.inject.Inject
@@ -37,6 +38,15 @@ class Datamanager @Inject constructor(
     }
 
     suspend fun getUserRuns(userId: String): List<UserRunDto> {
-        return service.getUserRuns(userId).data
+        val userRuns = service.getUserRuns(userId).data
+
+        val userPbs = service.getPBsForUser(userId).data
+
+        userRuns.map {
+            it.place = userPbs.find {pb: UserPBDto -> pb.run.id ==it.id }?.place
+        }
+
+        return userRuns
     }
+
 }

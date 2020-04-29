@@ -1,6 +1,7 @@
 package com.example.network
 
 import com.example.network.model.messages.LatestRunResponse
+import com.example.network.model.messages.PBResponse
 import com.example.network.model.messages.UserResponse
 import com.example.network.model.messages.UserRunsResponse
 import retrofit2.http.GET
@@ -18,6 +19,9 @@ interface SpeedrunService {
     @GET("users/{userId}")
     suspend fun getUserById(@Path("userId")userId: String): UserResponse
 
-    @GET("runs?embed=game,category,players")
+    @GET("users/{userId}/personal-bests?embed=games,categories,players")
+    suspend fun getPBsForUser(@Path("userId")userId: String): PBResponse
+
+    @GET("runs?embed=game,category,players&orderby=date&direction=desc")
     suspend fun getUserRuns(@Query("user")userId: String): UserRunsResponse
 }
