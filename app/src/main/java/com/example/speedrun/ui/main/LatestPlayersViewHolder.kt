@@ -15,7 +15,10 @@ class LatestPlayersViewHolder(itemView: View) : BaseViewHolder(itemView) {
 
     fun bind(player: UserDto) {
         itemView.apply {
-            latest_player.text = player.names?.international
+            if (player.role == "guest")
+                latest_player.text = player.name
+            else
+                latest_player.text = player.names?.international
 
             val textShader = LinearGradient(
                 0f, 0f, 0f, 20f,
@@ -27,7 +30,6 @@ class LatestPlayersViewHolder(itemView: View) : BaseViewHolder(itemView) {
                 Shader.TileMode.CLAMP
             )
             latest_player.paint.shader = textShader
-//            latest_player.setTextColor(Color.parseColor(player.nameStyle.colorFrom.light))
         }
     }
 }

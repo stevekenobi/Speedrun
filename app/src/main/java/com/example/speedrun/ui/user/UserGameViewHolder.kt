@@ -13,7 +13,7 @@ class UserGameViewHolder(itemView: View) : BaseViewHolder(itemView) {
 
     fun bind(game: UserGameModel) {
         itemView.apply {
-            Glide.with(this).load(game.image)
+            Glide.with(this).load(game.image).into(user_game_image)
 
             user_game_name.text = game.name
         }
