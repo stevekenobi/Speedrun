@@ -9,12 +9,12 @@ import kotlinx.android.synthetic.main.item_latest_player.view.*
 
 class LatestPlayersAdapter(
     val viewModel: MainViewModel?,
-    val playerList: List<UserDto>
+    private val playerList: List<UserDto>
 ) :
     RecyclerView.Adapter<LatestPlayersViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LatestPlayersViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_latest_player, parent, false)
-        return LatestPlayersViewHolder(view)
+        return LatestPlayersViewHolder(viewModel, view)
     }
 
     override fun getItemCount(): Int {
@@ -23,10 +23,6 @@ class LatestPlayersAdapter(
 
     override fun onBindViewHolder(holder: LatestPlayersViewHolder, position: Int) {
         holder.bind(playerList[position])
-
-        holder.itemView.latest_player.setOnClickListener {
-            viewModel?.latestUserPressedLiveData?.value = playerList[position].id
-        }
     }
 
 }

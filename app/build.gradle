@@ -66,6 +66,7 @@ dependencies {
     api deps.additional.prettytime
     api deps.additional.glide
     kapt deps.additional.glideProcessor
+    api deps.additional.material
 
     api project(':network')
     api project(':storage')

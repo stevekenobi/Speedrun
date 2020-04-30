@@ -1,5 +1,6 @@
 package com.example.speedrun.ui.user
 
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.LinearGradient
 import android.graphics.Shader
@@ -12,6 +13,7 @@ import com.example.network.model.dto.UserRunDto
 import com.example.speedrun.R
 import com.example.speedrun.model.UserGameModel
 import com.example.speedrun.ui.base.BaseActivity
+import com.example.speedrun.ui.game.GameDetailsActivity
 import com.example.speedrun.ui.main.ItemDivideDecorator
 import com.example.speedrun.utils.ActivityExtras
 import com.example.speedrun.viewmodel.SpeedrunViewModelFactory
@@ -68,6 +70,15 @@ class UserProfileActivity : BaseActivity() {
 
             updateUserInfo(it)
         })
+
+        viewModel?.gameClickedLiveData?.observe(this, Observer {
+            if (it.isNullOrEmpty())
+                return@Observer
+
+            val intent = Intent(this@UserProfileActivity, GameDetailsActivity::class.java)
+            intent.putExtra(ActivityExtras.EXTRA_GAME_ID, it)
+            startActivity(intent)
+        })
     }
 
     private fun initUI() {
@@ -84,8 +95,8 @@ class UserProfileActivity : BaseActivity() {
         val textShader = LinearGradient(
             0f, 0f, 0f, 20f,
             intArrayOf(
-                Color.parseColor(user.nameStyle.colorFrom.light),
-                Color.parseColor(user.nameStyle.colorTo.light)
+                Color.parseColor(user.nameStyle?.colorFrom?.light),
+                Color.parseColor(user.nameStyle?.colorTo?.light)
             ),
             floatArrayOf(0f, 1f),
             Shader.TileMode.CLAMP
@@ -95,6 +106,6 @@ class UserProfileActivity : BaseActivity() {
     }
 
     private fun updateUserRuns(gameList: List<UserGameModel>) {
-        rv_user_runs.adapter = UserGamesAdapter(gameList)
+        rv_user_runs.adapter = UserGamesAdapter(viewModel, gameList)
     }
 }

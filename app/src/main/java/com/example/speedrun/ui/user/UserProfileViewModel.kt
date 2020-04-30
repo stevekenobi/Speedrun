@@ -15,6 +15,7 @@ class UserProfileViewModel @Inject constructor(val datamanager: Datamanager) : B
 
     val userDetailsLiveData = MutableLiveData<UserDto>()
     val userRunsLiveData = MutableLiveData<List<UserGameModel>>()
+    val gameClickedLiveData = MutableLiveData<String>()
 
     fun getUserDetails(id: String) {
         viewModelScope.launch(Dispatchers.IO) {

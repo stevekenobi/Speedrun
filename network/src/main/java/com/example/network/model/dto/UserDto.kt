@@ -9,7 +9,7 @@ data class UserDto(
     val names: NamesDto?,
     val name: String?,
     val weblink: String,
-    @SerializedName("name-style")val nameStyle: StyleDto,
+    @SerializedName("name-style")val nameStyle: StyleDto?,
     val role: String,
     val signup: String,
     val location: LocationDto,

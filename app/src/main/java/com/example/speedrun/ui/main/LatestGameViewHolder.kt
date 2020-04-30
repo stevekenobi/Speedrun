@@ -17,7 +17,14 @@ class LatestGameViewHolder(val viewModel: MainViewModel?, itemView: View) : Base
         itemView.apply {
 
             Glide.with(this).load(game.imageURI).into(latest_game_image)
+            latest_game_image.setOnClickListener {
+                viewModel?.latestGamePressedLiveData?.value = game.id
+            }
+
             latest_game_name.text = game.name
+            latest_game_name.setOnClickListener {
+                viewModel?.latestGamePressedLiveData?.value = game.id
+            }
 
             latest_game_runs.layoutManager = LinearLayoutManager(context)
             latest_game_runs.adapter = LatestRunAdapter(viewModel, game.runs)

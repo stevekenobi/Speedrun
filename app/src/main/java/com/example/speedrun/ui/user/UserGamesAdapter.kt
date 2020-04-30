@@ -6,10 +6,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.speedrun.R
 import com.example.speedrun.model.UserGameModel
 
-class UserGamesAdapter(val gameList: List<UserGameModel>) : RecyclerView.Adapter<UserGameViewHolder>() {
+class UserGamesAdapter(val viewModel: UserProfileViewModel?, private val gameList: List<UserGameModel>) : RecyclerView.Adapter<UserGameViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserGameViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_user_game, parent, false)
-        return UserGameViewHolder(view)
+        return UserGameViewHolder(viewModel, view)
     }
 
     override fun getItemCount(): Int {

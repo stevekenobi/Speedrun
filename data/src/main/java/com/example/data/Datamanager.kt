@@ -2,10 +2,7 @@ package com.example.data
 
 import com.example.network.Session
 import com.example.network.SpeedrunService
-import com.example.network.model.dto.LatestRunDto
-import com.example.network.model.dto.UserDto
-import com.example.network.model.dto.UserPBDto
-import com.example.network.model.dto.UserRunDto
+import com.example.network.model.dto.*
 import com.example.storage.DatabaseSpeedrun
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -47,6 +44,10 @@ class Datamanager @Inject constructor(
         }
 
         return userRuns
+    }
+
+    suspend fun getGameDetails(gameId: String): GameDetailsDto {
+        return service.getGameDetails(gameId).data
     }
 
 }

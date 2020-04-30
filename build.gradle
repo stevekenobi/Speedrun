@@ -20,6 +20,7 @@ buildscript {
             'gson'               : '2.8.6',
             'lifecycle'          : '2.2.0',
             'liveDataKtxVersion' : '2.2.0',
+            'material'          : '1.1.0-rc02',
             'okhttp'             : '4.5.0',
             'prettytime'         : '4.0.4.Final',
             'recyclerview'       : '1.1.0',
@@ -87,6 +88,7 @@ buildscript {
                     'butterknifeCompiler': "com.jakewharton:butterknife-compiler:${versions.butterknife}",
                     'viewpump'           : "io.github.inflationx:viewpump:${versions.viewpump}",
                     'prettytime'         : "org.ocpsoft.prettytime:prettytime:${versions.prettytime}",
+                    'material'          : "com.google.android.material:material:${versions.material}",
                     'glide'              : "com.github.bumptech.glide:glide:${versions.glide}",
                     'glideProcessor'     : "com.github.bumptech.glide:compiler:${versions.glide}"
             ]

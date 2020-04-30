@@ -2,6 +2,7 @@ package com.example.speedrun.injection.modules
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.speedrun.ui.game.GameDetailsViewModel
 import com.example.speedrun.ui.main.MainViewModel
 import com.example.speedrun.ui.splash.SplashViewModel
 import com.example.speedrun.ui.user.UserProfileViewModel
@@ -33,5 +34,10 @@ interface ViewModelModule {
     @IntoMap
     @ViewModelKey(UserProfileViewModel::class)
     fun bindUserProfileViewModel(viewModel: UserProfileViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(GameDetailsViewModel::class)
+    fun bindGameDetailsViewModel(viewModel: GameDetailsViewModel): ViewModel
 
 }

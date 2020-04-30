@@ -8,7 +8,7 @@ import com.example.network.model.dto.UserDto
 import com.example.speedrun.ui.base.BaseViewHolder
 import kotlinx.android.synthetic.main.item_latest_player.view.*
 
-class LatestPlayersViewHolder(itemView: View) : BaseViewHolder(itemView) {
+class LatestPlayersViewHolder(val viewModel: MainViewModel?, itemView: View) : BaseViewHolder(itemView) {
     init {
         viewHolderComponent()?.inject(this)
     }
@@ -20,11 +20,15 @@ class LatestPlayersViewHolder(itemView: View) : BaseViewHolder(itemView) {
             else
                 latest_player.text = player.names?.international
 
+
+            latest_player.setOnClickListener {
+                viewModel?.latestUserPressedLiveData?.value = player.id
+            }
             val textShader = LinearGradient(
                 0f, 0f, 0f, 20f,
                 intArrayOf(
-                    Color.parseColor(player.nameStyle.colorFrom.light),
-                    Color.parseColor(player.nameStyle.colorTo.light)
+                    Color.parseColor(player.nameStyle?.colorFrom?.light),
+                    Color.parseColor(player.nameStyle?.colorTo?.light)
                 ),
                 floatArrayOf(0f, 1f),
                 Shader.TileMode.CLAMP
