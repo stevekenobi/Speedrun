@@ -63,10 +63,12 @@ dependencies {
     api deps.additional.butterknife
     kapt deps.additional.butterknifeCompiler
     api deps.additional.viewpump
+    api deps.additional.calligraphy
     api deps.additional.prettytime
     api deps.additional.glide
     kapt deps.additional.glideProcessor
     api deps.additional.material
+    api deps.additional.bootstrap
 
     api project(':network')
     api project(':storage')

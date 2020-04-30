@@ -6,12 +6,17 @@ import android.content.Context;
 
 import androidx.lifecycle.ProcessLifecycleOwner;
 
+import com.beardedhen.androidbootstrap.TypefaceProvider;
+import com.example.speedrun.R;
 import com.example.speedrun.injection.components.ApplicationComponent;
 import com.example.speedrun.injection.components.DaggerApplicationComponent;
 import com.example.speedrun.utils.LifecycleListener;
 import com.ice.restring.Restring;
 import com.ice.restring.RestringConfig;
 
+import io.github.inflationx.calligraphy3.CalligraphyConfig;
+import io.github.inflationx.calligraphy3.CalligraphyInterceptor;
+import io.github.inflationx.viewpump.ViewPump;
 import timber.log.Timber;
 
 public class SpeedrunApplication extends Application {
@@ -25,8 +30,10 @@ public class SpeedrunApplication extends Application {
         super.onCreate();
 
         initTimber();
+        initCalligraphy();
         initRestring();
         initLifeCycleListener();
+        TypefaceProvider.registerDefaultIconSets();
     }
 
     private void initLifeCycleListener() {
@@ -51,6 +58,16 @@ public class SpeedrunApplication extends Application {
     private void initTimber() {
             Timber.plant(new Timber.DebugTree());
 
+    }
+
+    private void initCalligraphy() {
+        ViewPump.init(ViewPump.builder()
+                .addInterceptor(new CalligraphyInterceptor(
+                        new CalligraphyConfig.Builder()
+                                .setDefaultFontPath("font/roboto_slab_black.ttf")
+                                .setFontAttrId(R.attr.fontPath)
+                                .build()))
+                .build());
     }
     
     private void initRestring() {
