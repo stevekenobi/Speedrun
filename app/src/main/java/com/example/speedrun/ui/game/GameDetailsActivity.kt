@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.example.network.model.dto.GameDetailsDto
+import com.example.network.model.dto.LeaderboardRunDto
 import com.example.speedrun.R
 import com.example.speedrun.ui.base.BaseActivity
 import com.example.speedrun.utils.ActivityExtras
@@ -34,10 +35,14 @@ class GameDetailsActivity : BaseActivity() {
         viewModel = viewModelFactory.create(GameDetailsViewModel::class.java)
 
         viewModel?.gameDetailsLiveData?.observe(this, Observer {
+            fillGameDetails(it)
+            viewModel?.getLeaderboards(it)
+        })
+
+        viewModel?.leaderboardsLiveData?.observe(this, Observer {
             if (it == null)
                 return@Observer
 
-            fillGameDetails(it)
             createViewPager(it)
         })
     }
@@ -47,15 +52,17 @@ class GameDetailsActivity : BaseActivity() {
         game_details_name.text = game.names?.international
     }
 
-    private fun createViewPager(game: GameDetailsDto) {
-        pager.adapter = CategoryLeaderboardAdapter(this, game)
+    private fun createViewPager(leaderboards: List<List<LeaderboardRunDto>>) {
+        pager.adapter = CategoryLeaderboardAdapter(this, leaderboards)
 
-        val tabTitles = game.categories.data.map {
+        val tabTitles = viewModel?.gameDetailsLiveData?.value?.categories?.data?.filter {
+            it.type != "per-level"
+        }?.map {
             it.name
         }
 
         TabLayoutMediator(tab_layout, pager) { tab, position ->
-            tab.text = tabTitles[position]
+            tab.text = tabTitles?.get(position)
         }.attach()
     }
 }

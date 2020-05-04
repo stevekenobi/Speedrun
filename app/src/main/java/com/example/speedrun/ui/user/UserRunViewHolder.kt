@@ -20,7 +20,7 @@ class UserRunViewHolder(itemView: View) : BaseViewHolder(itemView) {
                 user_run_info.text = RunsTextUtils.setUserGameRun(run)
             } else {
                 user_run_category.text = run.category.data.name
-                user_run_place.text = RunsTextUtils.setPlace(run.place)
+                user_run_place.text = RunsTextUtils.setPlaceForRecent(run.place)
                 user_run_date.text = run.date
                 user_run_time.text = RunTimeConverter.from(run.times.primary_t)
             }

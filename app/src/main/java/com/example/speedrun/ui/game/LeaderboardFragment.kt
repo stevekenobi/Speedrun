@@ -5,19 +5,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.network.model.dto.LeaderboardRunDto
 import com.example.speedrun.R
 import kotlinx.android.synthetic.main.fragment_leaderboard.*
 
 class LeaderboardFragment : Fragment() {
 
     companion object {
-        const val KEY_CATEGORY_NAME = "category_name"
+        const val KEY_CATEGORY_LEADERBOARD = "category_leaderboard"
 
-        fun newInstance(categoryname: String): Fragment {
+        fun newInstance(leaderboard: ArrayList<LeaderboardRunDto>): Fragment {
             val fragment = LeaderboardFragment()
 
             fragment.arguments = Bundle().apply {
-                putString(KEY_CATEGORY_NAME, categoryname)
+                putParcelableArrayList(KEY_CATEGORY_LEADERBOARD, leaderboard)
             }
             return fragment
         }
@@ -34,8 +36,13 @@ class LeaderboardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val categoryName = arguments?.getString(KEY_CATEGORY_NAME)
+        val leaderboard = arguments?.getParcelableArrayList<LeaderboardRunDto>(KEY_CATEGORY_LEADERBOARD)?.toList()
 
-        leader_category_name.text = categoryName
+        category_leaderboard.layoutManager = LinearLayoutManager(context)
+        if (leaderboard.isNullOrEmpty())
+            return
+
+        category_leaderboard.adapter = LeaderboardRunsAdapter(leaderboard)
+
     }
 }

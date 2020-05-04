@@ -1,7 +1,10 @@
 package com.example.network.model.dto
 
+import android.os.Parcelable
 import com.example.network.model.Link
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class RunForLeaderboardDto(
     val id: String,
     var place: Int?,
@@ -18,6 +21,5 @@ data class RunForLeaderboardDto(
     val times: TimeDto,
     val splits: Link,
     val system: SystemDto,
-    val values: Any?,
     val links: List<Link>
-)
+) : Parcelable
