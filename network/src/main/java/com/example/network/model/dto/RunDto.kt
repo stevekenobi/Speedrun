@@ -1,25 +1,24 @@
 package com.example.network.model.dto
 
-import android.os.Parcelable
 import com.example.network.model.Link
-import kotlinx.android.parcel.Parcelize
+import com.example.network.model.messages.CategoryResponse
+import com.example.network.model.messages.LevelResponse
+import com.example.network.model.messages.PlayersResponse
 
-@Parcelize
-data class RunForLeaderboardDto(
+data class RunDto(
     val id: String,
-    var place: Int?,
     val weblink: String,
     val game: String,
+    val category: CategoryResponse,
     val level: String?,
-    val category: String,
     val videos: VideosDto,
-    val comment: String,
+    val comment: String?,
     val status: StatusDto,
-    val players: List<PlayerDto>,
+    val players: PlayersResponse,
     val date: String,
     val submitted: String,
     val times: TimeDto,
-    val splits: SplitsDto?,
     val system: SystemDto,
+    val splits: SplitsDto?,
     val links: List<Link>
-) : Parcelable
+)

@@ -5,6 +5,7 @@ import com.example.speedrun.injection.modules.ActivityModule
 import com.example.speedrun.ui.base.BaseActivity
 import com.example.speedrun.ui.game.GameDetailsActivity
 import com.example.speedrun.ui.main.MainActivity
+import com.example.speedrun.ui.run.RunDetailsActivity
 import com.example.speedrun.ui.splash.SplashActivity
 import com.example.speedrun.ui.user.UserProfileActivity
 import dagger.Component
@@ -18,5 +19,6 @@ interface ActivityComponent {
     fun inject(activity: SplashActivity)
     fun inject(activity: UserProfileActivity)
     fun inject(activity: GameDetailsActivity)
+    fun inject(activity: RunDetailsActivity)
     //Context activityContext();
 }

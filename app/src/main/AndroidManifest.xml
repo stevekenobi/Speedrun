@@ -26,6 +26,7 @@
         <activity android:name=".ui.base.BaseActivity" />
         <activity android:name=".ui.user.UserProfileActivity" />
         <activity android:name=".ui.game.GameDetailsActivity" />
+        <activity android:name=".ui.run.RunDetailsActivity" />
     </application>
 
 </manifest>

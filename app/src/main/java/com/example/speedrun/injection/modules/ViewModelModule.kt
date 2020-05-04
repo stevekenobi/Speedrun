@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.speedrun.ui.game.GameDetailsViewModel
 import com.example.speedrun.ui.main.MainViewModel
+import com.example.speedrun.ui.run.RunDetailsViewModel
 import com.example.speedrun.ui.splash.SplashViewModel
 import com.example.speedrun.ui.user.UserProfileViewModel
 import com.example.speedrun.viewmodel.SpeedrunViewModelFactory
@@ -39,5 +40,10 @@ interface ViewModelModule {
     @IntoMap
     @ViewModelKey(GameDetailsViewModel::class)
     fun bindGameDetailsViewModel(viewModel: GameDetailsViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(RunDetailsViewModel::class)
+    fun bindRunDetailsViewModel(viewModel: RunDetailsViewModel): ViewModel
 
 }

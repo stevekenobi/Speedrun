@@ -2,8 +2,9 @@ package com.example.speedrun.injection.components
 
 import com.example.speedrun.injection.PerViewModel
 import com.example.speedrun.injection.modules.ViewModelModule
-import com.example.speedrun.ui.game.GameDetailsActivity
+import com.example.speedrun.ui.game.GameDetailsViewModel
 import com.example.speedrun.ui.main.MainViewModel
+import com.example.speedrun.ui.run.RunDetailsViewModel
 import com.example.speedrun.ui.splash.SplashViewModel
 import com.example.speedrun.ui.user.UserProfileViewModel
 import com.example.speedrun.viewmodel.SpeedrunViewModelFactory
@@ -18,5 +19,6 @@ interface ViewModelComponent {
     fun inject(viewModel: MainViewModel)
     fun inject(viewModel: SplashViewModel)
     fun inject(viewModel: UserProfileViewModel)
-    fun inject(viewModel: GameDetailsActivity)
+    fun inject(viewModel: GameDetailsViewModel)
+    fun inject(viewModel: RunDetailsViewModel)
 }

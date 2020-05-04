@@ -25,6 +25,10 @@ class LatestRunViewHolder(val viewModel: MainViewModel?, itemView: View) : BaseV
                 land_latest_players.adapter = LatestPlayersAdapter(viewModel, run.players.data)
                 land_latest_players.layoutManager = LinearLayoutManager(context)
             }
+
+            setOnClickListener {
+                viewModel?.latestRunPressedLiveData?.value = run.id
+            }
         }
     }
 }

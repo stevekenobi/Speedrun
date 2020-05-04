@@ -14,8 +14,8 @@ class MainViewModel @Inject constructor(private val datamanager: Datamanager) : 
     val latestRunsLiveData = MutableLiveData<List<LatestGameModel>>()
 
     val latestUserPressedLiveData = MutableLiveData<String>()
-
     val latestGamePressedLiveData = MutableLiveData<String>()
+    val latestRunPressedLiveData = MutableLiveData<String>()
 
     fun getLatestRuns() {
         viewModelScope.launch(Dispatchers.IO) {
