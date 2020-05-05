@@ -9,6 +9,7 @@ import com.example.network.Session;
 import com.example.network.SpeedrunService;
 import com.example.network.injection.NetworkModule;
 import com.example.speedrun.injection.modules.ApplicationModule;
+import com.example.speedrun.utils.Connectivity;
 import com.example.speedrun.utils.LifecycleListener;
 import com.example.speedrun.viewmodel.SpeedrunViewModelFactory;
 import com.example.storage.DatabaseSpeedrun;
@@ -19,6 +20,8 @@ import javax.inject.Singleton;
 import dagger.BindsInstance;
 import dagger.Component;
 import com.example.speedrun.injection.modules.ViewModelModule;
+
+import org.greenrobot.eventbus.EventBus;
 
 @Singleton
 @Component(modules = {
@@ -41,6 +44,10 @@ public interface ApplicationComponent {
     Application application();
 
     SpeedrunViewModelFactory viewModelFactory();
+
+    EventBus eventBus();
+
+    Connectivity connectivity();
 
     void inject(LifecycleListener lifecycleListener);
 

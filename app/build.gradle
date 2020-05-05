@@ -69,6 +69,7 @@ dependencies {
     kapt deps.additional.glideProcessor
     api deps.additional.material
     api deps.additional.bootstrap
+    api deps.additional.greenrobot
 
     api project(':network')
     api project(':storage')

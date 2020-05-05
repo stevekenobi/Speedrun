@@ -8,6 +8,7 @@ import com.example.speedrun.model.LatestGameModel
 import com.example.speedrun.ui.base.BaseViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import java.lang.Exception
 import javax.inject.Inject
 
 class MainViewModel @Inject constructor(private val datamanager: Datamanager) : BaseViewModel() {
@@ -19,24 +20,36 @@ class MainViewModel @Inject constructor(private val datamanager: Datamanager) : 
 
     fun getLatestRuns() {
         viewModelScope.launch(Dispatchers.IO) {
-            isLoadingLiveData.postValue(true)
-            val runs = datamanager.getLatestRuns()
+            try {
+                isLoadingLiveData.postValue(true)
+                val runs = datamanager.getLatestRuns()
 
-            val result = mutableListOf<LatestGameModel>()
+                val result = mutableListOf<LatestGameModel>()
 
-            runs.forEach run@ {run: LatestRunDto ->
-                result.forEach game@ {game: LatestGameModel ->
-                    if (run.game.data.id == game.id) {
-                        game.runs.add(run)
-                        return@run
+                runs.forEach run@{ run: LatestRunDto ->
+                    result.forEach game@{ game: LatestGameModel ->
+                        if (run.game.data.id == game.id) {
+                            game.runs.add(run)
+                            return@run
+                        }
                     }
+                    val newGame = run.game.data
+                    result.add(
+                        LatestGameModel(
+                            newGame.id,
+                            newGame.names?.international,
+                            newGame.assets.coverSmall?.uri,
+                            mutableListOf(run)
+                        )
+                    )
                 }
-                val newGame = run.game.data
-                result.add(LatestGameModel(newGame.id, newGame.names?.international, newGame.assets.coverSmall?.uri, mutableListOf(run)))
-            }
 
-            latestRunsLiveData.postValue(result)
-            isLoadingLiveData.postValue(false)
+                latestRunsLiveData.postValue(result)
+            } catch (e: Exception) {
+                handleException(e)
+            } finally {
+                isLoadingLiveData.postValue(false)
+            }
         }
     }
 }

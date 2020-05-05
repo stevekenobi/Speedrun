@@ -4,6 +4,7 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.speedrun.R
@@ -47,6 +48,10 @@ class MainActivity : BaseActivity() {
             DialogInterface.OnClickListener { dialog, _ -> dialog.dismiss()},
             true
         ).show()
+    }
+
+    override fun shouldListenToNetworkChanges(): Boolean {
+        return true
     }
 
     private fun initViewModel() {
@@ -100,6 +105,16 @@ class MainActivity : BaseActivity() {
 
             val intent = Intent(this, RunDetailsActivity::class.java).putExtra(ActivityExtras.EXTRA_RUN_ID, it)
             startActivity(intent)
+        })
+
+        viewModel?.noInternetConnectionLiveData?.observe(this, Observer {
+            if (it == true)
+                Toast.makeText(this, "I am your father", Toast.LENGTH_SHORT).show()
+        })
+
+        viewModel?.serverErrorLiveData?.observe(this, Observer {
+            if (it == true)
+                Toast.makeText(this, "Unknown Error", Toast.LENGTH_SHORT).show()
         })
     }
 

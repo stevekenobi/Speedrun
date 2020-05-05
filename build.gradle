@@ -19,6 +19,7 @@ buildscript {
             'coroutines'         : '1.0.0',
             'dagger'             : '2.27',
             'glide'              : '4.11.0',
+            'greenrobot'         : '3.1.1',
             'gson'               : '2.8.6',
             'lifecycle'          : '2.2.0',
             'liveDataKtxVersion' : '2.2.0',
@@ -95,6 +96,7 @@ buildscript {
                     'glideProcessor'     : "com.github.bumptech.glide:compiler:${versions.glide}",
                     'bootstrap'          : "com.beardedhen:androidbootstrap:${versions.bootstrap}",
                     'calligraphy'        : "io.github.inflationx:calligraphy3:${versions.calligraphy}",
+                    'greenrobot'         : "org.greenrobot:eventbus:${versions.greenrobot}",
             ]
     ]
 

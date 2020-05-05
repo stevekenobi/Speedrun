@@ -8,12 +8,17 @@ import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import com.example.data.Datamanager
 import com.example.speedrun.application.SpeedrunApplication
+import com.example.speedrun.events.NetworkAvailableEvent
 import com.example.speedrun.injection.components.ActivityComponent
 import com.example.speedrun.injection.components.ApplicationComponent
 import com.example.speedrun.injection.components.DaggerActivityComponent
 import com.example.speedrun.injection.modules.ActivityModule
+import com.example.speedrun.utils.Connectivity
 import com.ice.restring.Restring
 import io.github.inflationx.viewpump.ViewPumpContextWrapper
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 import timber.log.Timber
 import javax.inject.Inject
 
@@ -21,6 +26,12 @@ open class BaseActivity : AppCompatActivity() {
 
     @Inject
     lateinit var dataManager: Datamanager
+
+    @Inject
+    lateinit var eventBus: EventBus
+
+    @Inject
+    lateinit var connectivity: Connectivity
 
     var activityComponent: ActivityComponent? = null
 
@@ -41,20 +52,38 @@ open class BaseActivity : AppCompatActivity() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        if (shouldListenToNetworkChanges()) {
+            connectivity.startNetworkMonitoring()
+        }
+
+        eventBus.register(this)
+    }
+
+    override fun onPause() {
+        super.onPause()
+
+        connectivity.stopNetworkMonitoring()
+        eventBus.unregister(this)
+    }
+
     override fun attachBaseContext(newBase: Context?) {
 //        super.attachBaseContext(ViewPumpContextWrapper.wrap(newBase));
         Timber.d("attachBaseContext")
         super.attachBaseContext(ViewPumpContextWrapper.wrap(Restring.wrapContext(newBase)))
     }
 
-    fun buildAlertDialog(activity: BaseActivity,
-                         titleRes: Int,
-                         messageRes: Int,
-                         positiveRes: Int,
-                         positiveClick: DialogInterface.OnClickListener,
-                         negativeRes: Int,
-                         negativeClick: DialogInterface.OnClickListener,
-                         cancelable: Boolean) : android.app.AlertDialog{
+    fun buildAlertDialog(
+        activity: BaseActivity,
+        titleRes: Int,
+        messageRes: Int,
+        positiveRes: Int,
+        positiveClick: DialogInterface.OnClickListener,
+        negativeRes: Int,
+        negativeClick: DialogInterface.OnClickListener,
+        cancelable: Boolean
+    ): android.app.AlertDialog {
         return BaseAlertDialog.builder(
             activity,
             titleRes,
@@ -73,5 +102,19 @@ open class BaseActivity : AppCompatActivity() {
 
     open fun displayToast(@StringRes message: Int, duration: Int) {
         Toast.makeText(this, message, duration).show()
+    }
+
+    open fun shouldListenToNetworkChanges(): Boolean {
+        return false
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onConnectionLost(networkAvailableEvent: NetworkAvailableEvent) {
+        displayToast("No Network Available", Toast.LENGTH_LONG)
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun onConnectionAvailable(networkAvailableEvent: NetworkAvailableEvent) {
+        displayToast("Network Back", Toast.LENGTH_LONG)
     }
 }
