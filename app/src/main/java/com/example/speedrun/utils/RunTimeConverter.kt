@@ -14,9 +14,6 @@ object RunTimeConverter {
         return "${hours}h ${mins}m ${secs}s ${mills}ms"
     }
 
-    /**
-     *  TODO FIX ROUNDING ERRORS
-     */
     fun from(time: Double) : String {
         val mills = ((time - time.toInt()) * 1000).toInt()
 

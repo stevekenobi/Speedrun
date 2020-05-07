@@ -50,6 +50,9 @@ class Datamanager @Inject constructor(
         return service.getGameDetails(gameId).data
     }
 
+    /**
+     *  TODO Implement users logic
+     */
     suspend fun getCategoryLeaderboard(gameId: String, categoryId: String): List<LeaderboardRunDto> {
         return service.getLeaderboardForCategory(gameId, categoryId).data.runs
     }

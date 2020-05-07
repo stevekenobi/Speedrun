@@ -43,6 +43,7 @@ dependencies {
     api deps.reactivex.rxAndroid
 
     api deps.additional.timber
+    api deps.additional.conscrypt
 
     api deps.google.dagger
     kapt deps.google.daggerProcessor

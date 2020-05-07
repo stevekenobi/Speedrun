@@ -11,7 +11,7 @@ class EventBusModule {
     //TODO Find what is wrong with providing
     @Provides
     @Singleton
-    fun provideEventBus(): EventBus {
+    fun providesBus(): EventBus {
         return EventBus.getDefault()
     }
 }

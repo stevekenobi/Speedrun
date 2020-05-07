@@ -15,11 +15,13 @@ class GameDetailsViewModel @Inject constructor(val datamanager: Datamanager) : B
     val gameDetailsLiveData = MutableLiveData<GameDetailsDto>()
     val leaderboardsLiveData = MutableLiveData<List<List<LeaderboardRunDto>>>()
 
-    fun getGameDetails(gameId: String) {
+    fun getGameDetails(gameId: String?) {
+        if (gameId.isNullOrEmpty())
+            return
+
         viewModelScope.launch(Dispatchers.IO) {
             val gameDetails = datamanager.getGameDetails(gameId)
             gameDetailsLiveData.postValue(gameDetails)
-
         }
     }
 

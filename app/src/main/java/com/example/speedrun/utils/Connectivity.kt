@@ -104,12 +104,12 @@ class Connectivity @Inject constructor(
     private val networkCallback: NetworkCallback = object : NetworkCallback() {
         override fun onAvailable(network: Network) {
             Timber.d("Connectivity.onAvailable")
-            triggerNotworkEvents()
+            triggerNetworkEvents()
         }
 
         override fun onLost(network: Network) {
             Timber.d("Connectivity.onLost")
-            triggerNotworkEvents()
+            triggerNetworkEvents()
         }
     }
 
@@ -145,7 +145,7 @@ class Connectivity @Inject constructor(
         this.isConnected = isConnected
     }
 
-    private fun triggerNotworkEvents() {
+    private fun triggerNetworkEvents() {
         val isTrulyConnected = isConnected()
 
         if (isTrulyConnected && isConnected.not()) {
