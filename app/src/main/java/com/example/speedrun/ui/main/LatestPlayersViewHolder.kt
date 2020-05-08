@@ -5,6 +5,7 @@ import android.graphics.LinearGradient
 import android.graphics.Shader
 import android.view.View
 import com.example.network.model.dto.UserDto
+import com.example.network.utils.UserEnums
 import com.example.speedrun.ui.base.BaseViewHolder
 import kotlinx.android.synthetic.main.item_latest_player.view.*
 
@@ -24,16 +25,21 @@ class LatestPlayersViewHolder(val viewModel: MainViewModel?, itemView: View) : B
             latest_player.setOnClickListener {
                 viewModel?.latestUserPressedLiveData?.value = player.id
             }
-            val textShader = LinearGradient(
-                0f, 0f, 0f, 20f,
-                intArrayOf(
-                    Color.parseColor(player.nameStyle?.colorFrom?.light),
-                    Color.parseColor(player.nameStyle?.colorTo?.light)
-                ),
-                floatArrayOf(0f, 1f),
-                Shader.TileMode.CLAMP
-            )
-            latest_player.paint.shader = textShader
+            val style = player.nameStyle?.style
+            if (style.equals(UserEnums.STYLE_GRADIENT)) {
+                val textShader = LinearGradient(
+                    0f, 0f, 0f, 20f,
+                    intArrayOf(
+                        Color.parseColor(player.nameStyle?.colorFrom?.light),
+                        Color.parseColor(player.nameStyle?.colorTo?.light)
+                    ),
+                    floatArrayOf(0f, 1f),
+                    Shader.TileMode.CLAMP
+                )
+                latest_player.paint.shader = textShader
+            } else if (style.equals(UserEnums.STYLE_SOLID)) {
+                latest_player.setTextColor(Color.parseColor(player.nameStyle?.color?.light))
+            }
         }
     }
 }

@@ -9,7 +9,7 @@ import android.view.View
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.network.model.dto.UserDto
-import com.example.network.model.dto.UserRunDto
+import com.example.network.utils.UserEnums
 import com.example.speedrun.R
 import com.example.speedrun.model.UserGameModel
 import com.example.speedrun.ui.base.BaseActivity
@@ -92,16 +92,21 @@ class UserProfileActivity : BaseActivity() {
     private fun updateUserInfo(user: UserDto) {
         user_name.text = user.names?.international
 
-        val textShader = LinearGradient(
-            0f, 0f, 0f, 20f,
-            intArrayOf(
-                Color.parseColor(user.nameStyle?.colorFrom?.light),
-                Color.parseColor(user.nameStyle?.colorTo?.light)
-            ),
-            floatArrayOf(0f, 1f),
-            Shader.TileMode.CLAMP
-        )
-        user_name.paint.shader = textShader
+        val style = user.nameStyle?.style
+        if (style == UserEnums.STYLE_SOLID) {
+            user_name.setTextColor(Color.parseColor(user.nameStyle?.color?.light))
+        } else if (style == UserEnums.STYLE_GRADIENT) {
+            val textShader = LinearGradient(
+                0f, 0f, 0f, 20f,
+                intArrayOf(
+                    Color.parseColor(user.nameStyle?.colorFrom?.light),
+                    Color.parseColor(user.nameStyle?.colorTo?.light)
+                ),
+                floatArrayOf(0f, 1f),
+                Shader.TileMode.CLAMP
+            )
+            user_name.paint.shader = textShader
+        }
 
     }
 

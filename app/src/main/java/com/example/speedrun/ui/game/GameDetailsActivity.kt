@@ -5,6 +5,7 @@ import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.example.network.model.dto.GameDetailsDto
 import com.example.network.model.dto.LeaderboardRunDto
+import com.example.network.utils.CategoryEnums
 import com.example.speedrun.R
 import com.example.speedrun.ui.base.BaseActivity
 import com.example.speedrun.utils.ActivityExtras
@@ -56,7 +57,7 @@ class GameDetailsActivity : BaseActivity() {
         pager.adapter = CategoryLeaderboardAdapter(this, leaderboards)
 
         val tabTitles = viewModel?.gameDetailsLiveData?.value?.categories?.data?.filter {
-            it.type != "per-level"
+            it.type == CategoryEnums.TYPE_PER_GAME
         }?.map {
             it.name
         }
