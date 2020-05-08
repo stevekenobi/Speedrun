@@ -1,9 +1,6 @@
 package com.example.speedrun.ui.user
 
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.LinearGradient
-import android.graphics.Shader
 import android.os.Bundle
 import android.view.View
 import androidx.lifecycle.Observer
@@ -16,6 +13,7 @@ import com.example.speedrun.ui.base.BaseActivity
 import com.example.speedrun.ui.game.GameDetailsActivity
 import com.example.speedrun.ui.main.ItemDivideDecorator
 import com.example.speedrun.utils.ActivityExtras
+import com.example.speedrun.utils.UserColorUtils
 import com.example.speedrun.viewmodel.SpeedrunViewModelFactory
 import kotlinx.android.synthetic.main.activity_user_profile.*
 import javax.inject.Inject
@@ -94,18 +92,9 @@ class UserProfileActivity : BaseActivity() {
 
         val style = user.nameStyle?.style
         if (style == UserEnums.STYLE_SOLID) {
-            user_name.setTextColor(Color.parseColor(user.nameStyle?.color?.light))
+            user_name.setTextColor(UserColorUtils.setSolidColor(user.nameStyle))
         } else if (style == UserEnums.STYLE_GRADIENT) {
-            val textShader = LinearGradient(
-                0f, 0f, 0f, 20f,
-                intArrayOf(
-                    Color.parseColor(user.nameStyle?.colorFrom?.light),
-                    Color.parseColor(user.nameStyle?.colorTo?.light)
-                ),
-                floatArrayOf(0f, 1f),
-                Shader.TileMode.CLAMP
-            )
-            user_name.paint.shader = textShader
+            user_name.paint.shader = UserColorUtils.setGradientColor(user.nameStyle)
         }
 
     }
