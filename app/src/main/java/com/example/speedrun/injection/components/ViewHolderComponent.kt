@@ -12,15 +12,10 @@ import dagger.Component
 @PerViewHolder
 @Component(dependencies = [ApplicationComponent::class])
 interface ViewHolderComponent {
-
-    /**
-     *  TODO Check nullability of these params
-     */
-
-    fun inject(holder: LatestGameViewHolder?)
-    fun inject(holder: LatestRunViewHolder?)
-    fun inject(holder: LatestPlayersViewHolder?)
-    fun inject(holder: UserGameViewHolder?)
-    fun inject(holder: UserRunViewHolder?)
-    fun inject(holder: LeaderboardRunViewHolder?)
+    fun inject(holder: LatestGameViewHolder)
+    fun inject(holder: LatestRunViewHolder)
+    fun inject(holder: LatestPlayersViewHolder)
+    fun inject(holder: UserGameViewHolder)
+    fun inject(holder: UserRunViewHolder)
+    fun inject(holder: LeaderboardRunViewHolder)
 }
