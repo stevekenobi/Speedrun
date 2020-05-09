@@ -11,11 +11,10 @@ import org.greenrobot.eventbus.EventBus
 @Module
 class ConnectivityModule {
 
-    //TODO Find what is wrong with providing
     @Provides
     fun providesConnectivity(application: Application, eventBus: EventBus): Connectivity {
         val connectivityManager =
             application.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        return Connectivity(connectivityManager, eventBus);
+        return Connectivity(connectivityManager, eventBus)
     }
 }

@@ -4,25 +4,31 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.network.model.dto.LeaderboardRunDto
 import com.example.speedrun.R
-import kotlinx.android.synthetic.main.fragment_leaderboard.*
+import com.example.speedrun.ui.base.BaseFragment
 
-class LeaderboardFragment : Fragment() {
+class LeaderboardFragment : BaseFragment() {
 
     companion object {
-        const val KEY_CATEGORY_LEADERBOARD = "category_leaderboard"
+        const val KEY_CATEGORY_ID = "category_id"
 
-        fun newInstance(leaderboard: ArrayList<LeaderboardRunDto>): Fragment {
+        fun newInstance(categoryId: String): Fragment {
             val fragment = LeaderboardFragment()
 
             fragment.arguments = Bundle().apply {
-                putParcelableArrayList(KEY_CATEGORY_LEADERBOARD, leaderboard)
+                putString(KEY_CATEGORY_ID, categoryId)
             }
             return fragment
         }
+    }
+
+    private var viewModel: LeaderboardViewModel? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        fragmentComponent?.inject(this)
     }
 
     override fun onCreateView(
@@ -36,13 +42,15 @@ class LeaderboardFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val leaderboard = arguments?.getParcelableArrayList<LeaderboardRunDto>(KEY_CATEGORY_LEADERBOARD)?.toList()
+        val categoryId = arguments?.getString(KEY_CATEGORY_ID)
 
-        category_leaderboard.layoutManager = LinearLayoutManager(context)
-        if (leaderboard.isNullOrEmpty())
-            return
+    }
 
-        category_leaderboard.adapter = LeaderboardRunsAdapter(leaderboard)
+    override fun initViewModel() {
+        viewModel = viewModelFactory.create(LeaderboardViewModel::class.java)
+    }
 
+    override fun observeViewModel() {
+        Toast.makeText(activity, "So far so good", Toast.LENGTH_SHORT).show()
     }
 }

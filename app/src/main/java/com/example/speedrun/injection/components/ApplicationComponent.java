@@ -28,8 +28,8 @@ import dagger.Component;
 @Singleton
 @Component(modules = {
         ApplicationModule.class,
-        DataModule.class,
         ConnectivityModule.class,
+        DataModule.class,
         EventBusModule.class,
         NetworkModule.class,
         StorageModule.class,
