@@ -15,12 +15,20 @@ class LeaderboardViewModel @Inject constructor(val dataManager: Datamanager) : B
 
     fun getLeaderboard(gameId: String?, categoryId: String?) {
         viewModelScope.launch(Dispatchers.IO) {
-            if (gameId.isNullOrEmpty() || categoryId.isNullOrEmpty())
-                return@launch
+            try {
 
-            val result = dataManager.getCategoryLeaderboard(gameId, categoryId)
+                isLoadingLiveData.postValue(true)
+                if (gameId.isNullOrEmpty() || categoryId.isNullOrEmpty())
+                    return@launch
 
-            leaderboardLiveData.postValue(result)
+                val result = dataManager.getCategoryLeaderboard(gameId, categoryId)
+
+                leaderboardLiveData.postValue(result)
+            } catch (e: Exception) {
+                handleException(e)
+            } finally {
+                isLoadingLiveData.postValue(false)
+            }
         }
     }
 }

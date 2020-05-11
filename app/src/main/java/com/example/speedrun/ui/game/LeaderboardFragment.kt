@@ -60,6 +60,20 @@ class LeaderboardFragment : BaseFragment() {
     }
 
     override fun observeViewModel() {
+        viewModel?.isLoadingLiveData?.observe(this, Observer {
+            if (it == null)
+                return@Observer
+
+            if (it) {
+                leaderboard_loader.visibility = View.VISIBLE
+                category_leaderboard.visibility = View.GONE
+            } else {
+                leaderboard_loader.visibility = View.GONE
+                category_leaderboard.visibility = View.VISIBLE
+            }
+        })
+
+
         viewModel?.leaderboardLiveData?.observe(this, Observer {
             category_leaderboard.adapter = LeaderboardRunsAdapter(it)
         })
