@@ -12,6 +12,7 @@ import com.example.speedrun.model.UserGameModel
 import com.example.speedrun.ui.base.BaseActivity
 import com.example.speedrun.ui.game.GameDetailsActivity
 import com.example.speedrun.ui.main.ItemDivideDecorator
+import com.example.speedrun.ui.run.RunDetailsActivity
 import com.example.speedrun.utils.ActivityExtras
 import com.example.speedrun.utils.UserColorUtils
 import kotlinx.android.synthetic.main.activity_user_profile.*
@@ -70,6 +71,15 @@ class UserProfileActivity : BaseActivity() {
 
             val intent = Intent(this@UserProfileActivity, GameDetailsActivity::class.java)
             intent.putExtra(ActivityExtras.EXTRA_GAME_ID, it)
+            startActivity(intent)
+        })
+
+        viewModel?.runClickedLiveData?.observe(this, Observer {
+            if (it.isNullOrEmpty())
+                return@Observer
+
+            val intent = Intent(this@UserProfileActivity, RunDetailsActivity::class.java)
+            intent.putExtra(ActivityExtras.EXTRA_RUN_ID, it)
             startActivity(intent)
         })
     }

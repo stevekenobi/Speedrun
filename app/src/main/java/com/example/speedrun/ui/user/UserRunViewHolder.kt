@@ -8,7 +8,7 @@ import com.example.speedrun.utils.RunTimeConverter
 import com.example.speedrun.utils.RunsTextUtils
 import kotlinx.android.synthetic.main.item_user_run.view.*
 
-class UserRunViewHolder(itemView: View) : BaseViewHolder(itemView) {
+class UserRunViewHolder(val viewModel: UserProfileViewModel?, itemView: View) : BaseViewHolder(itemView) {
 
     init {
         viewHolderComponent()?.inject(this)
@@ -16,6 +16,9 @@ class UserRunViewHolder(itemView: View) : BaseViewHolder(itemView) {
 
     fun bind(run: UserRunDto) {
         itemView.apply {
+            setOnClickListener {
+                viewModel?.runClickedLiveData?.value = run.id
+            }
             if (context.resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
                 user_run_info.text = RunsTextUtils.setUserGameRun(run)
             } else {

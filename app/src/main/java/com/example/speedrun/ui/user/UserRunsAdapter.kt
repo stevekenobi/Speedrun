@@ -6,10 +6,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.network.model.dto.UserRunDto
 import com.example.speedrun.R
 
-class UserRunsAdapter(val runs: List<UserRunDto>): RecyclerView.Adapter<UserRunViewHolder>() {
+class UserRunsAdapter(val viewModel: UserProfileViewModel?, val runs: List<UserRunDto>): RecyclerView.Adapter<UserRunViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserRunViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_user_run, parent, false)
-        return UserRunViewHolder(view)
+        return UserRunViewHolder(viewModel, view)
     }
 
     override fun getItemCount(): Int {
