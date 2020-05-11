@@ -1,5 +1,6 @@
 package com.example.network.model.dto
 
+import com.example.network.model.messages.PlayersResponse
 import com.google.gson.annotations.SerializedName
 
 data class LeaderboardDto(
@@ -12,5 +13,6 @@ data class LeaderboardDto(
     @SerializedName("video-only")val videoOnly: Boolean,
     val timing: String,
     val values: Any?,
-    val runs: List<LeaderboardRunDto>
+    val runs: List<LeaderboardRunDto>,
+    val players: PlayersResponse
 )

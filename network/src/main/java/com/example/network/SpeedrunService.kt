@@ -34,7 +34,7 @@ interface SpeedrunService {
     @GET("games/{gameId}?embed=categories,developers,moderators,platforms")
     suspend fun getGameDetails(@Path("gameId") gameId: String): GameDetailsResponse
 
-    @GET("leaderboards/{gameId}/category/{categoryId}")
+    @GET("leaderboards/{gameId}/category/{categoryId}?embed=players")
     suspend fun getLeaderboardForCategory(@Path("gameId") gameId: String, @Path("categoryId") categoryId: String): LeaderboardResponse
 
     /**

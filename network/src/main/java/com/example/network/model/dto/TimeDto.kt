@@ -1,9 +1,6 @@
 package com.example.network.model.dto
 
-import android.os.Parcelable
-import kotlinx.android.parcel.Parcelize
 
-@Parcelize
 data class TimeDto(
     val primary: String,
     val primary_t: Double,
@@ -13,4 +10,4 @@ data class TimeDto(
     val realtime_noloads_t: Double,
     val ingame: String?,
     val ingame_t: Double
-) : Parcelable
+)

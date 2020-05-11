@@ -40,7 +40,7 @@ class Datamanager @Inject constructor(
         val userPbs = service.getPBsForUser(userId).data
 
         userRuns.map {
-            it.place = userPbs.find {pb: UserPBDto -> pb.run.id ==it.id }?.place
+            it.place = userPbs.find { pb: UserPBDto -> pb.run.id == it.id }?.place
         }
 
         return userRuns
