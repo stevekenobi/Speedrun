@@ -7,6 +7,7 @@ import com.example.network.model.dto.CategoryDto
 
 class CategoryLeaderboardAdapter(
     fragmentActivity: FragmentActivity,
+    private val gameId: String,
     private val categories: List<CategoryDto>
 ) : FragmentStateAdapter(fragmentActivity) {
     override fun getItemCount(): Int {
@@ -14,7 +15,7 @@ class CategoryLeaderboardAdapter(
     }
 
     override fun createFragment(position: Int): Fragment {
-        return LeaderboardFragment.newInstance(categories[position].id)
+        return LeaderboardFragment.newInstance(gameId, categories[position].id)
     }
 
 }

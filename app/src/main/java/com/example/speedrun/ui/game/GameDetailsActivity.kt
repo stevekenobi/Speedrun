@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.example.network.model.dto.GameDetailsDto
+import com.example.network.utils.CategoryEnums
 import com.example.speedrun.R
 import com.example.speedrun.ui.base.BaseActivity
 import com.example.speedrun.utils.ActivityExtras
@@ -45,14 +46,17 @@ class GameDetailsActivity : BaseActivity() {
     }
 
     private fun createViewPager(game: GameDetailsDto) {
-        pager.adapter = CategoryLeaderboardAdapter(this, game.categories.data)
+        val categories = game.categories.data.filter {
+            it.type == CategoryEnums.TYPE_PER_GAME
+        }
+        pager.adapter = CategoryLeaderboardAdapter(this, game.id, categories)
 
-        val tabTitles = game.categories.data.map {
+        val tabTitles = categories.map {
             it.name
         }
 
         TabLayoutMediator(tab_layout, pager) { tab, position ->
-            tab.text = tabTitles.get(position)
+            tab.text = tabTitles[position]
         }.attach()
     }
 }
