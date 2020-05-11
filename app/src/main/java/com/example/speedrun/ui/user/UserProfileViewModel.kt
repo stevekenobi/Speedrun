@@ -17,7 +17,10 @@ class UserProfileViewModel @Inject constructor(val datamanager: Datamanager) : B
     val userRunsLiveData = MutableLiveData<List<UserGameModel>>()
     val gameClickedLiveData = MutableLiveData<String>()
 
-    fun getUserDetails(id: String) {
+    fun getUserDetails(id: String?) {
+        if (id.isNullOrEmpty())
+            return
+
         viewModelScope.launch(Dispatchers.IO) {
             isLoadingLiveData.postValue(true)
 

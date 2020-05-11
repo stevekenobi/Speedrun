@@ -14,6 +14,7 @@ import com.example.speedrun.injection.components.ApplicationComponent
 import com.example.speedrun.injection.components.DaggerActivityComponent
 import com.example.speedrun.injection.modules.ActivityModule
 import com.example.speedrun.utils.Connectivity
+import com.example.speedrun.viewmodel.SpeedrunViewModelFactory
 import com.ice.restring.Restring
 import io.github.inflationx.viewpump.ViewPumpContextWrapper
 import org.greenrobot.eventbus.EventBus
@@ -22,7 +23,7 @@ import org.greenrobot.eventbus.ThreadMode
 import timber.log.Timber
 import javax.inject.Inject
 
-open class BaseActivity : AppCompatActivity() {
+abstract class BaseActivity : AppCompatActivity() {
 
     @Inject
     lateinit var dataManager: Datamanager
@@ -32,6 +33,9 @@ open class BaseActivity : AppCompatActivity() {
 
     @Inject
     lateinit var connectivity: Connectivity
+
+    @Inject
+    protected lateinit var viewModelFactory: SpeedrunViewModelFactory
 
     var activityComponent: ActivityComponent? = null
 
@@ -49,8 +53,14 @@ open class BaseActivity : AppCompatActivity() {
                 .build()
 
             activityComponent?.inject(this)
+
+            initViewModel()
+            observeViewModel()
         }
     }
+
+    abstract fun initViewModel()
+    abstract fun observeViewModel()
 
     override fun onResume() {
         super.onResume()

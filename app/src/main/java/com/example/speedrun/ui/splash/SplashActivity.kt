@@ -6,14 +6,9 @@ import android.view.View
 import com.example.speedrun.R
 import com.example.speedrun.ui.base.BaseActivity
 import com.example.speedrun.ui.main.MainActivity
-import com.example.speedrun.viewmodel.SpeedrunViewModelFactory
 import kotlinx.android.synthetic.main.activity_splash.*
-import javax.inject.Inject
 
 class SplashActivity : BaseActivity() {
-
-    @Inject
-    lateinit var viewModelFactory: SpeedrunViewModelFactory
 
     private var viewModel: SplashViewModel? = null
 
@@ -23,14 +18,14 @@ class SplashActivity : BaseActivity() {
 
         activityComponent?.inject(this)
 
-        initViewModel()
-
         viewModel?.updateResources()
     }
 
-    private fun initViewModel() {
+    override fun initViewModel() {
         viewModel = viewModelFactory.create(SplashViewModel::class.java)
+    }
 
+    override fun observeViewModel() {
         viewModel?.isLoadingLiveData?.observe(this, androidx.lifecycle.Observer {
             if (it == null)
                 return@Observer

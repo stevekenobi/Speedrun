@@ -9,10 +9,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class RunDetailsViewModel @Inject constructor(val datamanager: Datamanager): BaseViewModel() {
+class RunDetailsViewModel @Inject constructor(val datamanager: Datamanager) : BaseViewModel() {
     val runDetailsLiveData = MutableLiveData<RunDto>()
 
-    fun getRunDetails(runId: String) {
+    fun getRunDetails(runId: String?) {
+        if (runId.isNullOrEmpty())
+            return
+
         viewModelScope.launch(Dispatchers.IO) {
             val runDto = datamanager.getRunDetails(runId)
 

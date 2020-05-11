@@ -8,15 +8,10 @@ import com.example.network.utils.CategoryEnums
 import com.example.speedrun.R
 import com.example.speedrun.ui.base.BaseActivity
 import com.example.speedrun.utils.ActivityExtras
-import com.example.speedrun.viewmodel.SpeedrunViewModelFactory
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_game_details.*
-import javax.inject.Inject
 
 class GameDetailsActivity : BaseActivity() {
-
-    @Inject
-    lateinit var viewModelFactory: SpeedrunViewModelFactory
 
     var viewModel: GameDetailsViewModel? = null
 
@@ -26,14 +21,14 @@ class GameDetailsActivity : BaseActivity() {
 
         activityComponent?.inject(this)
 
-        initViewModel()
-
         viewModel?.getGameDetails(intent.getStringExtra(ActivityExtras.EXTRA_GAME_ID))
     }
 
-    private fun initViewModel() {
+    override fun initViewModel() {
         viewModel = viewModelFactory.create(GameDetailsViewModel::class.java)
+    }
 
+    override fun observeViewModel() {
         viewModel?.gameDetailsLiveData?.observe(this, Observer {
             fillGameDetails(it)
             createViewPager(it)

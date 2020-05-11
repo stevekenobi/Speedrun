@@ -13,14 +13,9 @@ import com.example.speedrun.ui.game.GameDetailsActivity
 import com.example.speedrun.ui.run.RunDetailsActivity
 import com.example.speedrun.ui.user.UserProfileActivity
 import com.example.speedrun.utils.ActivityExtras
-import com.example.speedrun.viewmodel.SpeedrunViewModelFactory
 import kotlinx.android.synthetic.main.activity_main.*
-import javax.inject.Inject
 
 class MainActivity : BaseActivity() {
-
-    @Inject
-    lateinit var viewModelFactory: SpeedrunViewModelFactory
 
     private var viewModel: MainViewModel? = null
 
@@ -29,8 +24,6 @@ class MainActivity : BaseActivity() {
         setContentView(R.layout.activity_main)
 
         activityComponent?.inject(this)
-
-        initViewModel()
 
         initUi()
 
@@ -54,9 +47,11 @@ class MainActivity : BaseActivity() {
         return true
     }
 
-    private fun initViewModel() {
+    override fun initViewModel() {
         viewModel = viewModelFactory.create(MainViewModel::class.java)
+    }
 
+    override fun observeViewModel() {
         viewModel?.isLoadingLiveData?.observe(this, Observer {
             if (it == null)
                 return@Observer

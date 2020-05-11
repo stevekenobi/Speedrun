@@ -8,14 +8,9 @@ import com.example.speedrun.R
 import com.example.speedrun.ui.base.BaseActivity
 import com.example.speedrun.utils.ActivityExtras
 import com.example.speedrun.utils.RunTimeConverter
-import com.example.speedrun.viewmodel.SpeedrunViewModelFactory
 import kotlinx.android.synthetic.main.activity_run_details.*
-import javax.inject.Inject
 
 class RunDetailsActivity : BaseActivity() {
-
-    @Inject
-    lateinit var viewModelFactory: SpeedrunViewModelFactory
 
     var viewModel: RunDetailsViewModel? = null
 
@@ -25,14 +20,14 @@ class RunDetailsActivity : BaseActivity() {
 
         activityComponent?.inject(this)
 
-        initViewModel()
-
         viewModel?.getRunDetails(intent.getStringExtra(ActivityExtras.EXTRA_RUN_ID))
     }
 
-    private fun initViewModel() {
+    override fun initViewModel() {
         viewModel = viewModelFactory.create(RunDetailsViewModel::class.java)
+    }
 
+    override fun observeViewModel() {
         viewModel?.runDetailsLiveData?.observe(this, Observer {
             setDetailsPage(it)
         })

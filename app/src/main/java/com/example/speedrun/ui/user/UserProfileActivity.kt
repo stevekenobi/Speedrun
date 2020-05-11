@@ -14,14 +14,9 @@ import com.example.speedrun.ui.game.GameDetailsActivity
 import com.example.speedrun.ui.main.ItemDivideDecorator
 import com.example.speedrun.utils.ActivityExtras
 import com.example.speedrun.utils.UserColorUtils
-import com.example.speedrun.viewmodel.SpeedrunViewModelFactory
 import kotlinx.android.synthetic.main.activity_user_profile.*
-import javax.inject.Inject
 
 class UserProfileActivity : BaseActivity() {
-
-    @Inject
-    lateinit var viewModelFactory: SpeedrunViewModelFactory
 
     var viewModel: UserProfileViewModel? = null
 
@@ -33,14 +28,14 @@ class UserProfileActivity : BaseActivity() {
 
         initUI()
 
-        initViewModel()
-
         viewModel?.getUserDetails(intent.getStringExtra(ActivityExtras.EXTRA_USER_ID))
     }
 
-    private fun initViewModel() {
+    override fun initViewModel() {
         viewModel = viewModelFactory.create(UserProfileViewModel::class.java)
+    }
 
+    override fun observeViewModel() {
         viewModel?.isLoadingLiveData?.observe(this, Observer {
             if (it == null)
                 return@Observer
@@ -78,7 +73,6 @@ class UserProfileActivity : BaseActivity() {
             startActivity(intent)
         })
     }
-
     private fun initUI() {
         rv_user_runs.apply {
             layoutManager = LinearLayoutManager(this@UserProfileActivity)
