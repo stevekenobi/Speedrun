@@ -56,7 +56,7 @@ class Datamanager @Inject constructor(
     suspend fun getCategoryLeaderboard(gameId: String, categoryId: String): List<LeaderboardRunDto> {
         val response = service.getLeaderboardForCategory(gameId, categoryId).data
 
-        val allPlayers = response.players.data
+        val allPlayers = response.players.data.distinct()
 
         response.runs.forEach { run ->
             val usersToAdd = mutableListOf<UserDto>()
