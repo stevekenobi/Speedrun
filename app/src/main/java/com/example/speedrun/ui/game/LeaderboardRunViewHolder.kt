@@ -18,6 +18,7 @@ class LeaderboardRunViewHolder(val viewModel: LeaderboardViewModel?, itemView: V
             setOnClickListener {
                 viewModel?.leaderboardRunClickedLiveData?.value = run.run.id
             }
+            leaderboard_run_players.text = RunsTextUtils.setPlayersText(run.run.playersToDisplay)
             leaderboard_run_place.text = RunsTextUtils.setPlaceForLeaderboard(run.place)
 
             leaderboard_run_time.text = RunTimeConverter.from(run.run.times.primary_t)

@@ -51,10 +51,28 @@ class Datamanager @Inject constructor(
     }
 
     /**
-     *  TODO Implement users logic
+     *  TODO Improve users logic
      */
     suspend fun getCategoryLeaderboard(gameId: String, categoryId: String): List<LeaderboardRunDto> {
-        return service.getLeaderboardForCategory(gameId, categoryId).data.runs
+        val response = service.getLeaderboardForCategory(gameId, categoryId).data
+
+        val allPlayers = response.players.data
+
+        response.runs.forEach { run ->
+            val usersToAdd = mutableListOf<UserDto>()
+
+            run.run.players.forEach { player ->
+                val nextUser = allPlayers.filter { user ->
+                    user.id == player.id
+                }
+
+                usersToAdd.addAll(nextUser)
+            }
+
+            run.run.playersToDisplay = usersToAdd
+        }
+
+        return response.runs
     }
 
     suspend fun getRunDetails(runId: String): RunDto {

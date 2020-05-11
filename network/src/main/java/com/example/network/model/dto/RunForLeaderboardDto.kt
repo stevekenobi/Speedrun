@@ -13,6 +13,7 @@ data class RunForLeaderboardDto(
     val comment: String,
     val status: StatusDto,
     val players: List<PlayerDto>,
+    var playersToDisplay: List<UserDto>,
     val date: String,
     val submitted: String,
     val times: TimeDto,

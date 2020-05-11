@@ -1,5 +1,6 @@
 package com.example.speedrun.utils
 
+import com.example.network.model.dto.UserDto
 import com.example.network.model.dto.UserRunDto
 
 object RunsTextUtils {
@@ -44,5 +45,19 @@ object RunsTextUtils {
         }
 
         return " ($place$placeSuff place)"
+    }
+
+    fun setPlayersText(players: List<UserDto>): String? {
+        if (players.size == 1)
+            return players[0].names?.international
+
+        if (players.size == 2)
+            return """${players[0].names?.international} and ${players[1].names?.international}"""
+
+        var result = ""
+        players.forEach {
+            result += it.names?.international + ", "
+        }
+        return result
     }
 }
