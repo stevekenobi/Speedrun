@@ -2,6 +2,7 @@ package com.example.speedrun.utils
 
 import com.example.network.model.dto.UserDto
 import com.example.network.model.dto.UserRunDto
+import com.example.network.utils.UserEnums
 
 object RunsTextUtils {
 
@@ -47,16 +48,24 @@ object RunsTextUtils {
         return " ($place$placeSuff place)"
     }
 
+    fun setPlayerText(player: UserDto): String? {
+        if (player.rel == UserEnums.REL_GUEST) {
+            return player.name
+        }
+
+        return player.names?.international
+    }
+
     fun setPlayersText(players: List<UserDto>): String? {
         if (players.size == 1)
-            return players[0].names?.international
+            return setPlayerText(players[0])
 
         if (players.size == 2)
-            return """${players[0].names?.international} and ${players[1].names?.international}"""
+            return """${setPlayerText(players[0])} and ${setPlayerText(players[1])}"""
 
         var result = ""
         players.forEach {
-            result += it.names?.international + ", "
+            result += setPlayerText(it) + ", "
         }
         return result
     }

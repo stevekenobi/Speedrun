@@ -17,4 +17,7 @@ object UserEnums {
     const val ROLE_MODERATOR = "moderator"
     const val ROLE_ADMIN = "admin"
     const val ROLE_PROGRAMMER = "programmer"
+
+    const val REL_USER = "user"
+    const val REL_GUEST = "guest"
 }

@@ -4,21 +4,19 @@ import android.view.View
 import com.example.network.model.dto.UserDto
 import com.example.network.utils.UserEnums
 import com.example.speedrun.ui.base.BaseViewHolder
+import com.example.speedrun.utils.RunsTextUtils
 import com.example.speedrun.utils.UserColorUtils
 import kotlinx.android.synthetic.main.item_latest_player.view.*
 
-class LatestPlayersViewHolder(val viewModel: MainViewModel?, itemView: View) : BaseViewHolder(itemView) {
+class LatestPlayersViewHolder(val viewModel: MainViewModel?, itemView: View) :
+    BaseViewHolder(itemView) {
     init {
         viewHolderComponent()?.inject(this)
     }
 
     fun bind(player: UserDto) {
         itemView.apply {
-            if (player.role == "guest")
-                latest_player.text = player.name
-            else
-                latest_player.text = player.names?.international
-
+            latest_player.text = RunsTextUtils.setPlayerText(player)
 
             latest_player.setOnClickListener {
                 viewModel?.latestUserPressedLiveData?.value = player.id

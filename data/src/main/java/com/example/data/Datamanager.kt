@@ -3,6 +3,7 @@ package com.example.data
 import com.example.network.Session
 import com.example.network.SpeedrunService
 import com.example.network.model.dto.*
+import com.example.network.utils.UserEnums
 import com.example.storage.DatabaseSpeedrun
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -50,6 +51,10 @@ class Datamanager @Inject constructor(
         return service.getGameDetails(gameId).data
     }
 
+    suspend fun getCategories(gameId: String): List<CategoryDto> {
+        return service.getGameCategories(gameId).data
+    }
+
     /**
      *  TODO Improve users logic
      */
@@ -62,11 +67,19 @@ class Datamanager @Inject constructor(
             val usersToAdd = mutableListOf<UserDto>()
 
             run.run.players.forEach { player ->
-                val nextUser = allPlayers.filter { user ->
-                    user.id == player.id
-                }
+                if (player.rel == UserEnums.REL_GUEST) {
+                    val nextUser = allPlayers.filter {user ->
+                        user.rel == UserEnums.REL_GUEST && user.name == player.name
+                    }
 
-                usersToAdd.addAll(nextUser)
+                    usersToAdd.addAll(nextUser)
+                } else {
+                    val nextUser = allPlayers.filter { user ->
+                        user.id == player.id
+                    }
+
+                    usersToAdd.addAll(nextUser)
+                }
             }
 
             run.run.playersToDisplay = usersToAdd

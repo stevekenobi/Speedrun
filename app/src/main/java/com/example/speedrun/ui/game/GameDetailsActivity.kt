@@ -1,19 +1,15 @@
 package com.example.speedrun.ui.game
 
 import android.os.Bundle
-import androidx.lifecycle.Observer
-import com.bumptech.glide.Glide
-import com.example.network.model.dto.GameDetailsDto
-import com.example.network.utils.CategoryEnums
+import android.view.View
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import com.example.speedrun.R
 import com.example.speedrun.ui.base.BaseActivity
 import com.example.speedrun.utils.ActivityExtras
-import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_game_details.*
 
 class GameDetailsActivity : BaseActivity() {
-
-    var viewModel: GameDetailsViewModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,37 +17,56 @@ class GameDetailsActivity : BaseActivity() {
 
         activityComponent?.inject(this)
 
-        viewModel?.getGameDetails(intent.getStringExtra(ActivityExtras.EXTRA_GAME_ID))
+        initDrawer()
+
+        initFragments()
     }
 
     override fun initViewModel() {
-        viewModel = viewModelFactory.create(GameDetailsViewModel::class.java)
     }
 
     override fun observeViewModel() {
-        viewModel?.gameDetailsLiveData?.observe(this, Observer {
-            fillGameDetails(it)
-            createViewPager(it)
-        })
     }
 
-    private fun fillGameDetails(game: GameDetailsDto) {
-        Glide.with(this).load(game.assets.coverMedium?.uri).into(game_image)
-        game_details_name.text = game.names?.international
+    override fun onBackPressed() {
+        if (drawer_layout != null && drawer_layout.isDrawerOpen(GravityCompat.START))
+            drawer_layout.closeDrawer(GravityCompat.START)
+        else
+            super.onBackPressed()
     }
 
-    private fun createViewPager(game: GameDetailsDto) {
-        val categories = game.categories.data.filter {
-            it.type == CategoryEnums.TYPE_PER_GAME
-        }
-        pager.adapter = CategoryLeaderboardAdapter(this, game.id, categories)
-
-        val tabTitles = categories.map {
-            it.name
-        }
-
-        TabLayoutMediator(tab_layout, pager) { tab, position ->
-            tab.text = tabTitles[position]
-        }.attach()
+    private fun initFragments() {
+        val gameId = intent.getStringExtra(ActivityExtras.EXTRA_GAME_ID)
+        val drawerFragment = GameDetailsFragment.newInstance(gameId)
+        val viewPagerFragment = GameLeaderboardFragment.newInstance(gameId)
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        fragmentTransaction.add(R.id.game_details_fragment, drawerFragment)
+        fragmentTransaction.add(R.id.game_leaderboard_layout_fragment, viewPagerFragment)
+        fragmentTransaction.commit()
     }
+
+    private fun initDrawer() {
+        drawer_layout.addDrawerListener(
+            object : DrawerLayout.DrawerListener {
+                override fun onDrawerStateChanged(newState: Int) {
+                }
+
+                override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
+                    val moveFactor = (drawerView.width * slideOffset *(-1))
+                    drawer_layout.bringChildToFront(drawerView)
+                    drawer_layout.requestLayout()
+                }
+
+                override fun onDrawerClosed(drawerView: View) {
+                }
+
+                override fun onDrawerOpened(drawerView: View) {
+                }
+
+            }
+        )
+
+    }
+
+
 }

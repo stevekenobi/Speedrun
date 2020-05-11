@@ -8,6 +8,7 @@ import com.example.speedrun.R
 import com.example.speedrun.ui.base.BaseActivity
 import com.example.speedrun.utils.ActivityExtras
 import com.example.speedrun.utils.RunTimeConverter
+import com.example.speedrun.utils.RunsTextUtils
 import kotlinx.android.synthetic.main.activity_run_details.*
 
 class RunDetailsActivity : BaseActivity() {
@@ -35,7 +36,7 @@ class RunDetailsActivity : BaseActivity() {
 
     @SuppressLint("SetTextI18n")
     private fun setDetailsPage(run: RunDto) {
-        run_details.text = "${run.category.data.name} in ${RunTimeConverter.from(run.times.primary_t)} by ${run.players.data[0].names?.international}"
+        run_details.text = "${run.category.data.name} in ${RunTimeConverter.from(run.times.primary_t)} by ${RunsTextUtils.setPlayersText(run.players.data)}"
         run_comment.text = run.comment
     }
 }
