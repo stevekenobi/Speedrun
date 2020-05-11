@@ -13,6 +13,7 @@ class LeaderboardViewModel @Inject constructor(val dataManager: Datamanager) : B
 
     val leaderboardLiveData = MutableLiveData<List<LeaderboardRunDto>>()
     val leaderboardRunClickedLiveData = MutableLiveData<String>()
+    val leaderboardUserClickedLiveData = MutableLiveData<String>()
 
     fun getLeaderboard(gameId: String?, categoryId: String?) {
         viewModelScope.launch(Dispatchers.IO) {

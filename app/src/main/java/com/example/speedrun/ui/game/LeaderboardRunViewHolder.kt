@@ -1,6 +1,7 @@
 package com.example.speedrun.ui.game
 
 import android.view.View
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.network.model.dto.LeaderboardRunDto
 import com.example.speedrun.ui.base.BaseViewHolder
 import com.example.speedrun.utils.RunTimeConverter
@@ -18,7 +19,9 @@ class LeaderboardRunViewHolder(val viewModel: LeaderboardViewModel?, itemView: V
             setOnClickListener {
                 viewModel?.leaderboardRunClickedLiveData?.value = run.run.id
             }
-            leaderboard_run_players.text = RunsTextUtils.setPlayersText(run.run.playersToDisplay)
+            leaderboard_run_players.layoutManager = LinearLayoutManager(context)
+            leaderboard_run_players.adapter = LeaderboardRunPlayersAdapter(viewModel, run.run.playersToDisplay)
+
             leaderboard_run_place.text = RunsTextUtils.setPlaceForLeaderboard(run.place)
 
             leaderboard_run_time.text = RunTimeConverter.from(run.run.times.primary_t)

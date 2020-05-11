@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.speedrun.R
 import com.example.speedrun.ui.base.BaseFragment
 import com.example.speedrun.ui.run.RunDetailsActivity
+import com.example.speedrun.ui.user.UserProfileActivity
 import com.example.speedrun.utils.ActivityExtras
 import kotlinx.android.synthetic.main.fragment_leaderboard.*
 
@@ -86,6 +87,14 @@ class LeaderboardFragment : BaseFragment() {
                 return@Observer
 
             val intent = Intent(activity, RunDetailsActivity::class.java).putExtra(ActivityExtras.EXTRA_RUN_ID, it)
+            activity?.startActivity(intent)
+        })
+
+        viewModel?.leaderboardUserClickedLiveData?.observe(this, Observer {
+            if (it.isNullOrEmpty())
+                return@Observer
+
+            val intent = Intent(activity, UserProfileActivity::class.java).putExtra(ActivityExtras.EXTRA_USER_ID, it)
             activity?.startActivity(intent)
         })
     }
