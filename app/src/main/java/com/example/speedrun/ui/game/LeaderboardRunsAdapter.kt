@@ -6,10 +6,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.network.model.dto.LeaderboardRunDto
 import com.example.speedrun.R
 
-class LeaderboardRunsAdapter(val runs: List<LeaderboardRunDto>) : RecyclerView.Adapter<LeaderboardRunViewHolder>() {
+class LeaderboardRunsAdapter(val viewModel: LeaderboardViewModel?, val runs: List<LeaderboardRunDto>) : RecyclerView.Adapter<LeaderboardRunViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LeaderboardRunViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_leaderboard_run, parent, false)
-        return LeaderboardRunViewHolder(view)
+        return LeaderboardRunViewHolder(viewModel, view)
     }
 
     override fun getItemCount(): Int {

@@ -7,7 +7,7 @@ import com.example.speedrun.utils.RunTimeConverter
 import com.example.speedrun.utils.RunsTextUtils
 import kotlinx.android.synthetic.main.item_leaderboard_run.view.*
 
-class LeaderboardRunViewHolder(itemView: View) : BaseViewHolder(itemView) {
+class LeaderboardRunViewHolder(val viewModel: LeaderboardViewModel?, itemView: View) : BaseViewHolder(itemView) {
 
     init {
         viewHolderComponent()?.inject(this)
@@ -15,6 +15,9 @@ class LeaderboardRunViewHolder(itemView: View) : BaseViewHolder(itemView) {
 
     fun bind(run: LeaderboardRunDto) {
         itemView.apply {
+            setOnClickListener {
+                viewModel?.leaderboardRunClickedLiveData?.value = run.run.id
+            }
             leaderboard_run_place.text = RunsTextUtils.setPlaceForLeaderboard(run.place)
 
             leaderboard_run_time.text = RunTimeConverter.from(run.run.times.primary_t)

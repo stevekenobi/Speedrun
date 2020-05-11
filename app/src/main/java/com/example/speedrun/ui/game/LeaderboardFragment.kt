@@ -1,5 +1,6 @@
 package com.example.speedrun.ui.game
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,8 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.speedrun.R
 import com.example.speedrun.ui.base.BaseFragment
+import com.example.speedrun.ui.run.RunDetailsActivity
+import com.example.speedrun.utils.ActivityExtras
 import kotlinx.android.synthetic.main.fragment_leaderboard.*
 
 class LeaderboardFragment : BaseFragment() {
@@ -75,7 +78,15 @@ class LeaderboardFragment : BaseFragment() {
 
 
         viewModel?.leaderboardLiveData?.observe(this, Observer {
-            category_leaderboard.adapter = LeaderboardRunsAdapter(it)
+            category_leaderboard.adapter = LeaderboardRunsAdapter(viewModel, it)
+        })
+
+        viewModel?.leaderboardRunClickedLiveData?.observe(this, Observer {
+            if (it.isNullOrEmpty())
+                return@Observer
+
+            val intent = Intent(activity, RunDetailsActivity::class.java).putExtra(ActivityExtras.EXTRA_RUN_ID, it)
+            activity?.startActivity(intent)
         })
     }
 

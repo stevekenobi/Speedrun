@@ -12,6 +12,7 @@ import javax.inject.Inject
 class LeaderboardViewModel @Inject constructor(val dataManager: Datamanager) : BaseViewModel() {
 
     val leaderboardLiveData = MutableLiveData<List<LeaderboardRunDto>>()
+    val leaderboardRunClickedLiveData = MutableLiveData<String>()
 
     fun getLeaderboard(gameId: String?, categoryId: String?) {
         viewModelScope.launch(Dispatchers.IO) {
