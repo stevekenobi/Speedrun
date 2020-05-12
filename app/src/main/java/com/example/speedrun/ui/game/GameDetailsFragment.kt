@@ -39,8 +39,16 @@ class GameDetailsFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initUi()
+
         val gameId = arguments?.getString(KEY_GAME_ID)
         viewModel?.getGameDetails(gameId)
+    }
+
+    private fun initUi() {
+        game_misc_button.setOnCheckedChangedListener { _, isChecked ->
+            (activity as GameDetailsActivity).onMiscButtonClicked(isChecked)
+        }
     }
 
     private fun fillGameDetails(gameName: String?, imageUrl: String?) {

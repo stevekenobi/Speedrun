@@ -16,11 +16,13 @@ class GameLeaderboardFragment : BaseFragment() {
     companion object {
 
         const val KEY_GAME_ID = "game_id"
-        fun newInstance(gameId: String?): GameLeaderboardFragment {
+        const val KEY_SHOW_MISC_CATEGORIES = "show_misc_categories"
+        fun newInstance(gameId: String?, showMisc: Boolean): GameLeaderboardFragment {
             val fragment = GameLeaderboardFragment()
 
             fragment.arguments = Bundle().apply {
                 putString(KEY_GAME_ID, gameId)
+                putBoolean(KEY_SHOW_MISC_CATEGORIES, showMisc)
             }
 
             return fragment
@@ -43,8 +45,9 @@ class GameLeaderboardFragment : BaseFragment() {
     }
 
     private fun createViewPager(categories: List<CategoryDto>) {
+        val mustShowMisc = arguments?.getBoolean(KEY_SHOW_MISC_CATEGORIES)
         val mCategories = categories.filter {
-            it.type == CategoryEnums.TYPE_PER_GAME
+            it.type == CategoryEnums.TYPE_PER_GAME && it.miscellaneous == mustShowMisc
         }
 
         pager.adapter =

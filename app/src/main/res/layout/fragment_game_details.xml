@@ -17,10 +17,24 @@
         android:id="@+id/game_details_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
         android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/game_image"
         tools:text="Game Title" />
+
+    <com.beardedhen.androidbootstrap.BootstrapButton
+        android:id="@+id/game_misc_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/game_details_misc_text"
+        app:bootstrapBrand="primary"
+        app:buttonMode="checkbox"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/game_details_name"
+        app:roundedCorners="true" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

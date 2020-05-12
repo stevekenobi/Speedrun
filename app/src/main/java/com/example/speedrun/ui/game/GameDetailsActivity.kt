@@ -9,7 +9,9 @@ import com.example.speedrun.ui.base.BaseActivity
 import com.example.speedrun.utils.ActivityExtras
 import kotlinx.android.synthetic.main.activity_game_details.*
 
-class GameDetailsActivity : BaseActivity() {
+class GameDetailsActivity : BaseActivity(), FragmentCommunicator {
+
+    private var gameId: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,12 +38,12 @@ class GameDetailsActivity : BaseActivity() {
     }
 
     private fun initFragments() {
-        val gameId = intent.getStringExtra(ActivityExtras.EXTRA_GAME_ID)
+        gameId = intent.getStringExtra(ActivityExtras.EXTRA_GAME_ID)
         val drawerFragment = GameDetailsFragment.newInstance(gameId)
-        val viewPagerFragment = GameLeaderboardFragment.newInstance(gameId)
+        val viewPagerFragment = GameLeaderboardFragment.newInstance(gameId, false)
         val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.add(R.id.game_details_fragment, drawerFragment)
-        fragmentTransaction.add(R.id.game_leaderboard_layout_fragment, viewPagerFragment)
+        fragmentTransaction.replace(R.id.game_details_fragment, drawerFragment)
+        fragmentTransaction.replace(R.id.game_leaderboard_layout_fragment, viewPagerFragment)
         fragmentTransaction.commit()
     }
 
@@ -52,7 +54,6 @@ class GameDetailsActivity : BaseActivity() {
                 }
 
                 override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
-                    val moveFactor = (drawerView.width * slideOffset *(-1))
                     drawer_layout.bringChildToFront(drawerView)
                     drawer_layout.requestLayout()
                 }
@@ -65,7 +66,13 @@ class GameDetailsActivity : BaseActivity() {
 
             }
         )
+    }
 
+    override fun onMiscButtonClicked(enabled: Boolean) {
+        val viewPagerFragment = GameLeaderboardFragment.newInstance(gameId, enabled)
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.game_leaderboard_layout_fragment, viewPagerFragment)
+        fragmentTransaction.commit()
     }
 
 
