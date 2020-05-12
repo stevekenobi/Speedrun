@@ -20,12 +20,14 @@ class LeaderboardFragment : BaseFragment() {
     companion object {
         const val KEY_GAME_ID = "game_id"
         const val KEY_CATEGORY_ID = "category_id"
+        const val KEY_LEVEL_ID = "level_id"
 
-        fun newInstance(gameId: String, categoryId: String): Fragment {
+        fun newInstance(gameId: String, levelId: String?, categoryId: String): Fragment {
             val fragment = LeaderboardFragment()
 
             fragment.arguments = Bundle().apply {
                 putString(KEY_GAME_ID, gameId)
+                putString(KEY_LEVEL_ID, levelId)
                 putString(KEY_CATEGORY_ID, categoryId)
             }
             return fragment
@@ -52,8 +54,12 @@ class LeaderboardFragment : BaseFragment() {
 
         val gameId = arguments?.getString(KEY_GAME_ID)
         val categoryId = arguments?.getString(KEY_CATEGORY_ID)
+        val levelId = arguments?.getString(KEY_LEVEL_ID)
 
-        viewModel?.getLeaderboard(gameId, categoryId)
+        if (levelId.isNullOrEmpty())
+            viewModel?.getLeaderboard(gameId, categoryId)
+        else
+            viewModel?.getLevelLeaderboard(gameId, levelId, categoryId)
 
         initUi()
 
@@ -86,7 +92,10 @@ class LeaderboardFragment : BaseFragment() {
             if (it.isNullOrEmpty())
                 return@Observer
 
-            val intent = Intent(activity, RunDetailsActivity::class.java).putExtra(ActivityExtras.EXTRA_RUN_ID, it)
+            val intent = Intent(
+                activity,
+                RunDetailsActivity::class.java
+            ).putExtra(ActivityExtras.EXTRA_RUN_ID, it)
             activity?.startActivity(intent)
         })
 
@@ -94,7 +103,10 @@ class LeaderboardFragment : BaseFragment() {
             if (it.isNullOrEmpty())
                 return@Observer
 
-            val intent = Intent(activity, UserProfileActivity::class.java).putExtra(ActivityExtras.EXTRA_USER_ID, it)
+            val intent = Intent(
+                activity,
+                UserProfileActivity::class.java
+            ).putExtra(ActivityExtras.EXTRA_USER_ID, it)
             activity?.startActivity(intent)
         })
     }

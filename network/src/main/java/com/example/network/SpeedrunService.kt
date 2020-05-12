@@ -37,8 +37,21 @@ interface SpeedrunService {
     @GET("games/{gameId}/categories")
     suspend fun getGameCategories(@Path("gameId") gameId: String): CategoriesResponse
 
+    @GET("games/{gameId}/levels?embed=categories")
+    suspend fun getGameLevels(@Path("gameId") gameId: String): LevelsResponse
+
     @GET("leaderboards/{gameId}/category/{categoryId}?embed=players")
-    suspend fun getLeaderboardForCategory(@Path("gameId") gameId: String, @Path("categoryId") categoryId: String): LeaderboardResponse
+    suspend fun getLeaderboardForCategory(
+        @Path("gameId") gameId: String,
+        @Path("categoryId") categoryId: String
+    ): LeaderboardResponse
+
+    @GET("leaderboards/{gameId}/level/{levelId}/{categoryId}?embed=players")
+    suspend fun getCategoryLeaderboardForLevel(
+        @Path("gameId") gameId: String,
+        @Path("levelId") levelId: String,
+        @Path("categoryId") categoryId: String
+    ): LeaderboardResponse
 
     /**
      *  Run Details Activity

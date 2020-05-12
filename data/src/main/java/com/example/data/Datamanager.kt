@@ -55,11 +55,45 @@ class Datamanager @Inject constructor(
         return service.getGameCategories(gameId).data
     }
 
+    suspend fun getLevels(gameId: String): List<LevelDto> {
+        return service.getGameLevels(gameId).data
+    }
+
     /**
      *  TODO Improve users logic
      */
     suspend fun getCategoryLeaderboard(gameId: String, categoryId: String): List<LeaderboardRunDto> {
         val response = service.getLeaderboardForCategory(gameId, categoryId).data
+
+        val allPlayers = response.players.data.distinct()
+
+        response.runs.forEach { run ->
+            val usersToAdd = mutableListOf<UserDto>()
+
+            run.run.players.forEach { player ->
+                if (player.rel == UserEnums.REL_GUEST) {
+                    val nextUser = allPlayers.filter {user ->
+                        user.rel == UserEnums.REL_GUEST && user.name == player.name
+                    }
+
+                    usersToAdd.addAll(nextUser)
+                } else {
+                    val nextUser = allPlayers.filter { user ->
+                        user.id == player.id
+                    }
+
+                    usersToAdd.addAll(nextUser)
+                }
+            }
+
+            run.run.playersToDisplay = usersToAdd
+        }
+
+        return response.runs
+    }
+
+    suspend fun getLevelLeaderboard(gameId: String,levelId: String, categoryId: String): List<LeaderboardRunDto> {
+        val response = service.getCategoryLeaderboardForLevel(gameId, levelId, categoryId).data
 
         val allPlayers = response.players.data.distinct()
 

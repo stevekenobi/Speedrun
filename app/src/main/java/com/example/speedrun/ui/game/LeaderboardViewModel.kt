@@ -33,4 +33,23 @@ class LeaderboardViewModel @Inject constructor(val dataManager: Datamanager) : B
             }
         }
     }
+
+    fun getLevelLeaderboard(gameId: String?, levelId: String, categoryId: String?) {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+
+                isLoadingLiveData.postValue(true)
+                if (gameId.isNullOrEmpty() || categoryId.isNullOrEmpty())
+                    return@launch
+
+                val result = dataManager.getLevelLeaderboard(gameId, levelId, categoryId)
+
+                leaderboardLiveData.postValue(result)
+            } catch (e: Exception) {
+                handleException(e)
+            } finally {
+                isLoadingLiveData.postValue(false)
+            }
+        }
+    }
 }

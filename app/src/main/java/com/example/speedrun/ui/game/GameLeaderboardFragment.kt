@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.network.model.dto.CategoryDto
+import com.example.network.model.dto.LevelDto
 import com.example.network.utils.CategoryEnums
 import com.example.speedrun.R
 import com.example.speedrun.ui.base.BaseFragment
@@ -41,7 +43,12 @@ class GameLeaderboardFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewModel?.getCategories(arguments?.getString(KEY_GAME_ID))
+
+        initUi()
+
+        val gameId = arguments?.getString(KEY_GAME_ID)
+        viewModel?.getCategories(gameId)
+        viewModel?.getLevels(gameId)
     }
 
     private fun createViewPager(categories: List<CategoryDto>) {
@@ -51,7 +58,7 @@ class GameLeaderboardFragment : BaseFragment() {
         }
 
         pager.adapter =
-            CategoryLeaderboardAdapter(activity!!, arguments?.getString(KEY_GAME_ID)!!, mCategories)
+            CategoryLeaderboardAdapter(activity!!, arguments?.getString(KEY_GAME_ID)!!, mCategories, null)
 
         val tabTitles = mCategories.map {
             it.name
@@ -62,6 +69,32 @@ class GameLeaderboardFragment : BaseFragment() {
         }.attach()
     }
 
+    private fun createViewPagerForLevel(levelId: String) {
+        val mCategories = viewModel?.levelsLiveData?.value?.find {
+            it.id == levelId
+        }?.categories?.data ?: return
+
+        pager.adapter =
+            CategoryLeaderboardAdapter(activity!!, arguments?.getString(KEY_GAME_ID)!!, mCategories, levelId)
+
+        val tabTitles = mCategories.map {
+            it.name
+        }
+
+        TabLayoutMediator(tab_layout, pager) { tab, position ->
+            tab.text = tabTitles[position]
+        }.attach()
+    }
+
+    private fun createLevelButtons(levels: List<LevelDto>) {
+        levels_buttons.adapter = LevelsAdapter(viewModel, levels)
+    }
+
+    private fun initUi() {
+        levels_buttons.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+    }
+
     override fun initViewModel() {
         viewModel = viewModelFactory.create(GameLeaderboardViewModel::class.java)
     }
@@ -69,6 +102,20 @@ class GameLeaderboardFragment : BaseFragment() {
     override fun observeViewModel() {
         viewModel?.categoriesLiveData?.observe(this, Observer {
             createViewPager(it)
+        })
+
+        viewModel?.levelsLiveData?.observe(this, Observer {
+            if (it.isNullOrEmpty())
+                return@Observer
+
+            createLevelButtons(it)
+        })
+
+        viewModel?.levelSelectedLiveData?.observe(this, Observer {
+            if (it.isNullOrEmpty())
+                viewModel?.getCategories(arguments?.getString(KEY_GAME_ID))
+            else
+                createViewPagerForLevel(it)
         })
     }
 
