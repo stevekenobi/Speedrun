@@ -5,10 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.network.model.dto.UserDto
 import com.example.speedrun.R
-import kotlinx.android.synthetic.main.item_latest_player.view.*
 
 class LatestPlayersAdapter(
-    val viewModel: MainViewModel?,
+    val viewModel: LatestRunsViewModel?,
     private val playerList: List<UserDto>
 ) :
     RecyclerView.Adapter<LatestPlayersViewHolder>() {

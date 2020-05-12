@@ -16,6 +16,9 @@ interface SpeedrunService {
     @GET("runs?orderby=verify-date&direction=desc&embed=game,category,players")
     suspend fun getLatestRun(): LatestRunResponse
 
+    @GET("games?orderby=released")
+    suspend fun getGames(): GamesResponse
+
     /**
      *  User Details Activity
      */

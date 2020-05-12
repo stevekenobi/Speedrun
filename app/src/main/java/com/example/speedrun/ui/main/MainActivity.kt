@@ -1,12 +1,7 @@
 package com.example.speedrun.ui.main
 
-import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
-import android.widget.Toast
-import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.speedrun.R
 import com.example.speedrun.ui.base.BaseActivity
 import com.example.speedrun.ui.game.GameDetailsActivity
@@ -15,114 +10,67 @@ import com.example.speedrun.ui.user.UserProfileActivity
 import com.example.speedrun.utils.ActivityExtras
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : BaseActivity() {
-
-    private var viewModel: MainViewModel? = null
+class MainActivity : BaseActivity(), MainFragmentCommunicator {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        activityComponent?.inject(this)
-
-        initUi()
-
-        viewModel?.getLatestRuns()
+        createLatestRunsFragment()
+        initNavigationBar()
     }
 
-    override fun onBackPressed() {
-        buildAlertDialog(
-            this,
-            R.string.base_alert_title,
-            R.string.base_alert_message,
-            R.string.base_alert_positive,
-            DialogInterface.OnClickListener { _, _ -> finish() },
-            R.string.base_alert_negative,
-            DialogInterface.OnClickListener { dialog, _ -> dialog.dismiss()},
-            true
-        ).show()
+    private fun initNavigationBar() {
+        main_navigation_bar.setOnNavigationItemSelectedListener { item ->
+            when (item.itemId) {
+                R.id.main_menu_latest_runs -> {
+                    createLatestRunsFragment()
+                    true
+                }
+                R.id.main_menu_popular_games -> {
+                    createPopularGamesFragment()
+                    true
+                }
+                else -> false
+            }
+        }
     }
 
-    override fun shouldListenToNetworkChanges(): Boolean {
-        return true
+    private fun createLatestRunsFragment() {
+        val fragment = LatestRunsFragment()
+
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.main_navigation_fragment, fragment)
+        fragmentTransaction.commit()
+    }
+
+    private fun createPopularGamesFragment() {
+        val fragment = PopularGamesFragment()
+
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.main_navigation_fragment, fragment)
+        fragmentTransaction.commit()
     }
 
     override fun initViewModel() {
-        viewModel = viewModelFactory.create(MainViewModel::class.java)
     }
 
     override fun observeViewModel() {
-        viewModel?.isLoadingLiveData?.observe(this, Observer {
-            if (it == null)
-                return@Observer
-
-            if (it) {
-                main_loader.visibility = View.VISIBLE
-                main_layout.visibility = View.GONE
-            } else {
-                main_refresh.isRefreshing = false
-                main_layout.visibility = View.VISIBLE
-                main_loader.visibility = View.GONE
-            }
-        })
-
-        viewModel?.latestRunsLiveData?.observe(this, Observer {
-            if (it.isNullOrEmpty()) {
-                return@Observer
-            }
-
-            main_rv_latest_runs.adapter = LatestGameAdapter(viewModel, it)
-            main_rv_latest_runs.isNestedScrollingEnabled = false
-        })
-
-        viewModel?.latestUserPressedLiveData?.observe(this, Observer {
-            if (it.isNullOrEmpty()) {
-                return@Observer
-            }
-
-            val intent = Intent(this, UserProfileActivity::class.java).putExtra(ActivityExtras.EXTRA_USER_ID, it)
-            startActivity(intent)
-        })
-
-        viewModel?.latestGamePressedLiveData?.observe(this, Observer {
-            if (it.isNullOrEmpty()) {
-                return@Observer
-            }
-
-            val intent = Intent(this, GameDetailsActivity::class.java).putExtra(ActivityExtras.EXTRA_GAME_ID, it)
-            startActivity(intent)
-        })
-
-        viewModel?.latestRunPressedLiveData?.observe(this, Observer {
-            if (it.isNullOrEmpty()) {
-                return@Observer
-            }
-
-            val intent = Intent(this, RunDetailsActivity::class.java).putExtra(ActivityExtras.EXTRA_RUN_ID, it)
-            startActivity(intent)
-        })
-
-        viewModel?.noInternetConnectionLiveData?.observe(this, Observer {
-            if (it == true)
-                Toast.makeText(this, "I am your father", Toast.LENGTH_SHORT).show()
-        })
-
-        viewModel?.serverErrorLiveData?.observe(this, Observer {
-            if (it == true)
-                Toast.makeText(this, "Unknown Error", Toast.LENGTH_SHORT).show()
-        })
     }
 
-    private fun initUi() {
-        main_refresh.setOnRefreshListener {
-            viewModel?.getLatestRuns()
-        }
+    override fun onPlayerClicked(id: String) {
+        val intent = Intent(this, UserProfileActivity::class.java).putExtra(ActivityExtras.EXTRA_USER_ID, id)
+        startActivity(intent)
+    }
 
-        main_rv_latest_runs.apply {
-            layoutManager = LinearLayoutManager(this@MainActivity)
-            val itemDecoration = ItemDivideDecorator(80)
-            addItemDecoration(itemDecoration)
-        }
+    override fun onGameClicked(id: String) {
+        val intent = Intent(this, GameDetailsActivity::class.java).putExtra(ActivityExtras.EXTRA_GAME_ID, id)
+        startActivity(intent)
+    }
+
+    override fun onRunClicked(id: String) {
+        val intent = Intent(this, RunDetailsActivity::class.java).putExtra(ActivityExtras.EXTRA_RUN_ID, id)
+        startActivity(intent)
     }
 
 }

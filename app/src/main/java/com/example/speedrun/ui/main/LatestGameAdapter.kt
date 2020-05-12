@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.speedrun.R
 import com.example.speedrun.model.LatestGameModel
 
-class LatestGameAdapter(val viewModel: MainViewModel?, private val latestGameList: List<LatestGameModel>) :
+class LatestGameAdapter(val viewModel: LatestRunsViewModel?, private val latestGameList: List<LatestGameModel>) :
     RecyclerView.Adapter<LatestGameViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LatestGameViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_latest_game, parent, false)

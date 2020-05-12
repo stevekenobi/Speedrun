@@ -8,7 +8,7 @@ import com.example.speedrun.utils.RunsTextUtils
 import com.example.speedrun.utils.UserColorUtils
 import kotlinx.android.synthetic.main.item_latest_player.view.*
 
-class LatestPlayersViewHolder(val viewModel: MainViewModel?, itemView: View) :
+class LatestPlayersViewHolder(val viewModel: LatestRunsViewModel?, itemView: View) :
     BaseViewHolder(itemView) {
     init {
         viewHolderComponent()?.inject(this)

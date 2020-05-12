@@ -7,7 +7,7 @@ import com.example.speedrun.model.LatestGameModel
 import com.example.speedrun.ui.base.BaseViewHolder
 import kotlinx.android.synthetic.main.item_latest_game.view.*
 
-class LatestGameViewHolder(val viewModel: MainViewModel?, itemView: View) : BaseViewHolder(itemView) {
+class LatestGameViewHolder(val viewModel: LatestRunsViewModel?, itemView: View) : BaseViewHolder(itemView) {
 
     init {
         viewHolderComponent()?.inject(this)

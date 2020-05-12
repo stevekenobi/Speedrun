@@ -8,7 +8,7 @@ import com.example.speedrun.ui.base.BaseViewHolder
 import com.example.speedrun.utils.RunTimeConverter
 import kotlinx.android.synthetic.main.item_latest_run.view.*
 
-class LatestRunViewHolder(val viewModel: MainViewModel?, itemView: View) : BaseViewHolder(itemView) {
+class LatestRunViewHolder(val viewModel: LatestRunsViewModel?, itemView: View) : BaseViewHolder(itemView) {
 
     init {
         viewHolderComponent()?.inject(this)

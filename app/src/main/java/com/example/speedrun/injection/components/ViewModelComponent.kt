@@ -5,7 +5,8 @@ import com.example.speedrun.injection.modules.ViewModelModule
 import com.example.speedrun.ui.game.GameDetailsViewModel
 import com.example.speedrun.ui.game.GameLeaderboardViewModel
 import com.example.speedrun.ui.game.LeaderboardViewModel
-import com.example.speedrun.ui.main.MainViewModel
+import com.example.speedrun.ui.main.LatestRunsViewModel
+import com.example.speedrun.ui.main.PopularGamesViewModel
 import com.example.speedrun.ui.run.RunDetailsViewModel
 import com.example.speedrun.ui.splash.SplashViewModel
 import com.example.speedrun.ui.user.UserProfileViewModel
@@ -18,7 +19,8 @@ import dagger.Component
 interface ViewModelComponent {
     fun inject(viewModelProvider: SpeedrunViewModelFactory)
 
-    fun inject(viewModel: MainViewModel)
+    fun inject(viewModel: LatestRunsViewModel)
+    fun inject(viewModel: PopularGamesViewModel)
     fun inject(viewModel: SplashViewModel)
     fun inject(viewModel: UserProfileViewModel)
     fun inject(viewModel: GameDetailsViewModel)

@@ -31,6 +31,10 @@ class Datamanager @Inject constructor(
         return service.getLatestRun().data
     }
 
+    suspend fun getRecentGames(): List<GameDto> {
+        return service.getGames().data
+    }
+
     suspend fun getUserDetails(userId: String): UserDto {
         return service.getUserById(userId).data
     }

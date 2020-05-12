@@ -8,10 +8,9 @@ import com.example.speedrun.model.LatestGameModel
 import com.example.speedrun.ui.base.BaseViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.lang.Exception
 import javax.inject.Inject
 
-class MainViewModel @Inject constructor(private val datamanager: Datamanager) : BaseViewModel() {
+class LatestRunsViewModel @Inject constructor(val dataManager: Datamanager): BaseViewModel() {
     val latestRunsLiveData = MutableLiveData<List<LatestGameModel>>()
 
     val latestUserPressedLiveData = MutableLiveData<String>()
@@ -22,7 +21,7 @@ class MainViewModel @Inject constructor(private val datamanager: Datamanager) : 
         viewModelScope.launch(Dispatchers.IO) {
             try {
                 isLoadingLiveData.postValue(true)
-                val runs = datamanager.getLatestRuns()
+                val runs = dataManager.getLatestRuns()
 
                 val result = mutableListOf<LatestGameModel>()
 
