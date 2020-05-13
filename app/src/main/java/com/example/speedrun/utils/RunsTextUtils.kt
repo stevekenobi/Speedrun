@@ -15,7 +15,7 @@ object RunsTextUtils {
     }
 
     fun setPlaceForLeaderboard(place: Int?): String {
-        if (place == null)
+        if (place == null || place == 0)
             return " - "
 
         val placeSuff = when {
@@ -31,8 +31,8 @@ object RunsTextUtils {
         return "$place$placeSuff"
     }
 
-    fun setPlaceForRecent(place: Int?): String {
-        if (place == null)
+    private fun setPlaceForRecent(place: Int?): String {
+        if (place == null || place == 0)
             return " - "
 
         val placeSuff = when {
