@@ -2,7 +2,7 @@ package com.example.speedrun.ui.game
 
 import android.view.View
 import com.example.network.model.dto.UserDto
-import com.example.network.utils.UserEnums
+import com.example.network.utils.enums.UserEnums
 import com.example.speedrun.ui.base.BaseViewHolder
 import com.example.speedrun.utils.RunsTextUtils
 import com.example.speedrun.utils.UserColorUtils

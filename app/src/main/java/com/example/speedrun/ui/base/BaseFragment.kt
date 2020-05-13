@@ -25,7 +25,7 @@ abstract class BaseFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         if (fragmentComponent == null) {
-            val applicationComponent = (activity?.application as SpeedrunApplication).component
+            val applicationComponent = (activity?.application as SpeedrunApplication).getComponent()
 
             fragmentComponent = DaggerFragmentComponent.builder()
                 .applicationComponent(applicationComponent)

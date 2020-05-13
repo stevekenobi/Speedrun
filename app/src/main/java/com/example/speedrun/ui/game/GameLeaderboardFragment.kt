@@ -8,7 +8,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.network.model.dto.CategoryDto
 import com.example.network.model.dto.LevelDto
-import com.example.network.utils.CategoryEnums
+import com.example.network.utils.enums.CategoryEnums
 import com.example.speedrun.R
 import com.example.speedrun.ui.base.BaseFragment
 import com.google.android.material.tabs.TabLayoutMediator

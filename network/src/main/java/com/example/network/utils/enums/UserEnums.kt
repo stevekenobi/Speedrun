@@ -1,4 +1,4 @@
-package com.example.network.utils
+package com.example.network.utils.enums
 
 object UserEnums {
     /******************

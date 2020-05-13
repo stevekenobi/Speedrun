@@ -4,7 +4,6 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import butterknife.ButterKnife
 import com.example.speedrun.application.SpeedrunApplication
-import com.example.speedrun.injection.components.ApplicationComponent
 import com.example.speedrun.injection.components.DaggerViewHolderComponent
 import com.example.speedrun.injection.components.ViewHolderComponent
 
@@ -17,7 +16,7 @@ open class BaseViewHolder(itemView: View) : ViewHolder(itemView) {
     init {
         ButterKnife.bind(this, itemView)
         if (viewHolderComponent == null) {
-            val applicationComponent: ApplicationComponent =
+            val applicationComponent =
                 (itemView.context.applicationContext as SpeedrunApplication).getComponent()
             viewHolderComponent = DaggerViewHolderComponent.builder()
                 .applicationComponent(applicationComponent)

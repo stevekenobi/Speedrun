@@ -10,7 +10,6 @@ import com.example.data.Datamanager
 import com.example.speedrun.application.SpeedrunApplication
 import com.example.speedrun.events.NetworkAvailableEvent
 import com.example.speedrun.injection.components.ActivityComponent
-import com.example.speedrun.injection.components.ApplicationComponent
 import com.example.speedrun.injection.components.DaggerActivityComponent
 import com.example.speedrun.injection.modules.ActivityModule
 import com.example.speedrun.utils.Connectivity
@@ -45,8 +44,7 @@ abstract class BaseActivity : AppCompatActivity() {
         // Create the ActivityComponent and reuses cached ConfigPersistentComponent if this is
         // being called after a configuration change.
         if (activityComponent == null) {
-            val applicationComponent: ApplicationComponent =
-                (application as SpeedrunApplication).component
+            val applicationComponent = (application as SpeedrunApplication).getComponent()
             activityComponent = DaggerActivityComponent.builder()
                 .applicationComponent(applicationComponent)
                 .activityModule(ActivityModule(this))

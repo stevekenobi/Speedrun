@@ -2,7 +2,7 @@ package com.example.speedrun.utils
 
 import com.example.network.model.dto.UserDto
 import com.example.network.model.dto.UserRunDto
-import com.example.network.utils.UserEnums
+import com.example.network.utils.enums.UserEnums
 
 object RunsTextUtils {
 

@@ -14,7 +14,7 @@ class LifecycleListener(application: Application) : LifecycleObserver {
     @Inject
     lateinit var eventBus: EventBus
     init {
-        (application as SpeedrunApplication).component.inject(this)
+        (application as SpeedrunApplication).getComponent()?.inject(this)
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_START)

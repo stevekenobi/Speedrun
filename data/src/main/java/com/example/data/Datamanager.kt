@@ -3,7 +3,7 @@ package com.example.data
 import com.example.network.Session
 import com.example.network.SpeedrunService
 import com.example.network.model.dto.*
-import com.example.network.utils.UserEnums
+import com.example.network.utils.enums.UserEnums
 import com.example.storage.DatabaseSpeedrun
 import javax.inject.Inject
 import javax.inject.Singleton
