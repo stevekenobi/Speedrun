@@ -12,6 +12,9 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity(), MainFragmentCommunicator {
 
+    val latestRunsFragment = LatestRunsFragment()
+    val popularGamesFragment = PopularGamesFragment()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -37,18 +40,14 @@ class MainActivity : BaseActivity(), MainFragmentCommunicator {
     }
 
     private fun createLatestRunsFragment() {
-        val fragment = LatestRunsFragment()
-
         val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.main_navigation_fragment, fragment)
+        fragmentTransaction.replace(R.id.main_navigation_fragment, latestRunsFragment)
         fragmentTransaction.commit()
     }
 
     private fun createPopularGamesFragment() {
-        val fragment = PopularGamesFragment()
-
         val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.main_navigation_fragment, fragment)
+        fragmentTransaction.replace(R.id.main_navigation_fragment, popularGamesFragment)
         fragmentTransaction.commit()
     }
 
