@@ -12,6 +12,7 @@ import javax.inject.Inject
 class GameDetailsViewModel @Inject constructor(val datamanager: Datamanager) : BaseViewModel() {
 
     val gameDetailsLiveData = MutableLiveData<GameDetailsDto>()
+    val levelSelectedLiveData = MutableLiveData<String>()
 
     fun getGameDetails(gameId: String?) {
         if (gameId.isNullOrEmpty())

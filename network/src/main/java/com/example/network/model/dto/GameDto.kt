@@ -1,6 +1,7 @@
 package com.example.network.model.dto
 
 import com.example.network.model.Link
+import com.google.gson.annotations.SerializedName
 
 data class GameDto(
     val id: String,
@@ -8,7 +9,7 @@ data class GameDto(
     val abbreviation: String,
     val weblink: String,
     val released: Int,
-    val releaseDate: String,
+    @SerializedName("release-date") val releaseDate: String,
     val ruleset: Any,
     val romhack: Boolean,
     val gameTypes: List<String>,

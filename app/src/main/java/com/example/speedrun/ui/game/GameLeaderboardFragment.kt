@@ -5,9 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.network.model.dto.CategoryDto
-import com.example.network.model.dto.LevelDto
 import com.example.network.utils.enums.CategoryEnums
 import com.example.speedrun.R
 import com.example.speedrun.ui.base.BaseFragment
@@ -18,6 +16,7 @@ class GameLeaderboardFragment : BaseFragment() {
     companion object {
 
         const val KEY_GAME_ID = "game_id"
+        const val KEY_LEVEL_ID = "level_id"
         const val KEY_SHOW_MISC_CATEGORIES = "show_misc_categories"
         fun newInstance(gameId: String?, showMisc: Boolean): GameLeaderboardFragment {
             val fragment = GameLeaderboardFragment()
@@ -25,6 +24,17 @@ class GameLeaderboardFragment : BaseFragment() {
             fragment.arguments = Bundle().apply {
                 putString(KEY_GAME_ID, gameId)
                 putBoolean(KEY_SHOW_MISC_CATEGORIES, showMisc)
+            }
+
+            return fragment
+        }
+
+        fun newInstance(gameId: String?, levelId: String?): GameLeaderboardFragment {
+            val fragment = GameLeaderboardFragment()
+
+            fragment.arguments = Bundle().apply {
+                putString(KEY_GAME_ID, gameId)
+                putString(KEY_LEVEL_ID, levelId)
             }
 
             return fragment
@@ -47,32 +57,22 @@ class GameLeaderboardFragment : BaseFragment() {
         initUi()
 
         val gameId = arguments?.getString(KEY_GAME_ID)
-        viewModel?.getCategories(gameId)
-        viewModel?.getLevels(gameId)
+        val levelId = arguments?.getString(KEY_LEVEL_ID)
+        viewModel?.getCategories(gameId, levelId)
     }
 
     private fun createViewPager(categories: List<CategoryDto>) {
-        val mustShowMisc = arguments?.getBoolean(KEY_SHOW_MISC_CATEGORIES)
-        val mCategories = categories.filter {
-            it.type == CategoryEnums.TYPE_PER_GAME && it.miscellaneous == mustShowMisc
+
+        val levelId = arguments?.getString(KEY_LEVEL_ID)
+
+        var mCategories = categories
+        if (categories.any {
+                it.type == CategoryEnums.TYPE_PER_GAME
+            }) {
+            mCategories = categories.filter {
+                it.type == CategoryEnums.TYPE_PER_GAME
+            }
         }
-
-        pager.adapter =
-            CategoryLeaderboardAdapter(activity!!, arguments?.getString(KEY_GAME_ID)!!, mCategories, null)
-
-        val tabTitles = mCategories.map {
-            it.name
-        }
-
-        TabLayoutMediator(tab_layout, pager) { tab, position ->
-            tab.text = tabTitles[position]
-        }.attach()
-    }
-
-    private fun createViewPagerForLevel(levelId: String) {
-        val mCategories = viewModel?.levelsLiveData?.value?.find {
-            it.id == levelId
-        }?.categories?.data ?: return
 
         pager.adapter =
             CategoryLeaderboardAdapter(activity!!, arguments?.getString(KEY_GAME_ID)!!, mCategories, levelId)
@@ -86,13 +86,7 @@ class GameLeaderboardFragment : BaseFragment() {
         }.attach()
     }
 
-    private fun createLevelButtons(levels: List<LevelDto>) {
-        levels_buttons.adapter = LevelsAdapter(viewModel, levels)
-    }
-
     private fun initUi() {
-        levels_buttons.layoutManager =
-            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
     }
 
     override fun initViewModel() {
@@ -102,20 +96,6 @@ class GameLeaderboardFragment : BaseFragment() {
     override fun observeViewModel() {
         viewModel?.categoriesLiveData?.observe(this, Observer {
             createViewPager(it)
-        })
-
-        viewModel?.levelsLiveData?.observe(this, Observer {
-            if (it.isNullOrEmpty())
-                return@Observer
-
-            createLevelButtons(it)
-        })
-
-        viewModel?.levelSelectedLiveData?.observe(this, Observer {
-            if (it.isNullOrEmpty())
-                viewModel?.getCategories(arguments?.getString(KEY_GAME_ID))
-            else
-                createViewPagerForLevel(it)
         })
     }
 

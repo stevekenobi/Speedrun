@@ -59,8 +59,8 @@ class Datamanager @Inject constructor(
         return service.getGameCategories(gameId).data
     }
 
-    suspend fun getLevels(gameId: String): List<LevelDto> {
-        return service.getGameLevels(gameId).data
+    suspend fun getLevelCategories(levelId: String): List<CategoryDto> {
+        return service.getLevelCategories(levelId).data
     }
 
     /**

@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.example.network.model.dto.LevelDto
 import com.example.speedrun.R
 import com.example.speedrun.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_game_details.*
@@ -46,14 +48,16 @@ class GameDetailsFragment : BaseFragment() {
     }
 
     private fun initUi() {
-        game_misc_button.setOnCheckedChangedListener { _, isChecked ->
-            (activity as GameDetailsActivity).onMiscButtonClicked(isChecked)
-        }
+        game_levels_list.layoutManager = LinearLayoutManager(context)
     }
 
     private fun fillGameDetails(gameName: String?, imageUrl: String?) {
         Glide.with(this).load(imageUrl).into(game_image)
         game_details_name.text = gameName
+    }
+
+    private fun fillLevelsList(levels: List<LevelDto>) {
+        game_levels_list.adapter = LevelsAdapter(viewModel, levels)
     }
 
     override fun initViewModel() {
@@ -66,6 +70,11 @@ class GameDetailsFragment : BaseFragment() {
                 return@Observer
 
             fillGameDetails(it.names?.international, it.assets.coverLarge?.uri)
+            fillLevelsList(it.levels.data)
+        })
+
+        viewModel?.levelSelectedLiveData?.observe(this, Observer {
+            (activity as GameDetailsActivity).onILClicked(it)
         })
     }
 

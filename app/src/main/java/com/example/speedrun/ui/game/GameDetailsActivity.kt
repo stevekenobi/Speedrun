@@ -68,12 +68,10 @@ class GameDetailsActivity : BaseActivity(), FragmentCommunicator {
         )
     }
 
-    override fun onMiscButtonClicked(enabled: Boolean) {
-        val viewPagerFragment = GameLeaderboardFragment.newInstance(gameId, enabled)
+    override fun onILClicked(levelId: String?) {
+        val viewPagerFragment = GameLeaderboardFragment.newInstance(gameId, levelId)
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.game_leaderboard_layout_fragment, viewPagerFragment)
         fragmentTransaction.commit()
     }
-
-
 }

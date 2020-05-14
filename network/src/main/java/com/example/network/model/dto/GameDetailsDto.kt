@@ -1,10 +1,7 @@
 package com.example.network.model.dto
 
 import com.example.network.model.Link
-import com.example.network.model.messages.CategoriesResponse
-import com.example.network.model.messages.DevelopersResponse
-import com.example.network.model.messages.PlatformsResponse
-import com.example.network.model.messages.PlayersResponse
+import com.example.network.model.messages.*
 
 data class GameDetailsDto(
     val id: String,
@@ -26,5 +23,6 @@ data class GameDetailsDto(
     val moderators: PlayersResponse,
     val created: String,
     val links: List<Link>,
-    val categories: CategoriesResponse
+    val categories: CategoriesResponse,
+    val levels: LevelsResponse
 )
