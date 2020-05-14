@@ -1,12 +1,12 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:textViewStyle">@style/Speedrun.TextAppearance.TextView.Black</item>
+        <item name="android:textViewStyle">@style/Speedrun.TextAppearance.TextView.Light</item>
     </style>
 
     <style name="InactiveMenu">
@@ -14,27 +14,27 @@
     </style>
 
     <style name="Speedrun.TextAppearance.TextView.Regular" parent="android:TextAppearance.Widget.TextView">
-        <item name="fontPath">font/roboto_slab_regular</item>
+        <item name="fontPath">fonts/RobotoSlabRegular.ttf</item>
     </style>
 
     <style name="Speedrun.TextAppearance.TextView.Black" parent="android:TextAppearance.Widget.TextView">
-        <item name="fontPath">font/roboto_slab_black</item>
+        <item name="fontPath">fonts/RobotoSlabBlack.ttf</item>
     </style>
 
     <style name="Speedrun.TextAppearance.TextView.Light" parent="android:TextAppearance.Widget.TextView">
-        <item name="fontPath">font/roboto_slab_light</item>
+        <item name="fontPath">fonts/RobotoSlabLight.ttf</item>
     </style>
 
     <style name="Speedrun.TextAppearance.TextView.Bold" parent="android:TextAppearance.Widget.TextView">
-        <item name="fontPath">font/roboto_slab_bold</item>
+        <item name="fontPath">fonts/RobotoSlabBold.ttf</item>
     </style>
 
     <style name="Speedrun.TextAppearance.TextView.Medium" parent="android:TextAppearance.Widget.TextView">
-        <item name="fontPath">font/roboto_slab_medium</item>
+        <item name="fontPath">fonts/RobotoSlabMedium.ttf</item>
     </style>
 
     <style name="Speedrun.TextAppearance.TextView.Thin" parent="android:TextAppearance.Widget.TextView">
-        <item name="fontPath">font/roboto_slab_thin</item>
+        <item name="fontPath">fonts/RobotoSlabThin.ttf</item>
     </style>
 
 </resources>
