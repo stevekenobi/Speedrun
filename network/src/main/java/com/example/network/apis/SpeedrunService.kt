@@ -1,4 +1,4 @@
-package com.example.network
+package com.example.network.apis
 
 import com.example.network.model.messages.*
 import retrofit2.http.GET

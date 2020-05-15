@@ -5,7 +5,7 @@ import android.app.Application
 import com.example.data.Datamanager
 import com.example.data.injection.DataModule
 import com.example.network.Session
-import com.example.network.SpeedrunService
+import com.example.network.apis.SpeedrunService
 import com.example.network.injection.NetworkModule
 import com.example.speedrun.injection.modules.ApplicationModule
 import com.example.speedrun.injection.modules.ConnectivityModule

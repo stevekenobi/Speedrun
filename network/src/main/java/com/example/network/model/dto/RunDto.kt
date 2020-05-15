@@ -2,7 +2,6 @@ package com.example.network.model.dto
 
 import com.example.network.model.Link
 import com.example.network.model.messages.CategoryResponse
-import com.example.network.model.messages.LevelResponse
 import com.example.network.model.messages.PlayersResponse
 
 data class RunDto(
@@ -19,6 +18,6 @@ data class RunDto(
     val submitted: String,
     val times: TimeDto,
     val system: SystemDto,
-    val splits: SplitsDto?,
+    val splits: Link?,
     val links: List<Link>
 )

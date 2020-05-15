@@ -17,7 +17,7 @@ data class RunForLeaderboardDto(
     val date: String,
     val submitted: String,
     val times: TimeDto,
-    val splits: SplitsDto?,
+    val splits: Link?,
     val system: SystemDto,
     val links: List<Link>
 )

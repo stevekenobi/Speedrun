@@ -1,6 +1,7 @@
 package com.example.network.injection
 
-import com.example.network.SpeedrunService
+import com.example.network.apis.SpeedrunService
+import com.example.network.apis.SplitsService
 import com.example.network.utils.DateConverter
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -38,7 +39,6 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    @Named("SpeedrunServiceHttpClient")
     fun provideSpeedrunServiceHttpClient(logging: HttpLoggingInterceptor): OkHttpClient {
         val builder = OkHttpClient.Builder()
             .addNetworkInterceptor(logging)
@@ -49,7 +49,7 @@ class NetworkModule {
     @Singleton
     @Named("SpeedrunServiceRetrofitBuilder")
     fun provideSpeedrunServiceRetrofitBuilder(
-        @Named("SpeedrunServiceHttpClient") client: OkHttpClient,
+        client: OkHttpClient,
         adapterFactory: RxJava2CallAdapterFactory,
         gsonConverterFactory: GsonConverterFactory
     ): Retrofit.Builder {
@@ -64,5 +64,26 @@ class NetworkModule {
     fun provideSpeedrunService(@Named("SpeedrunServiceRetrofitBuilder") retrofitBuilder: Retrofit.Builder): SpeedrunService {
         retrofitBuilder.baseUrl("https://www.speedrun.com/api/v1/")
         return retrofitBuilder.build().create(SpeedrunService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    @Named("SplitsServiceRetrofitBuilder")
+    fun provideSplitsServiceRetrofitBuilder(
+        client: OkHttpClient,
+        adapterFactory: RxJava2CallAdapterFactory,
+        gsonConverterFactory: GsonConverterFactory
+    ): Retrofit.Builder {
+        return Retrofit.Builder()
+            .client(client)
+            .addCallAdapterFactory(adapterFactory)
+            .addConverterFactory(gsonConverterFactory)
+    }
+
+    @Provides
+    @Singleton
+    fun provideSplitsService(@Named ("SplitsServiceRetrofitBuilder") retrofitBuilder: Retrofit.Builder): SplitsService {
+        retrofitBuilder.baseUrl("https://splits.io/api/v3/")
+        return retrofitBuilder.build().create(SplitsService::class.java)
     }
 }

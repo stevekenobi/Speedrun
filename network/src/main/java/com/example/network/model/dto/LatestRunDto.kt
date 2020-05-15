@@ -19,7 +19,7 @@ data class LatestRunDto(
     val submitted: String?,
     val times: TimeDto,
     val system: SystemDto,
-    val splits: SplitsDto?,
+    val splits: Link?,
     val values: Any,
     val links: List<Link>
 )
