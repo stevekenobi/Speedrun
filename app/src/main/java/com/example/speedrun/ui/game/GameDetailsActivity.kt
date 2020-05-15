@@ -6,7 +6,7 @@ import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import com.example.speedrun.R
 import com.example.speedrun.ui.base.BaseActivity
-import com.example.speedrun.utils.MockingIDs
+import com.example.speedrun.utils.ActivityExtras
 import kotlinx.android.synthetic.main.activity_game_details.*
 
 class GameDetailsActivity : BaseActivity(), FragmentCommunicator {
@@ -38,7 +38,7 @@ class GameDetailsActivity : BaseActivity(), FragmentCommunicator {
     }
 
     private fun initFragments() {
-        gameId = MockingIDs.LIJ_GAME_ID
+        gameId = intent.getStringExtra(ActivityExtras.EXTRA_GAME_ID)
         val drawerFragment = GameDetailsFragment.newInstance(gameId)
         val viewPagerFragment = GameLeaderboardFragment.newInstance(gameId)
         val fragmentTransaction = supportFragmentManager.beginTransaction()
