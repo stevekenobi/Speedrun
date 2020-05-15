@@ -40,7 +40,7 @@ class GameDetailsActivity : BaseActivity(), FragmentCommunicator {
     private fun initFragments() {
         gameId = intent.getStringExtra(ActivityExtras.EXTRA_GAME_ID)
         val drawerFragment = GameDetailsFragment.newInstance(gameId)
-        val viewPagerFragment = GameLeaderboardFragment.newInstance(gameId, false)
+        val viewPagerFragment = GameLeaderboardFragment.newInstance(gameId)
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.game_details_fragment, drawerFragment)
         fragmentTransaction.replace(R.id.game_leaderboard_layout_fragment, viewPagerFragment)

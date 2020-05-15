@@ -17,13 +17,11 @@ class GameLeaderboardFragment : BaseFragment() {
 
         const val KEY_GAME_ID = "game_id"
         const val KEY_LEVEL_ID = "level_id"
-        const val KEY_SHOW_MISC_CATEGORIES = "show_misc_categories"
-        fun newInstance(gameId: String?, showMisc: Boolean): GameLeaderboardFragment {
+        fun newInstance(gameId: String?): GameLeaderboardFragment {
             val fragment = GameLeaderboardFragment()
 
             fragment.arguments = Bundle().apply {
                 putString(KEY_GAME_ID, gameId)
-                putBoolean(KEY_SHOW_MISC_CATEGORIES, showMisc)
             }
 
             return fragment
