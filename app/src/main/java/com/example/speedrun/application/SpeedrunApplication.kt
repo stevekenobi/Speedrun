@@ -3,7 +3,6 @@ package com.example.speedrun.application
 import android.app.Application
 import android.content.Context
 import androidx.lifecycle.ProcessLifecycleOwner
-import com.beardedhen.androidbootstrap.TypefaceProvider
 import com.example.speedrun.R
 import com.example.speedrun.injection.components.ApplicationComponent
 import com.example.speedrun.injection.components.DaggerApplicationComponent
@@ -29,7 +28,6 @@ class SpeedrunApplication : Application() {
         initCalligraphy()
         initRestring()
         initLifeCycleListener()
-        TypefaceProvider.registerDefaultIconSets()
     }
 
     private fun initLifeCycleListener() {

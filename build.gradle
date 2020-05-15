@@ -11,7 +11,6 @@ buildscript {
 
 
             'appcompat'          : '1.1.0',
-            'bootstrap'          : '2.3.2',
             'butterknife'        : '10.2.1',
             'calligraphy'        : '3.1.1',
             'conscrypt'          : '2.4.0',
@@ -95,7 +94,6 @@ buildscript {
                     'material'           : "com.google.android.material:material:${versions.material}",
                     'glide'              : "com.github.bumptech.glide:glide:${versions.glide}",
                     'glideProcessor'     : "com.github.bumptech.glide:compiler:${versions.glide}",
-                    'bootstrap'          : "com.beardedhen:androidbootstrap:${versions.bootstrap}",
                     'calligraphy'        : "io.github.inflationx:calligraphy3:${versions.calligraphy}",
                     'greenrobot'         : "org.greenrobot:eventbus:${versions.greenrobot}",
                     'conscrypt'          : "org.conscrypt:conscrypt-android:${versions.conscrypt}"
