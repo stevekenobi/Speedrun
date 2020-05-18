@@ -14,6 +14,7 @@ import com.example.speedrun.ui.run.RunDetailsActivity
 import com.example.speedrun.ui.user.UserProfileActivity
 import com.example.speedrun.utils.ActivityExtras
 import kotlinx.android.synthetic.main.fragment_leaderboard.*
+import kotlin.math.floor
 
 class LeaderboardFragment : BaseFragment() {
 
@@ -85,7 +86,9 @@ class LeaderboardFragment : BaseFragment() {
 
 
         viewModel?.leaderboardLiveData?.observe(this, Observer {
-            category_leaderboard.adapter = LeaderboardRunsAdapter(viewModel, it)
+            category_leaderboard.adapter = LeaderboardRunsAdapter(viewModel, it, it.any {run ->
+                run.run.times.primary_t != floor(run.run.times.primary_t)
+            })
         })
 
         viewModel?.leaderboardRunClickedLiveData?.observe(this, Observer {

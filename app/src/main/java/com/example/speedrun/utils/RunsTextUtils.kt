@@ -6,10 +6,10 @@ import com.example.network.utils.enums.UserEnums
 
 object RunsTextUtils {
 
-    fun setUserGameRun(run: UserRunDto): String {
+    fun setUserGameRun(run: UserRunDto, showMills: Boolean): String {
 
         val result = run.category.data.name +
-                " " + RunTimeConverter.from(run.times.primary_t)
+                " " + RunTimeConverter.from(run.times.primary_t, showMills)
 
         return result + setPlaceForRecent(run.place)
     }

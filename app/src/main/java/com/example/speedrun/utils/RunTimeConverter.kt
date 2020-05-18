@@ -3,7 +3,7 @@ package com.example.speedrun.utils
 import java.util.concurrent.TimeUnit
 
 object RunTimeConverter {
-    fun from(time: Long): String {
+    fun from(time: Long, showMills: Boolean): String {
         val hours = TimeUnit.MILLISECONDS.toHours(time)
         val mins = TimeUnit.MILLISECONDS.toMinutes(time) - (hours * 60)
 
@@ -11,10 +11,13 @@ object RunTimeConverter {
 
         val mills = time.rem(1000)
 
-        return "${hours}h ${mins}m ${secs}s ${mills}ms"
+        if (showMills)
+            return "${hours}h ${mins}m ${secs}s ${mills}ms"
+
+        return "${hours}h ${mins}m ${secs}s"
     }
 
-    fun from(time: Double) : String {
+    fun from(time: Double, showMills: Boolean) : String {
         val mills = ((time - time.toInt()) * 1000).toInt()
 
         val hours = (time.toInt() / 3600)
@@ -27,6 +30,9 @@ object RunTimeConverter {
             hours == 0 && mins == 0 -> return "${secs}s ${mills}ms"
             hours == 0 -> return "${mins}m ${secs}s ${mills}ms"
         }
-        return "${hours}h ${mins}m ${secs}s ${mills}ms"
+        if (showMills)
+            return "${hours}h ${mins}m ${secs}s ${mills}ms"
+
+        return "${hours}h ${mins}m ${secs}s"
     }
 }

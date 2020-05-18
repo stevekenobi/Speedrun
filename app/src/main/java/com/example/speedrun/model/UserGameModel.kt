@@ -6,5 +6,7 @@ data class UserGameModel(
     val id: String,
     val name: String?,
     val image: String?,
-    val runs: MutableList<UserRunDto>
+    val runs: MutableList<UserRunDto>,
+    val showMills: Boolean,
+    val timeToShow: String
 )

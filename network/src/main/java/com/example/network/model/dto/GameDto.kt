@@ -10,7 +10,7 @@ data class GameDto(
     val weblink: String,
     val released: Int,
     @SerializedName("release-date") val releaseDate: String,
-    val ruleset: Any,
+    val ruleset: RulesetDto,
     val romhack: Boolean,
     val gameTypes: List<String>,
     val platforms: List<String>,

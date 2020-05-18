@@ -6,5 +6,7 @@ data class LatestGameModel(
     val id: String,
     val name: String?,
     val imageURI: String?,
-    val runs: MutableList<LatestRunDto>
+    val runs: MutableList<LatestRunDto>,
+    val showMills: Boolean,
+    val timeToShow: String
 )

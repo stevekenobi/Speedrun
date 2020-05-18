@@ -40,7 +40,16 @@ class UserProfileViewModel @Inject constructor(val datamanager: Datamanager) : B
                     }
                 }
                 val newGame = run.game.data
-                result.add(UserGameModel(newGame.id, newGame.names?.international, newGame.assets.coverSmall?.uri, mutableListOf(run)))
+                result.add(
+                    UserGameModel(
+                        newGame.id,
+                        newGame.names?.international,
+                        newGame.assets.coverSmall?.uri,
+                        mutableListOf(run),
+                        newGame.ruleset.showMills,
+                        newGame.ruleset.defaultTime
+                    )
+                )
             }
 
             userRunsLiveData.postValue(result)

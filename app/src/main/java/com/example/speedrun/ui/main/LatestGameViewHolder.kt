@@ -27,7 +27,7 @@ class LatestGameViewHolder(val viewModel: LatestRunsViewModel?, itemView: View) 
             }
 
             latest_game_runs.layoutManager = LinearLayoutManager(context)
-            latest_game_runs.adapter = LatestRunAdapter(viewModel, game.runs)
+            latest_game_runs.adapter = LatestRunAdapter(viewModel, game.runs, game.showMills)
         }
     }
 }

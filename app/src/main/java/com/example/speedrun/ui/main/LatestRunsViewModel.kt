@@ -38,7 +38,9 @@ class LatestRunsViewModel @Inject constructor(val dataManager: Datamanager): Bas
                             newGame.id,
                             newGame.names?.international,
                             newGame.assets.coverSmall?.uri,
-                            mutableListOf(run)
+                            mutableListOf(run),
+                            newGame.ruleset.showMills,
+                            newGame.ruleset.defaultTime
                         )
                     )
                 }

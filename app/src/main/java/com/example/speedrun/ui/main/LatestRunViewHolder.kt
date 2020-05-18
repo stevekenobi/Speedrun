@@ -8,7 +8,7 @@ import com.example.speedrun.ui.base.BaseViewHolder
 import com.example.speedrun.utils.RunTimeConverter
 import kotlinx.android.synthetic.main.item_latest_run.view.*
 
-class LatestRunViewHolder(val viewModel: LatestRunsViewModel?, itemView: View) : BaseViewHolder(itemView) {
+class LatestRunViewHolder(val viewModel: LatestRunsViewModel?, itemView: View, val showMills: Boolean) : BaseViewHolder(itemView) {
 
     init {
         viewHolderComponent()?.inject(this)
@@ -16,12 +16,12 @@ class LatestRunViewHolder(val viewModel: LatestRunsViewModel?, itemView: View) :
 
     fun bind(run: LatestRunDto) {
         itemView.apply {
-            val info = run.category.data.name + "   " + RunTimeConverter.from(run.times.primary_t)
+            val info = run.category.data.name + "   " + RunTimeConverter.from(run.times.primary_t, showMills)
             if (context.resources.configuration.orientation == Configuration.ORIENTATION_PORTRAIT) {
                 latest_game_run_info.text = info
             } else {
                 land_latest_run_cat.text = run.category.data.name
-                land_latest_run_time.text = RunTimeConverter.from(run.times.primary_t)
+                land_latest_run_time.text = RunTimeConverter.from(run.times.primary_t, showMills)
                 land_latest_players.adapter = LatestPlayersAdapter(viewModel, run.players.data)
                 land_latest_players.layoutManager = LinearLayoutManager(context)
             }

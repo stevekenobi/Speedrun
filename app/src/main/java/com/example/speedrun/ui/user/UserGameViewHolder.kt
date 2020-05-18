@@ -24,7 +24,7 @@ class UserGameViewHolder(val viewModel: UserProfileViewModel?, itemView: View) :
             }
 
             user_game_runs.layoutManager = LinearLayoutManager(context)
-            user_game_runs.adapter = UserRunsAdapter(viewModel, game.runs)
+            user_game_runs.adapter = UserRunsAdapter(viewModel, game.runs, game.showMills)
         }
     }
 }

@@ -12,6 +12,7 @@ import com.example.speedrun.utils.ActivityExtras
 import com.example.speedrun.utils.RunTimeConverter
 import com.example.speedrun.utils.RunsTextUtils
 import kotlinx.android.synthetic.main.activity_run_details.*
+import kotlin.math.floor
 
 class RunDetailsActivity : BaseActivity() {
 
@@ -33,7 +34,7 @@ class RunDetailsActivity : BaseActivity() {
     }
 
     private fun createSplits(splits: List<SplitsDto>) {
-        run_splits.adapter = SplitsAdapter(splits)
+        run_splits.adapter = SplitsAdapter(splits, true)
     }
 
     override fun initViewModel() {
@@ -56,7 +57,7 @@ class RunDetailsActivity : BaseActivity() {
     @SuppressLint("SetTextI18n")
     private fun setDetailsPage(run: RunDto) {
         run_details.text =
-            "${run.category.data.name} in ${RunTimeConverter.from(run.times.primary_t)} by ${RunsTextUtils.setPlayersText(
+            "${run.category.data.name} in ${RunTimeConverter.from(run.times.primary_t, run.times.primary_t != floor(run.times.primary_t))} by ${RunsTextUtils.setPlayersText(
                 run.players.data
             )}"
         run_comment.text = run.comment
