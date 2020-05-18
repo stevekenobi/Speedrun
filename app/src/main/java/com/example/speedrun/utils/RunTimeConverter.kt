@@ -27,8 +27,17 @@ object RunTimeConverter {
         val secs = time.toInt() - (mins * 60) - (hours * 3600)
 
         when {
-            hours == 0 && mins == 0 -> return "${secs}s ${mills}ms"
-            hours == 0 -> return "${mins}m ${secs}s ${mills}ms"
+            hours == 0 && mins == 0 -> {
+                if (showMills)
+                    return "${secs}s ${mills}ms"
+
+                return "${secs}s"
+            }
+            hours == 0 -> {
+                if (showMills)
+                    return "${mins}m ${secs}s ${mills}ms"
+
+                return "${mins}m ${secs}s"}
         }
         if (showMills)
             return "${hours}h ${mins}m ${secs}s ${mills}ms"
