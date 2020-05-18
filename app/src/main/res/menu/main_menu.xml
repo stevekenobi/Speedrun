@@ -4,10 +4,12 @@
     <item
         android:id="@+id/main_menu_latest_runs"
         android:enabled="true"
-        android:title="Latest Runs" />
+        android:title="Latest Runs"
+        android:icon="@drawable/outline_watch_later_white_18dp"/>
 
     <item
         android:id="@+id/main_menu_popular_games"
         android:enabled="true"
-        android:title="Popular Games" />
+        android:title="Popular Games"
+        android:icon="@drawable/outline_favorite_border_white_18dp"/>
 </menu>

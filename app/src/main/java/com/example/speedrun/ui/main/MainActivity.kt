@@ -12,8 +12,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity(), MainFragmentCommunicator {
 
-    val latestRunsFragment = LatestRunsFragment()
-    val popularGamesFragment = PopularGamesFragment()
+    private val latestRunsFragment = LatestRunsFragment()
+    private val popularGamesFragment = PopularGamesFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

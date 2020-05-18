@@ -73,5 +73,6 @@ class GameDetailsActivity : BaseActivity(), FragmentCommunicator {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.game_leaderboard_layout_fragment, viewPagerFragment)
         fragmentTransaction.commit()
+        drawer_layout.closeDrawers()
     }
 }
