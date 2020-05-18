@@ -39,15 +39,20 @@ class MainActivity : BaseActivity(), MainFragmentCommunicator {
         }
     }
 
+//  TODO fix names of transitions
     private fun createLatestRunsFragment() {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.main_navigation_fragment, latestRunsFragment)
+        fragmentTransaction
+            .setCustomAnimations(R.anim.enter_from_left, R.anim.exit_to_right)
+            .replace(R.id.main_navigation_fragment, latestRunsFragment)
         fragmentTransaction.commit()
     }
 
     private fun createPopularGamesFragment() {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.main_navigation_fragment, popularGamesFragment)
+        fragmentTransaction
+            .setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left)
+            .replace(R.id.main_navigation_fragment, popularGamesFragment)
         fragmentTransaction.commit()
     }
 
