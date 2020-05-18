@@ -45,6 +45,8 @@ class UserProfileViewModel @Inject constructor(val datamanager: Datamanager) : B
                         newGame.id,
                         newGame.names?.international,
                         newGame.assets.coverSmall?.uri,
+                        newGame.assets.coverSmall?.width,
+                        newGame.assets.coverSmall?.height,
                         mutableListOf(run),
                         newGame.ruleset.showMills,
                         newGame.ruleset.defaultTime

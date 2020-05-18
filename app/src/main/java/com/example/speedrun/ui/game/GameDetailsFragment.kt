@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.example.network.model.dto.ImageDto
 import com.example.network.model.dto.LevelDto
 import com.example.speedrun.R
 import com.example.speedrun.ui.base.BaseFragment
@@ -51,8 +53,12 @@ class GameDetailsFragment : BaseFragment() {
         game_levels_list.layoutManager = LinearLayoutManager(context)
     }
 
-    private fun fillGameDetails(gameName: String?, imageUrl: String?) {
-        Glide.with(this).load(imageUrl).into(game_image)
+    private fun fillGameDetails(gameName: String?, image: ImageDto?) {
+        Glide
+            .with(this)
+            .load(image?.uri)
+            .apply(RequestOptions().override(image?.width ?: 130, image?.height ?: 130))
+            .into(game_image)
         game_details_name.text = gameName
     }
 
@@ -69,7 +75,7 @@ class GameDetailsFragment : BaseFragment() {
             if (it == null)
                 return@Observer
 
-            fillGameDetails(it.names?.international, it.assets.coverLarge?.uri)
+            fillGameDetails(it.names?.international, it.assets.coverLarge)
             fillLevelsList(it.levels.data)
         })
 
