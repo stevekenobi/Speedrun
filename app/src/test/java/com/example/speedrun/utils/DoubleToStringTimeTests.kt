@@ -1,6 +1,5 @@
-package com.example.speedrun.runtime
+package com.example.speedrun.utils
 
-import com.example.speedrun.utils.RunTimeConverter
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
