@@ -10,6 +10,7 @@ import com.example.speedrun.R
 import com.example.speedrun.ui.base.BaseFragment
 import com.example.speedrun.ui.main.MainFragmentCommunicator
 import com.example.speedrun.utils.ItemDivideDecorator
+import com.google.android.material.transition.MaterialFadeThrough
 import kotlinx.android.synthetic.main.fragment_latest_runs.*
 
 class LatestRunsFragment : BaseFragment() {
@@ -20,6 +21,13 @@ class LatestRunsFragment : BaseFragment() {
     }
 
     var viewModel: LatestRunsViewModel? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        enterTransition = MaterialFadeThrough.create()
+        exitTransition = MaterialFadeThrough.create()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
