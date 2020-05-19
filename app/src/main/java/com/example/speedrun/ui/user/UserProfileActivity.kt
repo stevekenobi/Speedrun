@@ -11,9 +11,9 @@ import com.example.speedrun.R
 import com.example.speedrun.model.UserGameModel
 import com.example.speedrun.ui.base.BaseActivity
 import com.example.speedrun.ui.game.GameDetailsActivity
-import com.example.speedrun.ui.main.ItemDivideDecorator
 import com.example.speedrun.ui.run.RunDetailsActivity
 import com.example.speedrun.utils.ActivityExtras
+import com.example.speedrun.utils.ItemDivideDecorator
 import com.example.speedrun.utils.UserColorUtils
 import kotlinx.android.synthetic.main.activity_user_profile.*
 
@@ -86,7 +86,8 @@ class UserProfileActivity : BaseActivity() {
     private fun initUI() {
         rv_user_runs.apply {
             layoutManager = LinearLayoutManager(this@UserProfileActivity)
-            val itemDecoration = ItemDivideDecorator(80)
+            val itemDecoration =
+                ItemDivideDecorator(80)
             addItemDecoration(itemDecoration)
         }
     }

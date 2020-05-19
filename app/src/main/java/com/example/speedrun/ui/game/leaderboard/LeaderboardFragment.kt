@@ -1,4 +1,4 @@
-package com.example.speedrun.ui.game
+package com.example.speedrun.ui.game.leaderboard
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.speedrun.R
+import com.example.speedrun.extensions.withArguments
 import com.example.speedrun.ui.base.BaseFragment
 import com.example.speedrun.ui.run.RunDetailsActivity
 import com.example.speedrun.ui.user.UserProfileActivity
@@ -24,9 +25,10 @@ class LeaderboardFragment : BaseFragment() {
         const val KEY_LEVEL_ID = "level_id"
 
         fun newInstance(gameId: String, levelId: String?, categoryId: String): Fragment {
-            val fragment = LeaderboardFragment()
+            val fragment =
+                LeaderboardFragment()
 
-            fragment.arguments = Bundle().apply {
+            fragment.withArguments {
                 putString(KEY_GAME_ID, gameId)
                 putString(KEY_LEVEL_ID, levelId)
                 putString(KEY_CATEGORY_ID, categoryId)
@@ -86,9 +88,13 @@ class LeaderboardFragment : BaseFragment() {
 
 
         viewModel?.leaderboardLiveData?.observe(this, Observer {
-            category_leaderboard.adapter = LeaderboardRunsAdapter(viewModel, it, it.any {run ->
-                run.run.times.primary_t != floor(run.run.times.primary_t)
-            })
+            category_leaderboard.adapter =
+                LeaderboardRunsAdapter(
+                    viewModel,
+                    it,
+                    it.any { run ->
+                        run.run.times.primary_t != floor(run.run.times.primary_t)
+                    })
         })
 
         viewModel?.leaderboardRunClickedLiveData?.observe(this, Observer {

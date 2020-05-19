@@ -5,7 +5,7 @@ import com.example.speedrun.injection.ActivityContext
 import com.example.speedrun.injection.PerFragment
 import com.example.speedrun.injection.modules.FragmentModule
 import com.example.speedrun.ui.base.BaseFragment
-import com.example.speedrun.ui.game.LeaderboardFragment
+import com.example.speedrun.ui.game.leaderboard.LeaderboardFragment
 import dagger.Component
 
 @PerFragment

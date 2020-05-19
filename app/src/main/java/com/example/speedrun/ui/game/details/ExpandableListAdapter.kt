@@ -1,4 +1,4 @@
-package com.example.speedrun.ui.game
+package com.example.speedrun.ui.game.details
 
 import android.view.LayoutInflater
 import android.view.View

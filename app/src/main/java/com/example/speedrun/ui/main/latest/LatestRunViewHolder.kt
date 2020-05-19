@@ -1,4 +1,4 @@
-package com.example.speedrun.ui.main
+package com.example.speedrun.ui.main.latest
 
 import android.content.res.Configuration
 import android.view.View
@@ -22,7 +22,11 @@ class LatestRunViewHolder(val viewModel: LatestRunsViewModel?, itemView: View, v
             } else {
                 land_latest_run_cat.text = run.category.data.name
                 land_latest_run_time.text = RunTimeConverter.from(run.times.primary_t, showMills)
-                land_latest_players.adapter = LatestPlayersAdapter(viewModel, run.players.data)
+                land_latest_players.adapter =
+                    LatestPlayersAdapter(
+                        viewModel,
+                        run.players.data
+                    )
                 land_latest_players.layoutManager = LinearLayoutManager(context)
             }
 

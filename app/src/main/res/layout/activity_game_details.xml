@@ -7,7 +7,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/game_leaderboard_layout_fragment"
-        android:name="com.example.speedrun.ui.game.GameLeaderboardFragment"
+        android:name="com.example.speedrun.ui.game.leaderboard.GameLeaderboardFragment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
@@ -19,7 +19,7 @@
 
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/game_details_fragment"
-            android:name="com.example.speedrun.ui.game.GameDetailsFragment"
+            android:name="com.example.speedrun.ui.game.details.GameDetailsFragment"
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="match_parent" />

@@ -1,4 +1,4 @@
-package com.example.speedrun.ui.main
+package com.example.speedrun.ui.main.latest
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,9 +8,17 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.speedrun.R
 import com.example.speedrun.ui.base.BaseFragment
+import com.example.speedrun.ui.main.MainFragmentCommunicator
+import com.example.speedrun.utils.ItemDivideDecorator
 import kotlinx.android.synthetic.main.fragment_latest_runs.*
 
 class LatestRunsFragment : BaseFragment() {
+
+    companion object {
+        fun newInstance() =
+            LatestRunsFragment()
+    }
+
     var viewModel: LatestRunsViewModel? = null
 
     override fun onCreateView(
@@ -31,7 +39,11 @@ class LatestRunsFragment : BaseFragment() {
 
     private fun initUi() {
         main_rv_latest_runs.layoutManager = LinearLayoutManager(context)
-        main_rv_latest_runs.addItemDecoration(ItemDivideDecorator(80))
+        main_rv_latest_runs.addItemDecoration(
+            ItemDivideDecorator(
+                80
+            )
+        )
     }
 
     override fun initViewModel() {
@@ -58,7 +70,11 @@ class LatestRunsFragment : BaseFragment() {
                 return@Observer
             }
 
-            main_rv_latest_runs.adapter = LatestGameAdapter(viewModel, it)
+            main_rv_latest_runs.adapter =
+                LatestGameAdapter(
+                    viewModel,
+                    it
+                )
             main_rv_latest_runs.isNestedScrollingEnabled = false
         })
 

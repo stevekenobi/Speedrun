@@ -1,4 +1,4 @@
-package com.example.speedrun.ui.main
+package com.example.speedrun.ui.main.latest
 
 import android.view.View
 import com.example.network.model.dto.UserDto

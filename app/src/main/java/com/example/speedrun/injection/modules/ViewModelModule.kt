@@ -2,11 +2,11 @@ package com.example.speedrun.injection.modules
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.speedrun.ui.game.GameDetailsViewModel
-import com.example.speedrun.ui.game.GameLeaderboardViewModel
-import com.example.speedrun.ui.game.LeaderboardViewModel
-import com.example.speedrun.ui.main.LatestRunsViewModel
-import com.example.speedrun.ui.main.PopularGamesViewModel
+import com.example.speedrun.ui.game.details.GameDetailsViewModel
+import com.example.speedrun.ui.game.leaderboard.GameLeaderboardViewModel
+import com.example.speedrun.ui.game.leaderboard.LeaderboardViewModel
+import com.example.speedrun.ui.main.latest.LatestRunsViewModel
+import com.example.speedrun.ui.main.popular.PopularGamesViewModel
 import com.example.speedrun.ui.run.RunDetailsViewModel
 import com.example.speedrun.ui.splash.SplashViewModel
 import com.example.speedrun.ui.user.UserProfileViewModel

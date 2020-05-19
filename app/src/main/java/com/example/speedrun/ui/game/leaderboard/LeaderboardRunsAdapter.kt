@@ -1,4 +1,4 @@
-package com.example.speedrun.ui.game
+package com.example.speedrun.ui.game.leaderboard
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,7 +9,11 @@ import com.example.speedrun.R
 class LeaderboardRunsAdapter(val viewModel: LeaderboardViewModel?, val runs: List<LeaderboardRunDto>, val showMills: Boolean) : RecyclerView.Adapter<LeaderboardRunViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LeaderboardRunViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_leaderboard_run, parent, false)
-        return LeaderboardRunViewHolder(viewModel, view, showMills)
+        return LeaderboardRunViewHolder(
+            viewModel,
+            view,
+            showMills
+        )
     }
 
     override fun getItemCount(): Int {

@@ -1,4 +1,4 @@
-package com.example.speedrun.ui.main
+package com.example.speedrun.ui.main.latest
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope

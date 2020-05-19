@@ -1,4 +1,4 @@
-package com.example.speedrun.ui.game
+package com.example.speedrun.ui.game.leaderboard
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -17,7 +17,10 @@ class LeaderboardRunPlayersAdapter(
         val view =
             LayoutInflater.from(parent.context).inflate(R.layout.item_latest_player, parent, false)
 
-        return LeaderboardRunPlayerViewHolder(viewModel, view)
+        return LeaderboardRunPlayerViewHolder(
+            viewModel,
+            view
+        )
     }
 
     override fun getItemCount(): Int {

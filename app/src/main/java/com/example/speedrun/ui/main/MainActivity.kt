@@ -5,6 +5,8 @@ import android.os.Bundle
 import com.example.speedrun.R
 import com.example.speedrun.ui.base.BaseActivity
 import com.example.speedrun.ui.game.GameDetailsActivity
+import com.example.speedrun.ui.main.latest.LatestRunsFragment
+import com.example.speedrun.ui.main.popular.PopularGamesFragment
 import com.example.speedrun.ui.run.RunDetailsActivity
 import com.example.speedrun.ui.user.UserProfileActivity
 import com.example.speedrun.utils.ActivityExtras
@@ -12,8 +14,8 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity(), MainFragmentCommunicator {
 
-    private val latestRunsFragment = LatestRunsFragment()
-    private val popularGamesFragment = PopularGamesFragment()
+    private val latestRunsFragment = LatestRunsFragment.newInstance()
+    private val popularGamesFragment = PopularGamesFragment.newInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

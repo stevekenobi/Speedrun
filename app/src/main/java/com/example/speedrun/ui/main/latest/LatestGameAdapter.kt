@@ -1,4 +1,4 @@
-package com.example.speedrun.ui.main
+package com.example.speedrun.ui.main.latest
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -10,7 +10,10 @@ class LatestGameAdapter(val viewModel: LatestRunsViewModel?, private val latestG
     RecyclerView.Adapter<LatestGameViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LatestGameViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_latest_game, parent, false)
-        return LatestGameViewHolder(viewModel, view)
+        return LatestGameViewHolder(
+            viewModel,
+            view
+        )
     }
 
     override fun getItemCount() = latestGameList.size

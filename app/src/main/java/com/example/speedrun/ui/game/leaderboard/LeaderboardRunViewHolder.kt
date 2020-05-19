@@ -1,4 +1,4 @@
-package com.example.speedrun.ui.game
+package com.example.speedrun.ui.game.leaderboard
 
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,7 +20,11 @@ class LeaderboardRunViewHolder(val viewModel: LeaderboardViewModel?, itemView: V
                 viewModel?.leaderboardRunClickedLiveData?.value = run.run.id
             }
             leaderboard_run_players.layoutManager = LinearLayoutManager(context)
-            leaderboard_run_players.adapter = LeaderboardRunPlayersAdapter(viewModel, run.run.playersToDisplay)
+            leaderboard_run_players.adapter =
+                LeaderboardRunPlayersAdapter(
+                    viewModel,
+                    run.run.playersToDisplay
+                )
 
             leaderboard_run_place.text = RunsTextUtils.setPlaceForLeaderboard(run.place)
 

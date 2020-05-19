@@ -1,4 +1,4 @@
-package com.example.speedrun.ui.game
+package com.example.speedrun.ui.game.details
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,7 +10,9 @@ import com.bumptech.glide.request.RequestOptions
 import com.example.network.model.dto.ImageDto
 import com.example.network.model.dto.LevelDto
 import com.example.speedrun.R
+import com.example.speedrun.extensions.withArguments
 import com.example.speedrun.ui.base.BaseFragment
+import com.example.speedrun.ui.game.GameDetailsActivity
 import kotlinx.android.synthetic.main.fragment_game_details.*
 
 class GameDetailsFragment : BaseFragment() {
@@ -19,9 +21,10 @@ class GameDetailsFragment : BaseFragment() {
         const val KEY_GAME_ID = "game_id"
 
         fun newInstance(gameId: String?): GameDetailsFragment {
-            val fragment = GameDetailsFragment()
+            val fragment =
+                GameDetailsFragment()
 
-            fragment.arguments = Bundle().apply {
+            fragment.withArguments {
                 putString(KEY_GAME_ID, gameId)
             }
 
@@ -66,7 +69,13 @@ class GameDetailsFragment : BaseFragment() {
         val listChild = HashMap<String, List<LevelDto>>()
         listChild[headerList[1]] = levels
 
-        game_levels_list.setAdapter(ExpandableListAdapter(viewModel, headerList, listChild))
+        game_levels_list.setAdapter(
+            ExpandableListAdapter(
+                viewModel,
+                headerList,
+                listChild
+            )
+        )
     }
 
     override fun initViewModel() {

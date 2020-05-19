@@ -1,4 +1,4 @@
-package com.example.speedrun.ui.main
+package com.example.speedrun.ui.main.popular
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,9 +8,17 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.speedrun.R
 import com.example.speedrun.ui.base.BaseFragment
+import com.example.speedrun.ui.main.MainFragmentCommunicator
+import com.example.speedrun.utils.ItemDivideDecorator
 import kotlinx.android.synthetic.main.fragment_recent_games.*
 
 class PopularGamesFragment : BaseFragment() {
+
+    companion object {
+        fun newInstance() =
+            PopularGamesFragment()
+    }
+
     var viewModel: PopularGamesViewModel? = null
 
     override fun onCreateView(
@@ -30,7 +38,11 @@ class PopularGamesFragment : BaseFragment() {
 
     private fun initUi() {
         main_rv_recent_games.layoutManager = GridLayoutManager(context, 2)
-        main_rv_recent_games.addItemDecoration(ItemDivideDecorator(80))
+        main_rv_recent_games.addItemDecoration(
+            ItemDivideDecorator(
+                80
+            )
+        )
     }
 
     override fun initViewModel() {
@@ -42,7 +54,11 @@ class PopularGamesFragment : BaseFragment() {
             if (it.isNullOrEmpty())
                 return@Observer
 
-            main_rv_recent_games.adapter = PopularGamesAdapter(viewModel, it)
+            main_rv_recent_games.adapter =
+                PopularGamesAdapter(
+                    viewModel,
+                    it
+                )
         })
 
         viewModel?.gameClickedLiveData?.observe(this, Observer {

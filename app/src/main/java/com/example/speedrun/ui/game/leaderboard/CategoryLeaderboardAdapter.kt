@@ -1,4 +1,4 @@
-package com.example.speedrun.ui.game
+package com.example.speedrun.ui.game.leaderboard
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
@@ -16,7 +16,11 @@ class CategoryLeaderboardAdapter(
     }
 
     override fun createFragment(position: Int): Fragment {
-        return LeaderboardFragment.newInstance(gameId, levelId, categories[position].id)
+        return LeaderboardFragment.newInstance(
+            gameId,
+            levelId,
+            categories[position].id
+        )
     }
 
 }

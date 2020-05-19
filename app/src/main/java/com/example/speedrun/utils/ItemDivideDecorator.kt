@@ -1,4 +1,4 @@
-package com.example.speedrun.ui.main
+package com.example.speedrun.utils
 
 import android.graphics.Rect
 import android.view.View

@@ -1,4 +1,4 @@
-package com.example.speedrun.ui.game
+package com.example.speedrun.ui.game.leaderboard
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import androidx.lifecycle.Observer
 import com.example.network.model.dto.CategoryDto
 import com.example.network.utils.enums.CategoryEnums
 import com.example.speedrun.R
+import com.example.speedrun.extensions.withArguments
 import com.example.speedrun.ui.base.BaseFragment
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.fragment_leaderboard_view_pager.*
@@ -18,9 +19,10 @@ class GameLeaderboardFragment : BaseFragment() {
         const val KEY_GAME_ID = "game_id"
         const val KEY_LEVEL_ID = "level_id"
         fun newInstance(gameId: String?): GameLeaderboardFragment {
-            val fragment = GameLeaderboardFragment()
+            val fragment =
+                GameLeaderboardFragment()
 
-            fragment.arguments = Bundle().apply {
+            fragment.withArguments {
                 putString(KEY_GAME_ID, gameId)
             }
 
@@ -28,7 +30,8 @@ class GameLeaderboardFragment : BaseFragment() {
         }
 
         fun newInstance(gameId: String?, levelId: String?): GameLeaderboardFragment {
-            val fragment = GameLeaderboardFragment()
+            val fragment =
+                GameLeaderboardFragment()
 
             fragment.arguments = Bundle().apply {
                 putString(KEY_GAME_ID, gameId)
@@ -73,7 +76,12 @@ class GameLeaderboardFragment : BaseFragment() {
         }
 
         pager.adapter =
-            CategoryLeaderboardAdapter(activity!!, arguments?.getString(KEY_GAME_ID)!!, mCategories, levelId)
+            CategoryLeaderboardAdapter(
+                activity!!,
+                arguments?.getString(KEY_GAME_ID)!!,
+                mCategories,
+                levelId
+            )
 
         val tabTitles = mCategories.map {
             it.name

@@ -1,4 +1,4 @@
-package com.example.speedrun.ui.main
+package com.example.speedrun.ui.main.popular
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,7 +9,10 @@ import com.example.speedrun.R
 class PopularGamesAdapter (val viewModel: PopularGamesViewModel?, val gameList: List<GameDto>): RecyclerView.Adapter<PopularGameViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PopularGameViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_popular_game, parent, false)
-        return PopularGameViewHolder(viewModel, view)
+        return PopularGameViewHolder(
+            viewModel,
+            view
+        )
     }
 
     override fun getItemCount(): Int {

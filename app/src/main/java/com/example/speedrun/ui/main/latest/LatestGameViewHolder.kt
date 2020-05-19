@@ -1,4 +1,4 @@
-package com.example.speedrun.ui.main
+package com.example.speedrun.ui.main.latest
 
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -32,7 +32,12 @@ class LatestGameViewHolder(val viewModel: LatestRunsViewModel?, itemView: View) 
             }
 
             latest_game_runs.layoutManager = LinearLayoutManager(context)
-            latest_game_runs.adapter = LatestRunAdapter(viewModel, game.runs, game.showMills)
+            latest_game_runs.adapter =
+                LatestRunAdapter(
+                    viewModel,
+                    game.runs,
+                    game.showMills
+                )
         }
     }
 }
