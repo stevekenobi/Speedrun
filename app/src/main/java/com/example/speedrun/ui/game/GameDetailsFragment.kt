@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.network.model.dto.ImageDto
@@ -50,7 +49,6 @@ class GameDetailsFragment : BaseFragment() {
     }
 
     private fun initUi() {
-        game_levels_list.layoutManager = LinearLayoutManager(context)
     }
 
     private fun fillGameDetails(gameName: String?, image: ImageDto?) {
@@ -63,7 +61,12 @@ class GameDetailsFragment : BaseFragment() {
     }
 
     private fun fillLevelsList(levels: List<LevelDto>) {
-        game_levels_list.adapter = LevelsAdapter(viewModel, levels)
+        val headerList = listOf("Full Game Leaderboard", "Level Leaderboards")
+
+        val listChild = HashMap<String, List<LevelDto>>()
+        listChild[headerList[1]] = levels
+
+        game_levels_list.setAdapter(ExpandableListAdapter(viewModel, headerList, listChild))
     }
 
     override fun initViewModel() {

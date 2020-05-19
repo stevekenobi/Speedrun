@@ -3,7 +3,6 @@ package com.example.speedrun.injection.components
 import com.example.speedrun.injection.PerViewHolder
 import com.example.speedrun.ui.game.LeaderboardRunPlayerViewHolder
 import com.example.speedrun.ui.game.LeaderboardRunViewHolder
-import com.example.speedrun.ui.game.LevelViewHolder
 import com.example.speedrun.ui.main.LatestGameViewHolder
 import com.example.speedrun.ui.main.LatestPlayersViewHolder
 import com.example.speedrun.ui.main.LatestRunViewHolder
@@ -21,5 +20,4 @@ interface ViewHolderComponent {
     fun inject(holder: UserRunViewHolder)
     fun inject(holder: LeaderboardRunViewHolder)
     fun inject(holder: LeaderboardRunPlayerViewHolder)
-    fun inject(holder: LevelViewHolder)
 }
