@@ -8,7 +8,7 @@ import com.example.speedrun.R
 import com.example.speedrun.ui.base.BaseActivity
 import com.example.speedrun.ui.game.details.GameDetailsFragment
 import com.example.speedrun.ui.game.leaderboard.GameLeaderboardFragment
-import com.example.speedrun.utils.ActivityExtras
+import com.example.speedrun.utils.Constants
 import kotlinx.android.synthetic.main.activity_game_details.*
 
 class GameDetailsActivity : BaseActivity(), FragmentCommunicator {
@@ -40,7 +40,7 @@ class GameDetailsActivity : BaseActivity(), FragmentCommunicator {
     }
 
     private fun initFragments() {
-        gameId = intent.getStringExtra(ActivityExtras.EXTRA_GAME_ID)
+        gameId = intent.getStringExtra(Constants.EXTRA_GAME_ID)
         val drawerFragment = GameDetailsFragment.newInstance(gameId)
         val viewPagerFragment = GameLeaderboardFragment.newInstance(gameId)
         val fragmentTransaction = supportFragmentManager.beginTransaction()

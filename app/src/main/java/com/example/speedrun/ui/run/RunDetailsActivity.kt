@@ -8,7 +8,7 @@ import com.example.network.model.dto.RunDto
 import com.example.network.model.splits.SplitsDto
 import com.example.speedrun.R
 import com.example.speedrun.ui.base.BaseActivity
-import com.example.speedrun.utils.ActivityExtras
+import com.example.speedrun.utils.Constants
 import com.example.speedrun.utils.RunTimeConverter
 import com.example.speedrun.utils.RunsTextUtils
 import kotlinx.android.synthetic.main.activity_run_details.*
@@ -26,7 +26,7 @@ class RunDetailsActivity : BaseActivity() {
 
         initUi()
 
-        viewModel?.getRunDetails(intent.getStringExtra(ActivityExtras.EXTRA_RUN_ID))
+        viewModel?.getRunDetails(intent.getStringExtra(Constants.EXTRA_RUN_ID))
     }
 
     private fun initUi() {

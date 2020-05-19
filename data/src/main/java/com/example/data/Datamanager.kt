@@ -5,7 +5,7 @@ import com.example.network.apis.SpeedrunService
 import com.example.network.apis.SplitsService
 import com.example.network.model.dto.*
 import com.example.network.model.splits.SplitsDto
-import com.example.network.utils.enums.UserEnums
+import com.example.network.utils.NetworkConstants
 import com.example.storage.DatabaseSpeedrun
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -78,9 +78,9 @@ class Datamanager @Inject constructor(
             val usersToAdd = mutableListOf<UserDto>()
 
             run.run.players.forEach { player ->
-                if (player.rel == UserEnums.REL_GUEST) {
+                if (player.rel == NetworkConstants.REL_GUEST) {
                     val nextUser = allPlayers.filter {user ->
-                        user.rel == UserEnums.REL_GUEST && user.name == player.name
+                        user.rel == NetworkConstants.REL_GUEST && user.name == player.name
                     }
 
                     usersToAdd.addAll(nextUser)
@@ -108,9 +108,9 @@ class Datamanager @Inject constructor(
             val usersToAdd = mutableListOf<UserDto>()
 
             run.run.players.forEach { player ->
-                if (player.rel == UserEnums.REL_GUEST) {
+                if (player.rel == NetworkConstants.REL_GUEST) {
                     val nextUser = allPlayers.filter {user ->
-                        user.rel == UserEnums.REL_GUEST && user.name == player.name
+                        user.rel == NetworkConstants.REL_GUEST && user.name == player.name
                     }
 
                     usersToAdd.addAll(nextUser)
@@ -132,7 +132,6 @@ class Datamanager @Inject constructor(
     suspend fun getRunDetails(runId: String): RunDto {
         return service.getRunDetails(runId).data
     }
-
 
 
     suspend fun getSplitsForRun(runId: String): List<SplitsDto>{

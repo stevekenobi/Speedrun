@@ -2,7 +2,7 @@ package com.example.speedrun.ui.main.latest
 
 import android.view.View
 import com.example.network.model.dto.UserDto
-import com.example.network.utils.enums.UserEnums
+import com.example.network.utils.NetworkConstants
 import com.example.speedrun.ui.base.BaseViewHolder
 import com.example.speedrun.utils.RunsTextUtils
 import com.example.speedrun.utils.UserColorUtils
@@ -22,9 +22,9 @@ class LatestPlayersViewHolder(val viewModel: LatestRunsViewModel?, itemView: Vie
                 viewModel?.latestUserPressedLiveData?.value = player.id
             }
             val style = player.nameStyle?.style
-            if (style == UserEnums.STYLE_SOLID) {
+            if (style == NetworkConstants.STYLE_SOLID) {
                 latest_player.setTextColor(UserColorUtils.setSolidColor(player.nameStyle))
-            } else if (style == UserEnums.STYLE_GRADIENT) {
+            } else if (style == NetworkConstants.STYLE_GRADIENT) {
                 latest_player.paint.shader = UserColorUtils.setGradientColor(player.nameStyle)
             }
         }

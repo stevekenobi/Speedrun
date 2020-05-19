@@ -9,7 +9,7 @@ import com.example.speedrun.ui.main.latest.LatestRunsFragment
 import com.example.speedrun.ui.main.popular.PopularGamesFragment
 import com.example.speedrun.ui.run.RunDetailsActivity
 import com.example.speedrun.ui.user.UserProfileActivity
-import com.example.speedrun.utils.ActivityExtras
+import com.example.speedrun.utils.Constants
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : BaseActivity(), MainFragmentCommunicator {
@@ -63,17 +63,17 @@ class MainActivity : BaseActivity(), MainFragmentCommunicator {
     }
 
     override fun onPlayerClicked(id: String) {
-        val intent = Intent(this, UserProfileActivity::class.java).putExtra(ActivityExtras.EXTRA_USER_ID, id)
+        val intent = Intent(this, UserProfileActivity::class.java).putExtra(Constants.EXTRA_USER_ID, id)
         startActivity(intent)
     }
 
     override fun onGameClicked(id: String) {
-        val intent = Intent(this, GameDetailsActivity::class.java).putExtra(ActivityExtras.EXTRA_GAME_ID, id)
+        val intent = Intent(this, GameDetailsActivity::class.java).putExtra(Constants.EXTRA_GAME_ID, id)
         startActivity(intent)
     }
 
     override fun onRunClicked(id: String) {
-        val intent = Intent(this, RunDetailsActivity::class.java).putExtra(ActivityExtras.EXTRA_RUN_ID, id)
+        val intent = Intent(this, RunDetailsActivity::class.java).putExtra(Constants.EXTRA_RUN_ID, id)
         startActivity(intent)
     }
 

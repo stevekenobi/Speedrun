@@ -2,7 +2,7 @@ package com.example.speedrun.utils
 
 import com.example.network.model.dto.UserDto
 import com.example.network.model.dto.UserRunDto
-import com.example.network.utils.enums.UserEnums
+import com.example.network.utils.NetworkConstants
 
 object RunsTextUtils {
 
@@ -49,7 +49,7 @@ object RunsTextUtils {
     }
 
     fun setPlayerText(player: UserDto): String? {
-        if (player.rel == UserEnums.REL_GUEST) {
+        if (player.rel == NetworkConstants.REL_GUEST) {
             return player.name
         }
 

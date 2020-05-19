@@ -6,13 +6,13 @@ import android.view.View
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.network.model.dto.UserDto
-import com.example.network.utils.enums.UserEnums
+import com.example.network.utils.NetworkConstants
 import com.example.speedrun.R
 import com.example.speedrun.model.UserGameModel
 import com.example.speedrun.ui.base.BaseActivity
 import com.example.speedrun.ui.game.GameDetailsActivity
 import com.example.speedrun.ui.run.RunDetailsActivity
-import com.example.speedrun.utils.ActivityExtras
+import com.example.speedrun.utils.Constants
 import com.example.speedrun.utils.ItemDivideDecorator
 import com.example.speedrun.utils.UserColorUtils
 import kotlinx.android.synthetic.main.activity_user_profile.*
@@ -29,7 +29,7 @@ class UserProfileActivity : BaseActivity() {
 
         initUI()
 
-        viewModel?.getUserDetails(intent.getStringExtra(ActivityExtras.EXTRA_USER_ID))
+        viewModel?.getUserDetails(intent.getStringExtra(Constants.EXTRA_USER_ID))
     }
 
     override fun initViewModel() {
@@ -70,7 +70,7 @@ class UserProfileActivity : BaseActivity() {
                 return@Observer
 
             val intent = Intent(this@UserProfileActivity, GameDetailsActivity::class.java)
-            intent.putExtra(ActivityExtras.EXTRA_GAME_ID, it)
+            intent.putExtra(Constants.EXTRA_GAME_ID, it)
             startActivity(intent)
         })
 
@@ -79,7 +79,7 @@ class UserProfileActivity : BaseActivity() {
                 return@Observer
 
             val intent = Intent(this@UserProfileActivity, RunDetailsActivity::class.java)
-            intent.putExtra(ActivityExtras.EXTRA_RUN_ID, it)
+            intent.putExtra(Constants.EXTRA_RUN_ID, it)
             startActivity(intent)
         })
     }
@@ -96,9 +96,9 @@ class UserProfileActivity : BaseActivity() {
         user_name.text = user.names?.international
 
         val style = user.nameStyle?.style
-        if (style == UserEnums.STYLE_SOLID) {
+        if (style == NetworkConstants.STYLE_SOLID) {
             user_name.setTextColor(UserColorUtils.setSolidColor(user.nameStyle))
-        } else if (style == UserEnums.STYLE_GRADIENT) {
+        } else if (style == NetworkConstants.STYLE_GRADIENT) {
             user_name.paint.shader = UserColorUtils.setGradientColor(user.nameStyle)
         }
 

@@ -13,7 +13,7 @@ import com.example.speedrun.extensions.withArguments
 import com.example.speedrun.ui.base.BaseFragment
 import com.example.speedrun.ui.run.RunDetailsActivity
 import com.example.speedrun.ui.user.UserProfileActivity
-import com.example.speedrun.utils.ActivityExtras
+import com.example.speedrun.utils.Constants
 import kotlinx.android.synthetic.main.fragment_leaderboard.*
 import kotlin.math.floor
 
@@ -104,7 +104,7 @@ class LeaderboardFragment : BaseFragment() {
             val intent = Intent(
                 activity,
                 RunDetailsActivity::class.java
-            ).putExtra(ActivityExtras.EXTRA_RUN_ID, it)
+            ).putExtra(Constants.EXTRA_RUN_ID, it)
             activity?.startActivity(intent)
         })
 
@@ -115,7 +115,7 @@ class LeaderboardFragment : BaseFragment() {
             val intent = Intent(
                 activity,
                 UserProfileActivity::class.java
-            ).putExtra(ActivityExtras.EXTRA_USER_ID, it)
+            ).putExtra(Constants.EXTRA_USER_ID, it)
             activity?.startActivity(intent)
         })
     }

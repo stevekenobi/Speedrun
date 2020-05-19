@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import com.example.network.model.dto.CategoryDto
-import com.example.network.utils.enums.CategoryEnums
+import com.example.network.utils.NetworkConstants
 import com.example.speedrun.R
 import com.example.speedrun.extensions.withArguments
 import com.example.speedrun.ui.base.BaseFragment
@@ -68,10 +68,10 @@ class GameLeaderboardFragment : BaseFragment() {
 
         var mCategories = categories
         if (categories.any {
-                it.type == CategoryEnums.TYPE_PER_GAME
+                it.type == NetworkConstants.TYPE_PER_GAME
             }) {
             mCategories = categories.filter {
-                it.type == CategoryEnums.TYPE_PER_GAME
+                it.type == NetworkConstants.TYPE_PER_GAME
             }
         }
 
