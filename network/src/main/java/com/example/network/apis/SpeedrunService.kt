@@ -13,11 +13,11 @@ interface SpeedrunService {
     /**
      *  Main Activity
      */
-    @GET("runs?orderby=verify-date&direction=desc&embed=game,category,players")
+    @GET("runs?orderby=verify-date&max=50&direction=desc&embed=game,category,players")
     suspend fun getLatestRun(): LatestRunResponse
 
-    @GET("games?orderby=released")
-    suspend fun getGames(): GamesResponse
+    @GET("games?orderby=released&direction=desc&max=50")
+    suspend fun getGames(@Query("offset") offset: Int): GamesResponse
 
     /**
      *  User Details Activity

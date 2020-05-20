@@ -34,8 +34,8 @@ class Datamanager @Inject constructor(
         return service.getLatestRun().data
     }
 
-    suspend fun getRecentGames(): List<GameDto> {
-        return service.getGames().data
+    suspend fun getRecentGames(offset: Int): List<GameDto> {
+        return service.getGames(offset).data
     }
 
     suspend fun getUserDetails(userId: String): UserDto {

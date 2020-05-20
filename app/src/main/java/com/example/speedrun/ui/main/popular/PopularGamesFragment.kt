@@ -16,11 +16,11 @@ import kotlinx.android.synthetic.main.fragment_recent_games.*
 class PopularGamesFragment : BaseFragment() {
 
     companion object {
-        fun newInstance() =
-            PopularGamesFragment()
+        fun newInstance() = PopularGamesFragment()
     }
 
     var viewModel: PopularGamesViewModel? = null
+    var offset = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,16 +40,26 @@ class PopularGamesFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initUi()
-        viewModel?.getGames()
+        getGames(offset)
     }
 
     private fun initUi() {
         main_rv_recent_games.layoutManager = GridLayoutManager(context, 2)
-        main_rv_recent_games.addItemDecoration(
-            ItemDivideDecorator(
-                80
-            )
-        )
+        main_rv_recent_games.addItemDecoration(ItemDivideDecorator(80))
+    }
+
+    private fun getNextGames() {
+        offset += 20
+        getGames(offset)
+    }
+
+    private fun getPrevGames() {
+        offset -= 20
+        getGames(offset)
+    }
+
+    private fun getGames(offset: Int) {
+        viewModel?.getGames(offset)
     }
 
     override fun initViewModel() {
@@ -61,11 +71,7 @@ class PopularGamesFragment : BaseFragment() {
             if (it.isNullOrEmpty())
                 return@Observer
 
-            main_rv_recent_games.adapter =
-                PopularGamesAdapter(
-                    viewModel,
-                    it
-                )
+            main_rv_recent_games.adapter = PopularGamesAdapter(viewModel, it)
         })
 
         viewModel?.gameClickedLiveData?.observe(this, Observer {

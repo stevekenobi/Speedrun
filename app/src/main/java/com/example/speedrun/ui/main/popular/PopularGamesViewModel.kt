@@ -14,9 +14,9 @@ class PopularGamesViewModel @Inject constructor(val datamanager: Datamanager): B
     val gamesLiveData = MutableLiveData<List<GameDto>>()
     val gameClickedLiveData = MutableLiveData<String>()
 
-    fun getGames() {
+    fun getGames(offset: Int) {
         viewModelScope.launch(Dispatchers.IO) {
-            val games = datamanager.getRecentGames()
+            val games = datamanager.getRecentGames(offset)
 
             gamesLiveData.postValue(games)
         }
