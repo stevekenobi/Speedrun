@@ -19,6 +19,9 @@ interface SpeedrunService {
     @GET("games?orderby=released&direction=desc&max=50")
     suspend fun getGames(@Query("offset") offset: Int): GamesResponse
 
+    @GET("series?max=50&orderby=created&direction=desc")
+    suspend fun getSeries(): SeriesResponse
+
     /**
      *  User Details Activity
      */

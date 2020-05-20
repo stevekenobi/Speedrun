@@ -7,6 +7,7 @@ import com.example.speedrun.ui.game.leaderboard.GameLeaderboardViewModel
 import com.example.speedrun.ui.game.leaderboard.LeaderboardViewModel
 import com.example.speedrun.ui.main.latest.LatestRunsViewModel
 import com.example.speedrun.ui.main.popular.PopularGamesViewModel
+import com.example.speedrun.ui.main.series.SeriesViewModel
 import com.example.speedrun.ui.run.RunDetailsViewModel
 import com.example.speedrun.ui.splash.SplashViewModel
 import com.example.speedrun.ui.user.UserProfileViewModel
@@ -33,6 +34,11 @@ interface ViewModelModule {
     @IntoMap
     @ViewModelKey(PopularGamesViewModel::class)
     fun bindPopularGamesViewModel(viewModel: PopularGamesViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(SeriesViewModel::class)
+    fun bindSeriesViewModel(viewModel: SeriesViewModel): ViewModel
 
     @Binds
     @IntoMap

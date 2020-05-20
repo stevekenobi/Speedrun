@@ -38,6 +38,10 @@ class Datamanager @Inject constructor(
         return service.getGames(offset).data
     }
 
+    suspend fun getSeries(): List<SeriesDto> {
+        return service.getSeries().data
+    }
+
     suspend fun getUserDetails(userId: String): UserDto {
         return service.getUserById(userId).data
     }

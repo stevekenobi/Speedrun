@@ -7,6 +7,7 @@ import com.example.speedrun.ui.base.BaseActivity
 import com.example.speedrun.ui.game.GameDetailsActivity
 import com.example.speedrun.ui.main.latest.LatestRunsFragment
 import com.example.speedrun.ui.main.popular.PopularGamesFragment
+import com.example.speedrun.ui.main.series.SeriesFragment
 import com.example.speedrun.ui.run.RunDetailsActivity
 import com.example.speedrun.ui.user.UserProfileActivity
 import com.example.speedrun.utils.Constants
@@ -16,6 +17,7 @@ class MainActivity : BaseActivity(), MainFragmentCommunicator {
 
     private val latestRunsFragment = LatestRunsFragment.newInstance()
     private val popularGamesFragment = PopularGamesFragment.newInstance()
+    private val seriesFragment = SeriesFragment.newInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +38,10 @@ class MainActivity : BaseActivity(), MainFragmentCommunicator {
                     createPopularGamesFragment()
                     true
                 }
+                R.id.main_menu_series -> {
+                    createSeriesFragment()
+                    true
+                }
                 else -> false
             }
         }
@@ -53,6 +59,13 @@ class MainActivity : BaseActivity(), MainFragmentCommunicator {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction
             .replace(R.id.main_navigation_fragment, popularGamesFragment)
+            .commit()
+    }
+
+    private fun createSeriesFragment() {
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        fragmentTransaction
+            .replace(R.id.main_navigation_fragment, seriesFragment)
             .commit()
     }
 

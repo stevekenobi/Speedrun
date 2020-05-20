@@ -7,6 +7,7 @@ import com.example.speedrun.ui.game.leaderboard.GameLeaderboardViewModel
 import com.example.speedrun.ui.game.leaderboard.LeaderboardViewModel
 import com.example.speedrun.ui.main.latest.LatestRunsViewModel
 import com.example.speedrun.ui.main.popular.PopularGamesViewModel
+import com.example.speedrun.ui.main.series.SeriesViewModel
 import com.example.speedrun.ui.run.RunDetailsViewModel
 import com.example.speedrun.ui.splash.SplashViewModel
 import com.example.speedrun.ui.user.UserProfileViewModel
@@ -21,6 +22,7 @@ interface ViewModelComponent {
 
     fun inject(viewModel: LatestRunsViewModel)
     fun inject(viewModel: PopularGamesViewModel)
+    fun inject(viewModel: SeriesViewModel)
     fun inject(viewModel: SplashViewModel)
     fun inject(viewModel: UserProfileViewModel)
     fun inject(viewModel: GameDetailsViewModel)

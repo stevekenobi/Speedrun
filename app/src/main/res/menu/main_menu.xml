@@ -12,4 +12,10 @@
         android:enabled="true"
         android:title="Popular Games"
         android:icon="@drawable/outline_favorite_border_white_18dp"/>
+
+    <item
+        android:id="@+id/main_menu_series"
+        android:enabled="true"
+        android:title="Series"
+        android:icon="@drawable/baseline_games_white_18dp"/>
 </menu>
