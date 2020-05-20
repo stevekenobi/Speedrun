@@ -1,4 +1,4 @@
-package com.example.speedrun.ui.user
+package com.example.speedrun.ui.user.runs
 
 import android.content.res.Configuration
 import android.view.View
@@ -8,7 +8,7 @@ import com.example.speedrun.utils.RunTimeConverter
 import com.example.speedrun.utils.RunsTextUtils
 import kotlinx.android.synthetic.main.item_user_run.view.*
 
-class UserRunViewHolder(val viewModel: UserProfileViewModel?, itemView: View, val showMills: Boolean) : BaseViewHolder(itemView) {
+class UserRunViewHolder(val viewModel: UserRunsViewModel?, itemView: View, val showMills: Boolean) : BaseViewHolder(itemView) {
 
     init {
         viewHolderComponent()?.inject(this)

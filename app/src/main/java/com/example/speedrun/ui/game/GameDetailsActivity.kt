@@ -33,8 +33,8 @@ class GameDetailsActivity : BaseActivity(), FragmentCommunicator {
     }
 
     override fun onBackPressed() {
-        if (drawer_layout != null && drawer_layout.isDrawerOpen(GravityCompat.START))
-            drawer_layout.closeDrawer(GravityCompat.START)
+        if (game_drawer_layout != null && game_drawer_layout.isDrawerOpen(GravityCompat.START))
+            game_drawer_layout.closeDrawer(GravityCompat.START)
         else
             super.onBackPressed()
     }
@@ -50,14 +50,14 @@ class GameDetailsActivity : BaseActivity(), FragmentCommunicator {
     }
 
     private fun initDrawer() {
-        drawer_layout.addDrawerListener(
+        game_drawer_layout.addDrawerListener(
             object : DrawerLayout.DrawerListener {
                 override fun onDrawerStateChanged(newState: Int) {
                 }
 
                 override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
-                    drawer_layout.bringChildToFront(drawerView)
-                    drawer_layout.requestLayout()
+                    game_drawer_layout.bringChildToFront(drawerView)
+                    game_drawer_layout.requestLayout()
                 }
 
                 override fun onDrawerClosed(drawerView: View) {
@@ -75,6 +75,6 @@ class GameDetailsActivity : BaseActivity(), FragmentCommunicator {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.game_leaderboard_layout_fragment, viewPagerFragment)
         fragmentTransaction.commit()
-        drawer_layout.closeDrawers()
+        game_drawer_layout.closeDrawers()
     }
 }

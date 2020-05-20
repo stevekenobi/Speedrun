@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/user_menu_full"
+        android:enabled="true"
+        android:title="Full Game Runs" />
+
+    <item
+        android:id="@+id/user_menu_level"
+        android:enabled="true"
+        android:title="Level Runs" />
+
+    <item
+        android:id="@+id/user_menu_info"
+        android:enabled="true"
+        android:title="Info" />
+</menu>

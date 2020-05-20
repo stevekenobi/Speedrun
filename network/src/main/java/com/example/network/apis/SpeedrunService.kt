@@ -34,6 +34,12 @@ interface SpeedrunService {
     @GET("runs?embed=game,category,players&orderby=date&direction=desc")
     suspend fun getUserRuns(@Query("user") userId: String): UserRunsResponse
 
+    @GET("games")
+    suspend fun getGamesModeratedBy(@Query("moderator") modId: String): GamesResponse
+
+    @GET("series")
+    suspend fun getSeriesModeratedBy(@Query("moderator") modId: String): SeriesResponse
+
     /**
      *  Game Details Activity
      */

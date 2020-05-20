@@ -1,9 +1,8 @@
-package com.example.speedrun.ui.user
+package com.example.speedrun.ui.user.runs
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.data.Datamanager
-import com.example.network.model.dto.UserDto
 import com.example.network.model.dto.UserRunDto
 import com.example.speedrun.model.UserGameModel
 import com.example.speedrun.ui.base.BaseViewModel
@@ -11,25 +10,18 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class UserProfileViewModel @Inject constructor(val datamanager: Datamanager) : BaseViewModel() {
+class UserRunsViewModel @Inject constructor(val datamanager: Datamanager): BaseViewModel() {
 
-    val userDetailsLiveData = MutableLiveData<UserDto>()
     val userRunsLiveData = MutableLiveData<List<UserGameModel>>()
-
     val gameClickedLiveData = MutableLiveData<String>()
     val runClickedLiveData = MutableLiveData<String>()
 
-    fun getUserDetails(id: String?) {
-        if (id.isNullOrEmpty())
+    fun getUserRuns(userId: String?) {
+        if (userId.isNullOrEmpty())
             return
 
         viewModelScope.launch(Dispatchers.IO) {
-            isLoadingLiveData.postValue(true)
-
-            val userDetails = datamanager.getUserDetails(id)
-            userDetailsLiveData.postValue(userDetails)
-
-            val userRuns = datamanager.getUserRuns(id)
+            val userRuns = datamanager.getUserRuns(userId)
             val result = mutableListOf<UserGameModel>()
 
             userRuns.forEach run@ {run: UserRunDto ->
@@ -55,8 +47,6 @@ class UserProfileViewModel @Inject constructor(val datamanager: Datamanager) : B
             }
 
             userRunsLiveData.postValue(result)
-
-            isLoadingLiveData.postValue(false)
         }
     }
 }

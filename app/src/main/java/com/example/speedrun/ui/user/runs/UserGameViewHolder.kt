@@ -1,4 +1,4 @@
-package com.example.speedrun.ui.user
+package com.example.speedrun.ui.user.runs
 
 import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -8,7 +8,7 @@ import com.example.speedrun.model.UserGameModel
 import com.example.speedrun.ui.base.BaseViewHolder
 import kotlinx.android.synthetic.main.item_user_game.view.*
 
-class UserGameViewHolder(val viewModel: UserProfileViewModel?, itemView: View) : BaseViewHolder(itemView) {
+class UserGameViewHolder(val viewModel: UserRunsViewModel?, itemView: View) : BaseViewHolder(itemView) {
     init {
         viewHolderComponent()?.inject(this)
     }
@@ -29,7 +29,12 @@ class UserGameViewHolder(val viewModel: UserProfileViewModel?, itemView: View) :
             }
 
             user_game_runs.layoutManager = LinearLayoutManager(context)
-            user_game_runs.adapter = UserRunsAdapter(viewModel, game.runs, game.showMills)
+            user_game_runs.adapter =
+                UserRunsAdapter(
+                    viewModel,
+                    game.runs,
+                    game.showMills
+                )
         }
     }
 }

@@ -58,6 +58,14 @@ class Datamanager @Inject constructor(
         return userRuns
     }
 
+    suspend fun getGamesModeratedBy(moderatorId: String): List<GameDto> {
+        return service.getGamesModeratedBy(moderatorId).data
+    }
+
+    suspend fun getSeriesModeratedBy(moderatorId: String): List<SeriesDto> {
+        return service.getSeriesModeratedBy(moderatorId).data
+    }
+
     suspend fun getGameDetails(gameId: String): GameDetailsDto {
         return service.getGameDetails(gameId).data
     }

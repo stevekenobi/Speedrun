@@ -6,8 +6,8 @@ import com.example.speedrun.ui.game.leaderboard.LeaderboardRunViewHolder
 import com.example.speedrun.ui.main.latest.LatestGameViewHolder
 import com.example.speedrun.ui.main.latest.LatestPlayersViewHolder
 import com.example.speedrun.ui.main.latest.LatestRunViewHolder
-import com.example.speedrun.ui.user.UserGameViewHolder
-import com.example.speedrun.ui.user.UserRunViewHolder
+import com.example.speedrun.ui.user.runs.UserGameViewHolder
+import com.example.speedrun.ui.user.runs.UserRunViewHolder
 import dagger.Component
 
 @PerViewHolder

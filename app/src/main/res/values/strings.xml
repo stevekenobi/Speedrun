@@ -9,5 +9,6 @@
     <string name="main_test">Hello World!</string>
     <string name="main_recent_title">Latest Runs</string>
     <string name="game_details_misc_text">Miscellaneous Categories</string>
+    <string name="user_runs_title">Runs</string>
 
 </resources>
