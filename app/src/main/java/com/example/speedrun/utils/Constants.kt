@@ -2,9 +2,9 @@ package com.example.speedrun.utils
 
 object Constants {
 
-    const val EXTRA_USER_ID = "extra_user_id"
-    const val EXTRA_GAME_ID = "extra_game_id"
-    const val EXTRA_RUN_ID = "extra_run_id"
+    const val ACTIVITY_EXTRA_USER_ID = "extra_user_id"
+    const val ACTIVITY_EXTRA_GAME_ID = "extra_game_id"
+    const val ACTIVITY_EXTRA_RUN_ID = "extra_run_id"
 
     const val LIJ_GAME_ID = "pdv94r1w"
     const val SONIC_THE_HEDGEHOG_2_ID = "8nd2gv10"

@@ -76,17 +76,17 @@ class MainActivity : BaseActivity(), MainFragmentCommunicator {
     }
 
     override fun onPlayerClicked(id: String) {
-        val intent = Intent(this, UserProfileActivity::class.java).putExtra(Constants.EXTRA_USER_ID, id)
+        val intent = Intent(this, UserProfileActivity::class.java).putExtra(Constants.ACTIVITY_EXTRA_USER_ID, id)
         startActivity(intent)
     }
 
     override fun onGameClicked(id: String) {
-        val intent = Intent(this, GameDetailsActivity::class.java).putExtra(Constants.EXTRA_GAME_ID, id)
+        val intent = Intent(this, GameDetailsActivity::class.java).putExtra(Constants.ACTIVITY_EXTRA_GAME_ID, id)
         startActivity(intent)
     }
 
     override fun onRunClicked(id: String) {
-        val intent = Intent(this, RunDetailsActivity::class.java).putExtra(Constants.EXTRA_RUN_ID, id)
+        val intent = Intent(this, RunDetailsActivity::class.java).putExtra(Constants.ACTIVITY_EXTRA_RUN_ID, id)
         startActivity(intent)
     }
 

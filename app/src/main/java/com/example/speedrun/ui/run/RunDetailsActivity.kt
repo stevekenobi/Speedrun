@@ -26,7 +26,7 @@ class RunDetailsActivity : BaseActivity() {
 
         initUi()
 
-        viewModel?.getRunDetails(intent.getStringExtra(Constants.EXTRA_RUN_ID))
+        viewModel?.getRunDetails(intent.getStringExtra(Constants.ACTIVITY_EXTRA_RUN_ID))
     }
 
     private fun initUi() {

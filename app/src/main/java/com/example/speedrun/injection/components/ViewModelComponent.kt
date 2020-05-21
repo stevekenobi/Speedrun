@@ -11,6 +11,7 @@ import com.example.speedrun.ui.main.series.SeriesViewModel
 import com.example.speedrun.ui.run.RunDetailsViewModel
 import com.example.speedrun.ui.splash.SplashViewModel
 import com.example.speedrun.ui.user.UserMenuViewModel
+import com.example.speedrun.ui.user.details.UserDetailsViewModel
 import com.example.speedrun.ui.user.runs.UserRunsViewModel
 import com.example.speedrun.viewmodel.SpeedrunViewModelFactory
 import dagger.Component
@@ -27,6 +28,7 @@ interface ViewModelComponent {
     fun inject(viewModel: SplashViewModel)
     fun inject(viewModel: UserRunsViewModel)
     fun inject(viewModel: UserMenuViewModel)
+    fun inject(viewModel: UserDetailsViewModel)
     fun inject(viewModel: GameDetailsViewModel)
     fun inject(viewModel: RunDetailsViewModel)
     fun inject(viewModel: LeaderboardViewModel)

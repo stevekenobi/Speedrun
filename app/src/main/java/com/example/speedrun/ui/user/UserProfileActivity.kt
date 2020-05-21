@@ -11,6 +11,7 @@ import com.example.speedrun.R
 import com.example.speedrun.ui.base.BaseActivity
 import com.example.speedrun.ui.game.GameDetailsActivity
 import com.example.speedrun.ui.run.RunDetailsActivity
+import com.example.speedrun.ui.user.details.UserDetailsFragment
 import com.example.speedrun.ui.user.runs.UserRunsFragment
 import com.example.speedrun.utils.Constants
 import com.example.speedrun.utils.UserColorUtils
@@ -20,6 +21,11 @@ import kotlinx.android.synthetic.main.layout_user_menu.*
 class UserProfileActivity : BaseActivity(), UserFragmentCommunicator {
     private var viewModel: UserMenuViewModel? = null
 
+    private var userId: String? = null
+
+    private var userRunsFragment: UserRunsFragment? = null
+    private var userDetailsFragment: UserDetailsFragment? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user_details)
@@ -27,10 +33,10 @@ class UserProfileActivity : BaseActivity(), UserFragmentCommunicator {
         activityComponent?.inject(this)
 
         initDrawer()
-
-        val userId = intent.getStringExtra(Constants.EXTRA_GAME_ID) // Constants.NORDANIX_USER_ID
-
-        initFragments(userId)
+        userId = Constants.NORDANIX_USER_ID
+        initFragments()
+        initMenu()
+        createUserRunsFragment()
         viewModel?.getUserDetails(userId)
     }
 
@@ -41,10 +47,20 @@ class UserProfileActivity : BaseActivity(), UserFragmentCommunicator {
             super.onBackPressed()
     }
 
-    private fun initFragments(userId: String?) {
-        val userRunsFragment = UserRunsFragment.newInstance(userId)
+    private fun initFragments() {
+        userRunsFragment = UserRunsFragment.newInstance(userId)
+        userDetailsFragment = UserDetailsFragment.newInstance(userId)
+    }
+
+    private fun createUserRunsFragment() {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.user_details_fragment, userRunsFragment)
+        fragmentTransaction.replace(R.id.user_details_fragment, userRunsFragment!!)
+        fragmentTransaction.commit()
+    }
+
+    private fun createInfoFragment() {
+        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.user_details_fragment, userDetailsFragment!!)
         fragmentTransaction.commit()
     }
 
@@ -69,6 +85,22 @@ class UserProfileActivity : BaseActivity(), UserFragmentCommunicator {
         )
     }
 
+    private fun initMenu() {
+        user_details_menu.setNavigationItemSelectedListener {item ->
+            when (item.itemId) {
+                R.id.user_menu_full -> {
+                    createUserRunsFragment()
+                    true
+                }
+                R.id.user_menu_info -> {
+                    createInfoFragment()
+                    true
+                }
+                else -> false
+            }
+        }
+    }
+
     override fun initViewModel() {
         viewModel = viewModelFactory.create(UserMenuViewModel::class.java)
     }
@@ -90,13 +122,13 @@ class UserProfileActivity : BaseActivity(), UserFragmentCommunicator {
 
     override fun onGameClicked(id: String) {
         val intent = Intent(this, GameDetailsActivity::class.java)
-        intent.putExtra(Constants.EXTRA_GAME_ID, id)
+        intent.putExtra(Constants.ACTIVITY_EXTRA_GAME_ID, id)
         startActivity(intent)
     }
 
     override fun onRunClicked(id: String) {
         val intent = Intent(this, RunDetailsActivity::class.java)
-        intent.putExtra(Constants.EXTRA_RUN_ID, id)
+        intent.putExtra(Constants.ACTIVITY_EXTRA_RUN_ID, id)
         startActivity(intent)
     }
 }

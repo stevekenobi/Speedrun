@@ -10,5 +10,7 @@
     <string name="main_recent_title">Latest Runs</string>
     <string name="game_details_misc_text">Miscellaneous Categories</string>
     <string name="user_runs_title">Runs</string>
+    <string name="user_details_info_title">Info</string>
+    <string name="user_details_moderate_title">Moderator of</string>
 
 </resources>

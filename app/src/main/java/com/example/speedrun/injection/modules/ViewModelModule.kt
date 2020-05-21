@@ -11,6 +11,7 @@ import com.example.speedrun.ui.main.series.SeriesViewModel
 import com.example.speedrun.ui.run.RunDetailsViewModel
 import com.example.speedrun.ui.splash.SplashViewModel
 import com.example.speedrun.ui.user.UserMenuViewModel
+import com.example.speedrun.ui.user.details.UserDetailsViewModel
 import com.example.speedrun.ui.user.runs.UserRunsViewModel
 import com.example.speedrun.viewmodel.SpeedrunViewModelFactory
 import com.example.speedrun.viewmodel.ViewModelKey
@@ -60,6 +61,11 @@ interface ViewModelModule {
     @IntoMap
     @ViewModelKey(GameDetailsViewModel::class)
     fun bindGameDetailsViewModel(viewModel: GameDetailsViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(UserDetailsViewModel::class)
+    fun bindUserDetailsViewModel(viewModel: UserDetailsViewModel): ViewModel
 
     @Binds
     @IntoMap

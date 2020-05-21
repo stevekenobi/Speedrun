@@ -104,7 +104,7 @@ class LeaderboardFragment : BaseFragment() {
             val intent = Intent(
                 activity,
                 RunDetailsActivity::class.java
-            ).putExtra(Constants.EXTRA_RUN_ID, it)
+            ).putExtra(Constants.ACTIVITY_EXTRA_RUN_ID, it)
             activity?.startActivity(intent)
         })
 
@@ -115,7 +115,7 @@ class LeaderboardFragment : BaseFragment() {
             val intent = Intent(
                 activity,
                 UserProfileActivity::class.java
-            ).putExtra(Constants.EXTRA_USER_ID, it)
+            ).putExtra(Constants.ACTIVITY_EXTRA_USER_ID, it)
             activity?.startActivity(intent)
         })
     }
