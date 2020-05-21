@@ -1,4 +1,4 @@
-package com.example.speedrun.ui.user.drawer
+package com.example.speedrun.ui.user
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope

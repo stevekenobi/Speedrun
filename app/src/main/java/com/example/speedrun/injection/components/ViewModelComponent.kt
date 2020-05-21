@@ -10,7 +10,7 @@ import com.example.speedrun.ui.main.popular.PopularGamesViewModel
 import com.example.speedrun.ui.main.series.SeriesViewModel
 import com.example.speedrun.ui.run.RunDetailsViewModel
 import com.example.speedrun.ui.splash.SplashViewModel
-import com.example.speedrun.ui.user.drawer.UserMenuViewModel
+import com.example.speedrun.ui.user.UserMenuViewModel
 import com.example.speedrun.ui.user.runs.UserRunsViewModel
 import com.example.speedrun.viewmodel.SpeedrunViewModelFactory
 import dagger.Component

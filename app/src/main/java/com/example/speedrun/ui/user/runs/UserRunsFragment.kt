@@ -10,6 +10,7 @@ import com.example.speedrun.R
 import com.example.speedrun.extensions.withArguments
 import com.example.speedrun.model.UserGameModel
 import com.example.speedrun.ui.base.BaseFragment
+import com.example.speedrun.ui.user.UserFragmentCommunicator
 import com.example.speedrun.utils.ItemDivideDecorator
 import kotlinx.android.synthetic.main.fragment_user_runs.*
 
@@ -75,19 +76,15 @@ class UserRunsFragment : BaseFragment() {
         viewModel?.gameClickedLiveData?.observe(this, Observer {
             if (it.isNullOrEmpty())
                 return@Observer
-//
-//            val intent = Intent(this@UserProfileActivity, GameDetailsActivity::class.java)
-//            intent.putExtra(Constants.EXTRA_GAME_ID, it)
-//            startActivity(intent)
+
+            (activity as UserFragmentCommunicator).onGameClicked(it)
         })
 
         viewModel?.runClickedLiveData?.observe(this, Observer {
             if (it.isNullOrEmpty())
                 return@Observer
 
-//            val intent = Intent(this@UserProfileActivity, RunDetailsActivity::class.java)
-//            intent.putExtra(Constants.EXTRA_RUN_ID, it)
-//            startActivity(intent)
+            (activity as UserFragmentCommunicator).onRunClicked(it)
         })
     }
 }
