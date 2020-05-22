@@ -8,8 +8,8 @@ import com.example.data.speedrun.SpeedrunDataManager
 import com.example.data.splits.AndroidSplitsDataManager
 import com.example.data.splits.SplitsDataManager
 import com.example.network.Session
-import com.example.network.apis.SpeedrunService
-import com.example.network.apis.SplitsService
+import com.example.network.api.SpeedrunService
+import com.example.network.api.SplitsService
 import com.example.network.injection.NetworkModule
 import com.example.storage.interfaces.AuthorizationStorageManager
 import dagger.Module

@@ -20,7 +20,6 @@ class RunDetailsActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_run_details)
 
         activityComponent?.inject(this)
 
@@ -36,6 +35,8 @@ class RunDetailsActivity : BaseActivity() {
     private fun createSplits(splits: List<SplitsDto>) {
         run_splits.adapter = SplitsAdapter(splits, true)
     }
+
+    override fun getLayoutId() = R.layout.activity_run_details
 
     override fun initViewModel() {
         viewModel = viewModelFactory.create(RunDetailsViewModel::class.java)

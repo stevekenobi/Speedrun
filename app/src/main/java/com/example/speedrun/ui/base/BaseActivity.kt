@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
 import android.widget.Toast
+import androidx.annotation.LayoutRes
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
 import com.example.speedrun.application.SpeedrunApplication
@@ -36,6 +37,7 @@ abstract class BaseActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(getLayoutId())
 
         // Create the ActivityComponent and reuses cached ConfigPersistentComponent if this is
         // being called after a configuration change.
@@ -53,6 +55,8 @@ abstract class BaseActivity : AppCompatActivity() {
         }
     }
 
+    @LayoutRes
+    abstract fun getLayoutId(): Int
     abstract fun initViewModel()
     abstract fun observeViewModel()
 

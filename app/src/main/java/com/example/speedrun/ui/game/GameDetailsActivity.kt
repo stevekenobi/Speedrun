@@ -17,14 +17,14 @@ class GameDetailsActivity : BaseActivity(), FragmentCommunicator {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_game_details)
-
         activityComponent?.inject(this)
 
         initDrawer()
 
         initFragments()
     }
+
+    override fun getLayoutId() = R.layout.activity_game_details
 
     override fun initViewModel() {
     }

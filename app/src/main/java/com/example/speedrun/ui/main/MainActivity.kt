@@ -21,7 +21,6 @@ class MainActivity : BaseActivity(), MainFragmentCommunicator {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
         createLatestRunsFragment()
         initNavigationBar()
@@ -68,6 +67,9 @@ class MainActivity : BaseActivity(), MainFragmentCommunicator {
             .replace(R.id.main_navigation_fragment, seriesFragment)
             .commit()
     }
+
+    override fun getLayoutId() = R.layout.activity_main
+
 
     override fun initViewModel() {
     }

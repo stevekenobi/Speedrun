@@ -1,6 +1,6 @@
 package com.example.data.speedrun
 
-import com.example.network.apis.SpeedrunService
+import com.example.network.api.SpeedrunService
 import com.example.network.model.dto.*
 
 interface SpeedrunDataManager {

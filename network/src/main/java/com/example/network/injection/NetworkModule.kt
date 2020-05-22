@@ -1,7 +1,7 @@
 package com.example.network.injection
 
-import com.example.network.apis.SpeedrunService
-import com.example.network.apis.SplitsService
+import com.example.network.api.SpeedrunService
+import com.example.network.api.SplitsService
 import com.example.network.utils.DateConverter
 import com.google.gson.GsonBuilder
 import dagger.Module

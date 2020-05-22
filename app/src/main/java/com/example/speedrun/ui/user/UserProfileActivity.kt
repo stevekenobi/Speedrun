@@ -29,7 +29,6 @@ class UserProfileActivity : BaseActivity(), UserFragmentCommunicator {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_user_details)
 
         activityComponent?.inject(this)
 
@@ -101,6 +100,8 @@ class UserProfileActivity : BaseActivity(), UserFragmentCommunicator {
             }
         }
     }
+
+    override fun getLayoutId() = R.layout.activity_user_details
 
     override fun initViewModel() {
         viewModel = viewModelFactory.create(UserMenuViewModel::class.java)
