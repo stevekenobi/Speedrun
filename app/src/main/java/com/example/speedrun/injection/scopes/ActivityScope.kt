@@ -1,7 +1,7 @@
-package com.example.speedrun.injection
+package com.example.speedrun.injection.scopes
 
 import javax.inject.Scope
 
 @Scope
 @kotlin.annotation.Retention(AnnotationRetention.RUNTIME)
-annotation class PerActivity
+annotation class ActivityScope

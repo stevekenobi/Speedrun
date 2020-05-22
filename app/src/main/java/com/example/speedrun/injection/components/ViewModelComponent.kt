@@ -1,7 +1,7 @@
 package com.example.speedrun.injection.components
 
-import com.example.speedrun.injection.PerViewModel
 import com.example.speedrun.injection.modules.ViewModelModule
+import com.example.speedrun.injection.scopes.ViewModelScope
 import com.example.speedrun.ui.game.details.GameDetailsViewModel
 import com.example.speedrun.ui.game.leaderboard.GameLeaderboardViewModel
 import com.example.speedrun.ui.game.leaderboard.LeaderboardViewModel
@@ -17,7 +17,7 @@ import com.example.speedrun.viewmodel.SpeedrunViewModelFactory
 import dagger.Component
 
 
-@PerViewModel
+@ViewModelScope
 @Component(dependencies = [ApplicationComponent::class], modules = [ViewModelModule::class])
 interface ViewModelComponent {
     fun inject(viewModelProvider: SpeedrunViewModelFactory)

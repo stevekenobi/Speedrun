@@ -9,18 +9,14 @@ class CategoryLeaderboardAdapter(
     fragmentActivity: FragmentActivity,
     private val gameId: String,
     private val categories: List<CategoryDto>,
-    private val levelId: String?
-) : FragmentStateAdapter(fragmentActivity) {
+    private val levelId: String?) : FragmentStateAdapter(fragmentActivity) {
+
     override fun getItemCount(): Int {
         return categories.size
     }
 
     override fun createFragment(position: Int): Fragment {
-        return LeaderboardFragment.newInstance(
-            gameId,
-            levelId,
-            categories[position].id
-        )
+        return LeaderboardFragment.newInstance(gameId, levelId, categories[position].id)
     }
 
 }
