@@ -56,7 +56,7 @@ class SpeedrunApplication : Application() {
                 .addInterceptor(
                     CalligraphyInterceptor(
                         CalligraphyConfig.Builder()
-                            .setDefaultFontPath("fonts/RobotoSlabThin.ttf")
+                            .setDefaultFontPath("fonts/PDFIntextCondproRegular.ttf")
                             .setFontAttrId(R.attr.fontPath)
                             .build()
                     )

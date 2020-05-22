@@ -15,27 +15,27 @@
     </style>
 
     <style name="Speedrun.TextAppearance.TextView.Regular" parent="android:TextAppearance.Widget.TextView">
-        <item name="fontPath">fonts/RobotoSlabRegular.ttf</item>
+        <item name="fontPath">fonts/PDFIntextCondproRegular.ttf</item>
     </style>
 
-    <style name="Speedrun.TextAppearance.TextView.Black" parent="android:TextAppearance.Widget.TextView">
-        <item name="fontPath">fonts/RobotoSlabBlack.ttf</item>
+    <style name="Speedrun.TextAppearance.TextView.Italic" parent="android:TextAppearance.Widget.TextView">
+        <item name="fontPath">fonts/PDFIntextCondproItalic.ttf</item>
     </style>
 
     <style name="Speedrun.TextAppearance.TextView.Light" parent="android:TextAppearance.Widget.TextView">
-        <item name="fontPath">fonts/RobotoSlabLight.ttf</item>
+        <item name="fontPath">fonts/PDFIntextCondproLight.ttf</item>
     </style>
 
     <style name="Speedrun.TextAppearance.TextView.Bold" parent="android:TextAppearance.Widget.TextView">
-        <item name="fontPath">fonts/RobotoSlabBold.ttf</item>
+        <item name="fontPath">fonts/PDFIntextCondproBold.ttf</item>
     </style>
 
     <style name="Speedrun.TextAppearance.TextView.Medium" parent="android:TextAppearance.Widget.TextView">
-        <item name="fontPath">fonts/RobotoSlabMedium.ttf</item>
+        <item name="fontPath">fonts/PDFIntextCondproMedium.ttf</item>
     </style>
 
-    <style name="Speedrun.TextAppearance.TextView.Thin" parent="android:TextAppearance.Widget.TextView">
-        <item name="fontPath">fonts/RobotoSlabThin.ttf</item>
+    <style name="Speedrun.TextAppearance.TextView.Medium.Italic" parent="android:TextAppearance.Widget.TextView">
+        <item name="fontPath">fonts/PDFIntextCondproMediumItalic.ttf</item>
     </style>
 
 </resources>
