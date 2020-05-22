@@ -67,18 +67,18 @@ class PopularGamesFragment : BaseFragment() {
     }
 
     override fun observeViewModel() {
-        viewModel?.gamesLiveData?.observe(this, Observer {
-            if (it.isNullOrEmpty())
+        viewModel?.gamesLiveData?.observe(this, Observer { gameList ->
+            if (gameList.isNullOrEmpty())
                 return@Observer
 
-            main_rv_recent_games.adapter = PopularGamesAdapter(viewModel, it)
+            main_rv_recent_games.adapter = PopularGamesAdapter(viewModel, gameList)
         })
 
-        viewModel?.gameClickedLiveData?.observe(this, Observer {
-            if (it.isNullOrEmpty())
+        viewModel?.gameClickedLiveData?.observe(this, Observer { gameId ->
+            if (gameId.isNullOrEmpty())
                 return@Observer
 
-            (activity as MainFragmentCommunicator).onGameClicked(it)
+            (activity as MainFragmentCommunicator).onGameClicked(gameId)
         })
     }
 

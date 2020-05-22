@@ -67,11 +67,11 @@ class GameLeaderboardFragment : BaseFragment() {
         val levelId = arguments?.getString(KEY_LEVEL_ID)
 
         var mCategories = categories
-        if (categories.any {
-                it.type == NetworkConstants.TYPE_PER_GAME
+        if (categories.any { category ->
+                category.type == NetworkConstants.TYPE_PER_GAME
             }) {
-            mCategories = categories.filter {
-                it.type == NetworkConstants.TYPE_PER_GAME
+            mCategories = categories.filter { category ->
+                category.type == NetworkConstants.TYPE_PER_GAME
             }
         }
 
@@ -83,8 +83,8 @@ class GameLeaderboardFragment : BaseFragment() {
                 levelId
             )
 
-        val tabTitles = mCategories.map {
-            it.name
+        val tabTitles = mCategories.map { category ->
+            category.name
         }
 
         TabLayoutMediator(tab_layout, pager) { tab, position ->
@@ -100,8 +100,8 @@ class GameLeaderboardFragment : BaseFragment() {
     }
 
     override fun observeViewModel() {
-        viewModel?.categoriesLiveData?.observe(this, Observer {
-            createViewPager(it)
+        viewModel?.categoriesLiveData?.observe(this, Observer { categoryList ->
+            createViewPager(categoryList)
         })
     }
 

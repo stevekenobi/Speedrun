@@ -66,25 +66,25 @@ class UserRunsFragment : BaseFragment() {
     }
 
     override fun observeViewModel() {
-        viewModel?.userRunsLiveData?.observe(this, Observer {
-            if (it == null)
+        viewModel?.userRunsLiveData?.observe(this, Observer { runList ->
+            if (runList == null)
                 return@Observer
 
-            updateUserRuns(it)
+            updateUserRuns(runList)
         })
 
-        viewModel?.gameClickedLiveData?.observe(this, Observer {
-            if (it.isNullOrEmpty())
+        viewModel?.gameClickedLiveData?.observe(this, Observer { gameId ->
+            if (gameId.isNullOrEmpty())
                 return@Observer
 
-            (activity as UserFragmentCommunicator).onGameClicked(it)
+            (activity as UserFragmentCommunicator).onGameClicked(gameId)
         })
 
-        viewModel?.runClickedLiveData?.observe(this, Observer {
-            if (it.isNullOrEmpty())
+        viewModel?.runClickedLiveData?.observe(this, Observer { runId ->
+            if (runId.isNullOrEmpty())
                 return@Observer
 
-            (activity as UserFragmentCommunicator).onRunClicked(it)
+            (activity as UserFragmentCommunicator).onRunClicked(runId)
         })
     }
 }

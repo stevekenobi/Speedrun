@@ -87,35 +87,35 @@ class LeaderboardFragment : BaseFragment() {
         })
 
 
-        viewModel?.leaderboardLiveData?.observe(this, Observer {
+        viewModel?.leaderboardLiveData?.observe(this, Observer { leaderboardRunList ->
             category_leaderboard.adapter =
                 LeaderboardRunsAdapter(
                     viewModel,
-                    it,
-                    it.any { run ->
+                    leaderboardRunList,
+                    leaderboardRunList.any { run ->
                         run.run.times.primary_t != floor(run.run.times.primary_t)
                     })
         })
 
-        viewModel?.leaderboardRunClickedLiveData?.observe(this, Observer {
-            if (it.isNullOrEmpty())
+        viewModel?.leaderboardRunClickedLiveData?.observe(this, Observer { leaderboardRunId ->
+            if (leaderboardRunId.isNullOrEmpty())
                 return@Observer
 
             val intent = Intent(
                 activity,
                 RunDetailsActivity::class.java
-            ).putExtra(Constants.ACTIVITY_EXTRA_RUN_ID, it)
+            ).putExtra(Constants.ACTIVITY_EXTRA_RUN_ID, leaderboardRunId)
             activity?.startActivity(intent)
         })
 
-        viewModel?.leaderboardUserClickedLiveData?.observe(this, Observer {
-            if (it.isNullOrEmpty())
+        viewModel?.leaderboardUserClickedLiveData?.observe(this, Observer { userId ->
+            if (userId.isNullOrEmpty())
                 return@Observer
 
             val intent = Intent(
                 activity,
                 UserProfileActivity::class.java
-            ).putExtra(Constants.ACTIVITY_EXTRA_USER_ID, it)
+            ).putExtra(Constants.ACTIVITY_EXTRA_USER_ID, userId)
             activity?.startActivity(intent)
         })
     }

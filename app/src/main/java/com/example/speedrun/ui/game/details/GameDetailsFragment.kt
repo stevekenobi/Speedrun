@@ -83,16 +83,16 @@ class GameDetailsFragment : BaseFragment() {
     }
 
     override fun observeViewModel() {
-        viewModel?.gameDetailsLiveData?.observe(this, Observer {
-            if (it == null)
+        viewModel?.gameDetailsLiveData?.observe(this, Observer { game ->
+            if (game == null)
                 return@Observer
 
-            fillGameDetails(it.names?.international, it.assets.coverLarge)
-            fillLevelsList(it.levels.data)
+            fillGameDetails(game.names?.international, game.assets.coverLarge)
+            fillLevelsList(game.levels.data)
         })
 
-        viewModel?.levelSelectedLiveData?.observe(this, Observer {
-            (activity as GameDetailsActivity).onILClicked(it)
+        viewModel?.levelSelectedLiveData?.observe(this, Observer { levelId ->
+            (activity as GameDetailsActivity).onILClicked(levelId)
         })
     }
 

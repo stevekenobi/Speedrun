@@ -73,41 +73,37 @@ class LatestRunsFragment : BaseFragment() {
             }
         })
 
-        viewModel?.latestRunsLiveData?.observe(this, Observer {
-            if (it.isNullOrEmpty()) {
+        viewModel?.latestRunsLiveData?.observe(this, Observer { runs ->
+            if (runs.isNullOrEmpty()) {
                 return@Observer
             }
 
-            main_rv_latest_runs.adapter =
-                LatestGameAdapter(
-                    viewModel,
-                    it
-                )
+            main_rv_latest_runs.adapter = LatestGameAdapter(viewModel, runs)
             main_rv_latest_runs.isNestedScrollingEnabled = false
         })
 
-        viewModel?.latestUserPressedLiveData?.observe(this, Observer {
-            if (it.isNullOrEmpty()) {
+        viewModel?.latestUserPressedLiveData?.observe(this, Observer { userId ->
+            if (userId.isNullOrEmpty()) {
                 return@Observer
             }
 
-            (activity as MainFragmentCommunicator).onPlayerClicked(it)
+            (activity as MainFragmentCommunicator).onPlayerClicked(userId)
         })
 
-        viewModel?.latestGamePressedLiveData?.observe(this, Observer {
-            if (it.isNullOrEmpty()) {
+        viewModel?.latestGamePressedLiveData?.observe(this, Observer { gameId ->
+            if (gameId.isNullOrEmpty()) {
                 return@Observer
             }
 
-            (activity as MainFragmentCommunicator).onGameClicked(it)
+            (activity as MainFragmentCommunicator).onGameClicked(gameId)
         })
 
-        viewModel?.latestRunPressedLiveData?.observe(this, Observer {
-            if (it.isNullOrEmpty()) {
+        viewModel?.latestRunPressedLiveData?.observe(this, Observer {runId ->
+            if (runId.isNullOrEmpty()) {
                 return@Observer
             }
 
-            (activity as MainFragmentCommunicator).onRunClicked(it)
+            (activity as MainFragmentCommunicator).onRunClicked(runId)
         })
 
     }

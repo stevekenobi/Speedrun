@@ -43,8 +43,8 @@ class AndroidSpeedrunDataManager @Inject constructor(override val serviceSpeedru
 
         val userPbs = serviceSpeedrun.getPBsForUser(userId).data
 
-        userRuns.map {
-            it.place = userPbs.find { pb: UserPBDto -> pb.run.id == it.id }?.place
+        userRuns.map { run ->
+            run.place = userPbs.find { pb: UserPBDto -> pb.run.id == run.id }?.place
         }
 
         return userRuns

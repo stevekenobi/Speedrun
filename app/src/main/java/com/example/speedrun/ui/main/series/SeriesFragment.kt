@@ -59,15 +59,15 @@ class SeriesFragment : BaseFragment() {
     }
 
     override fun observeViewModel() {
-        viewModel?.seriesLiveData?.observe(this, Observer {
-            if (it.isNullOrEmpty())
+        viewModel?.seriesLiveData?.observe(this, Observer { seriesList ->
+            if (seriesList.isNullOrEmpty())
                 return@Observer
 
-            fillSeries(it)
+            fillSeries(seriesList)
         })
 
-        viewModel?.seriesClickedLiveData?.observe(this, Observer {
-            if (it.isNullOrEmpty())
+        viewModel?.seriesClickedLiveData?.observe(this, Observer { seriesId ->
+            if (seriesId.isNullOrEmpty())
                 return@Observer
 
             Toast.makeText(context, "Not Implemented", Toast.LENGTH_SHORT).show()

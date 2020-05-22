@@ -42,15 +42,15 @@ class RunDetailsActivity : BaseActivity() {
     }
 
     override fun observeViewModel() {
-        viewModel?.runDetailsLiveData?.observe(this, Observer {
-            setDetailsPage(it)
+        viewModel?.runDetailsLiveData?.observe(this, Observer { run ->
+            setDetailsPage(run)
         })
 
-        viewModel?.splitsLiveData?.observe(this, Observer {
-            if (it.isNullOrEmpty())
+        viewModel?.splitsLiveData?.observe(this, Observer { splitList ->
+            if (splitList.isNullOrEmpty())
                 return@Observer
 
-            createSplits(it)
+            createSplits(splitList)
         })
     }
 

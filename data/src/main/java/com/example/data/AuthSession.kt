@@ -63,8 +63,8 @@ class AuthSession @Inject constructor(private val authorizationStorageManager: A
         setTokenType(authenticationResponse?.tokenType)
         setAccessToken(authenticationResponse?.accessToken)
         setRefreshToken(authenticationResponse?.refreshToken)
-        authenticationResponse?.let{
-            updateExpirationDate(it.expiresIn)
+        authenticationResponse?.let{ response ->
+            updateExpirationDate(response.expiresIn)
         }
     }
 
