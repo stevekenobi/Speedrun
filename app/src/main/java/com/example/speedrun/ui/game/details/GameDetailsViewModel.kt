@@ -2,14 +2,14 @@ package com.example.speedrun.ui.game.details
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.data.Datamanager
+import com.example.data.DataManager
 import com.example.network.model.dto.GameDetailsDto
 import com.example.speedrun.ui.base.BaseViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class GameDetailsViewModel @Inject constructor(val datamanager: Datamanager) : BaseViewModel() {
+class GameDetailsViewModel @Inject constructor(val datamanager: DataManager) : BaseViewModel() {
 
     val gameDetailsLiveData = MutableLiveData<GameDetailsDto>()
     val levelSelectedLiveData = MutableLiveData<String>()
@@ -19,7 +19,7 @@ class GameDetailsViewModel @Inject constructor(val datamanager: Datamanager) : B
             return
 
         viewModelScope.launch(Dispatchers.IO) {
-            val gameDetails = datamanager.getGameDetails(gameId)
+            val gameDetails = datamanager.speedrunDataManager.getGameDetails(gameId)
             gameDetailsLiveData.postValue(gameDetails)
         }
     }

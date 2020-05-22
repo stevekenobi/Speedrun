@@ -2,7 +2,6 @@ package com.example.speedrun.injection.components
 
 
 import android.app.Application
-import com.example.data.Datamanager
 import com.example.data.injection.DataModule
 import com.example.network.Session
 import com.example.network.apis.SpeedrunService
@@ -40,8 +39,6 @@ interface ApplicationComponent {
     fun speedrunService(): SpeedrunService
 
     fun database(): DatabaseSpeedrun
-
-    fun datamanager(): Datamanager
 
     fun application(): Application
 

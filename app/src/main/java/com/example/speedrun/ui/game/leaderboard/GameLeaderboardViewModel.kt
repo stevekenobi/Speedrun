@@ -2,14 +2,14 @@ package com.example.speedrun.ui.game.leaderboard
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.data.Datamanager
+import com.example.data.DataManager
 import com.example.network.model.dto.CategoryDto
 import com.example.speedrun.ui.base.BaseViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class GameLeaderboardViewModel @Inject constructor(val datamanager: Datamanager) : BaseViewModel() {
+class GameLeaderboardViewModel @Inject constructor(val datamanager: DataManager) : BaseViewModel() {
 
     val categoriesLiveData = MutableLiveData<List<CategoryDto>>()
 
@@ -19,11 +19,11 @@ class GameLeaderboardViewModel @Inject constructor(val datamanager: Datamanager)
 
         viewModelScope.launch(Dispatchers.IO) {
             if (levelId.isNullOrEmpty()) {
-                val categories = datamanager.getCategories(gameId)
+                val categories = datamanager.speedrunDataManager.getCategories(gameId)
 
                 categoriesLiveData.postValue(categories)
             } else {
-                val categories =  datamanager.getLevelCategories(levelId)
+                val categories =  datamanager.speedrunDataManager.getLevelCategories(levelId)
 
                 categoriesLiveData.postValue(categories)
             }

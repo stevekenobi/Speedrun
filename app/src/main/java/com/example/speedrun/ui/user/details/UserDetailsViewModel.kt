@@ -2,7 +2,7 @@ package com.example.speedrun.ui.user.details
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.data.Datamanager
+import com.example.data.DataManager
 import com.example.network.model.dto.GameDto
 import com.example.network.model.dto.SeriesDto
 import com.example.network.model.dto.UserDto
@@ -11,7 +11,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class UserDetailsViewModel @Inject constructor(val datamanager: Datamanager):BaseViewModel() {
+class UserDetailsViewModel @Inject constructor(val datamanager: DataManager):BaseViewModel() {
     val userDetailsLiveData = MutableLiveData<UserDto>()
 
     val gamesModeratedByUser = MutableLiveData<List<GameDto>>()
@@ -25,7 +25,7 @@ class UserDetailsViewModel @Inject constructor(val datamanager: Datamanager):Bas
             return
 
         viewModelScope.launch(Dispatchers.IO) {
-            val user = datamanager.getUserDetails(userId)
+            val user = datamanager.speedrunDataManager.getUserDetails(userId)
 
             userDetailsLiveData.postValue(user)
         }
@@ -36,7 +36,7 @@ class UserDetailsViewModel @Inject constructor(val datamanager: Datamanager):Bas
             return
 
         viewModelScope.launch(Dispatchers.IO) {
-            val games = datamanager.getGamesModeratedBy(userId)
+            val games = datamanager.speedrunDataManager.getGamesModeratedBy(userId)
 
             gamesModeratedByUser.postValue(games)
         }
@@ -47,7 +47,7 @@ class UserDetailsViewModel @Inject constructor(val datamanager: Datamanager):Bas
             return
 
         viewModelScope.launch(Dispatchers.IO) {
-            val series = datamanager.getSeriesModeratedBy(userId)
+            val series = datamanager.speedrunDataManager.getSeriesModeratedBy(userId)
 
             seriesModeratedByUser.postValue(series)
         }

@@ -2,7 +2,7 @@ package com.example.speedrun.ui.user.runs
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.data.Datamanager
+import com.example.data.DataManager
 import com.example.network.model.dto.UserRunDto
 import com.example.speedrun.model.UserGameModel
 import com.example.speedrun.ui.base.BaseViewModel
@@ -10,7 +10,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class UserRunsViewModel @Inject constructor(val datamanager: Datamanager): BaseViewModel() {
+class UserRunsViewModel @Inject constructor(val datamanager: DataManager): BaseViewModel() {
 
     val userRunsLiveData = MutableLiveData<List<UserGameModel>>()
     val gameClickedLiveData = MutableLiveData<String>()
@@ -21,7 +21,7 @@ class UserRunsViewModel @Inject constructor(val datamanager: Datamanager): BaseV
             return
 
         viewModelScope.launch(Dispatchers.IO) {
-            val userRuns = datamanager.getUserRuns(userId)
+            val userRuns = datamanager.speedrunDataManager.getUserRuns(userId)
             val result = mutableListOf<UserGameModel>()
 
             userRuns.forEach run@ {run: UserRunDto ->

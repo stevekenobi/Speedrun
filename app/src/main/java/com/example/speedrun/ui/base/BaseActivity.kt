@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
-import com.example.data.Datamanager
 import com.example.speedrun.application.SpeedrunApplication
 import com.example.speedrun.events.NetworkAvailableEvent
 import com.example.speedrun.injection.components.ActivityComponent
@@ -23,9 +22,6 @@ import timber.log.Timber
 import javax.inject.Inject
 
 abstract class BaseActivity : AppCompatActivity() {
-
-    @Inject
-    lateinit var dataManager: Datamanager
 
     @Inject
     lateinit var eventBus: EventBus

@@ -1,22 +1,14 @@
-package com.example.data
+package com.example.data.speedrun
 
-import com.example.network.Session
 import com.example.network.apis.SpeedrunService
-import com.example.network.apis.SplitsService
 import com.example.network.model.dto.*
-import com.example.network.model.splits.SplitsDto
 import com.example.network.utils.NetworkConstants
-import com.example.storage.DatabaseSpeedrun
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class Datamanager @Inject constructor(
-    private val database: DatabaseSpeedrun,
-    private val service: SpeedrunService,
-    private val session: Session,
-    private val splitsService: SplitsService
-) {
+class AndroidSpeedrunDataManager @Inject constructor(override val serviceSpeedrun: SpeedrunService) :
+    SpeedrunDataManager {
 
 //    suspend fun getResources(): Map<String, String> {
 //        val resourcesFromServer = service.getResources().data
@@ -30,26 +22,26 @@ class Datamanager @Inject constructor(
 //        return database.resourcesDao().getResourcesAsMap()
 //    }
 
-    suspend fun getLatestRuns(): List<LatestRunDto> {
-        return service.getLatestRun().data
+    override  suspend fun getLatestRuns(): List<LatestRunDto> {
+        return serviceSpeedrun.getLatestRun().data
     }
 
-    suspend fun getRecentGames(offset: Int): List<GameDto> {
-        return service.getGames(offset).data
+    override  suspend fun getRecentGames(offset: Int): List<GameDto> {
+        return serviceSpeedrun.getGames(offset).data
     }
 
-    suspend fun getSeries(): List<SeriesDto> {
-        return service.getSeries().data
+    override   suspend fun getSeries(): List<SeriesDto> {
+        return serviceSpeedrun.getSeries().data
     }
 
-    suspend fun getUserDetails(userId: String): UserDto {
-        return service.getUserById(userId).data
+    override suspend fun getUserDetails(userId: String): UserDto {
+        return serviceSpeedrun.getUserById(userId).data
     }
 
-    suspend fun getUserRuns(userId: String): List<UserRunDto> {
-        val userRuns = service.getUserRuns(userId).data
+    override  suspend fun getUserRuns(userId: String): List<UserRunDto> {
+        val userRuns = serviceSpeedrun.getUserRuns(userId).data
 
-        val userPbs = service.getPBsForUser(userId).data
+        val userPbs = serviceSpeedrun.getPBsForUser(userId).data
 
         userRuns.map {
             it.place = userPbs.find { pb: UserPBDto -> pb.run.id == it.id }?.place
@@ -58,31 +50,31 @@ class Datamanager @Inject constructor(
         return userRuns
     }
 
-    suspend fun getGamesModeratedBy(moderatorId: String): List<GameDto> {
-        return service.getGamesModeratedBy(moderatorId).data
+    override   suspend fun getGamesModeratedBy(moderatorId: String): List<GameDto> {
+        return serviceSpeedrun.getGamesModeratedBy(moderatorId).data
     }
 
-    suspend fun getSeriesModeratedBy(moderatorId: String): List<SeriesDto> {
-        return service.getSeriesModeratedBy(moderatorId).data
+    override suspend fun getSeriesModeratedBy(moderatorId: String): List<SeriesDto> {
+        return serviceSpeedrun.getSeriesModeratedBy(moderatorId).data
     }
 
-    suspend fun getGameDetails(gameId: String): GameDetailsDto {
-        return service.getGameDetails(gameId).data
+    override  suspend fun getGameDetails(gameId: String): GameDetailsDto {
+        return serviceSpeedrun.getGameDetails(gameId).data
     }
 
-    suspend fun getCategories(gameId: String): List<CategoryDto> {
-        return service.getGameCategories(gameId).data
+    override   suspend fun getCategories(gameId: String): List<CategoryDto> {
+        return serviceSpeedrun.getGameCategories(gameId).data
     }
 
-    suspend fun getLevelCategories(levelId: String): List<CategoryDto> {
-        return service.getLevelCategories(levelId).data
+    override   suspend fun getLevelCategories(levelId: String): List<CategoryDto> {
+        return serviceSpeedrun.getLevelCategories(levelId).data
     }
 
     /**
      *  TODO Improve users logic
      */
-    suspend fun getCategoryLeaderboard(gameId: String, categoryId: String): List<LeaderboardRunDto> {
-        val response = service.getLeaderboardForCategory(gameId, categoryId).data
+    override   suspend fun getCategoryLeaderboard(gameId: String, categoryId: String): List<LeaderboardRunDto> {
+        val response = serviceSpeedrun.getLeaderboardForCategory(gameId, categoryId).data
 
         val allPlayers = response.players.data.distinct()
 
@@ -111,8 +103,8 @@ class Datamanager @Inject constructor(
         return response.runs
     }
 
-    suspend fun getLevelLeaderboard(gameId: String,levelId: String, categoryId: String): List<LeaderboardRunDto> {
-        val response = service.getCategoryLeaderboardForLevel(gameId, levelId, categoryId).data
+    override   suspend fun getLevelLeaderboard(gameId: String,levelId: String, categoryId: String): List<LeaderboardRunDto> {
+        val response = serviceSpeedrun.getCategoryLeaderboardForLevel(gameId, levelId, categoryId).data
 
         val allPlayers = response.players.data.distinct()
 
@@ -141,12 +133,8 @@ class Datamanager @Inject constructor(
         return response.runs
     }
 
-    suspend fun getRunDetails(runId: String): RunDto {
-        return service.getRunDetails(runId).data
+    override  suspend fun getRunDetails(runId: String): RunDto {
+        return serviceSpeedrun.getRunDetails(runId).data
     }
 
-
-    suspend fun getSplitsForRun(runId: String): List<SplitsDto>{
-        return splitsService.getSplitsForRun(runId).run.splits
-    }
 }

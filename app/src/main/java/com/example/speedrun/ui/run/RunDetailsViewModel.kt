@@ -2,7 +2,7 @@ package com.example.speedrun.ui.run
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.example.data.Datamanager
+import com.example.data.DataManager
 import com.example.network.model.dto.RunDto
 import com.example.network.model.splits.SplitsDto
 import com.example.speedrun.ui.base.BaseViewModel
@@ -10,7 +10,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class RunDetailsViewModel @Inject constructor(val datamanager: Datamanager) : BaseViewModel() {
+class RunDetailsViewModel @Inject constructor(val datamanager: DataManager) : BaseViewModel() {
     val runDetailsLiveData = MutableLiveData<RunDto>()
     val splitsLiveData = MutableLiveData<List<SplitsDto>>()
 
@@ -19,7 +19,7 @@ class RunDetailsViewModel @Inject constructor(val datamanager: Datamanager) : Ba
             return
 
         viewModelScope.launch(Dispatchers.IO) {
-            val runDto = datamanager.getRunDetails(runId)
+            val runDto = datamanager.speedrunDataManager.getRunDetails(runId)
 
             val splitId = runDto.splits?.uri?.split("/runs/")?.get(1)
 
@@ -34,7 +34,7 @@ class RunDetailsViewModel @Inject constructor(val datamanager: Datamanager) : Ba
             return
 
         viewModelScope.launch(Dispatchers.IO) {
-            val splits = datamanager.getSplitsForRun(id)
+            val splits = datamanager.splitsDataManager.getSplitsForRun(id)
 
             splitsLiveData.postValue(splits)
         }

@@ -33,7 +33,7 @@ class UserProfileActivity : BaseActivity(), UserFragmentCommunicator {
 
         activityComponent?.inject(this)
 
-        userId = Constants.ACTIVITY_EXTRA_USER_ID
+        userId = intent.getStringExtra(Constants.ACTIVITY_EXTRA_USER_ID)
         viewModel?.getUserDetails(userId)
         initDrawer()
         initFragments()
