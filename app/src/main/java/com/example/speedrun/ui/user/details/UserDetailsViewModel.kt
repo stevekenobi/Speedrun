@@ -17,6 +17,9 @@ class UserDetailsViewModel @Inject constructor(val datamanager: Datamanager):Bas
     val gamesModeratedByUser = MutableLiveData<List<GameDto>>()
     val seriesModeratedByUser = MutableLiveData<List<SeriesDto>>()
 
+    val gameClickedLiveData = MutableLiveData<String>()
+    val seriesClickedLiveData = MutableLiveData<String>()
+
     fun getUserDetails(userId: String?) {
         if (userId.isNullOrEmpty())
             return

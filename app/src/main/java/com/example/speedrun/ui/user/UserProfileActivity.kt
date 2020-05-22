@@ -3,6 +3,7 @@ package com.example.speedrun.ui.user
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.lifecycle.Observer
@@ -32,12 +33,12 @@ class UserProfileActivity : BaseActivity(), UserFragmentCommunicator {
 
         activityComponent?.inject(this)
 
+        userId = Constants.ACTIVITY_EXTRA_USER_ID
+        viewModel?.getUserDetails(userId)
         initDrawer()
-        userId = Constants.NORDANIX_USER_ID
         initFragments()
         initMenu()
         createUserRunsFragment()
-        viewModel?.getUserDetails(userId)
     }
 
     override fun onBackPressed() {
@@ -124,6 +125,10 @@ class UserProfileActivity : BaseActivity(), UserFragmentCommunicator {
         val intent = Intent(this, GameDetailsActivity::class.java)
         intent.putExtra(Constants.ACTIVITY_EXTRA_GAME_ID, id)
         startActivity(intent)
+    }
+
+    override fun onSeriesClicked(id: String) {
+        Toast.makeText(this, "Not implemented", Toast.LENGTH_SHORT).show()
     }
 
     override fun onRunClicked(id: String) {
