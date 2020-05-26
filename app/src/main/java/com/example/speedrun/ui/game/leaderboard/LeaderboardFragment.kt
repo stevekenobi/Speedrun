@@ -25,8 +25,7 @@ class LeaderboardFragment : BaseFragment() {
         const val KEY_LEVEL_ID = "level_id"
 
         fun newInstance(gameId: String, levelId: String?, categoryId: String): Fragment {
-            val fragment =
-                LeaderboardFragment()
+            val fragment = LeaderboardFragment()
 
             fragment.withArguments {
                 putString(KEY_GAME_ID, gameId)
@@ -88,8 +87,7 @@ class LeaderboardFragment : BaseFragment() {
 
 
         viewModel?.leaderboardLiveData?.observe(this, Observer { leaderboardRunList ->
-            category_leaderboard.adapter =
-                LeaderboardRunsAdapter(
+            category_leaderboard.adapter = LeaderboardRunsAdapter(
                     viewModel,
                     leaderboardRunList,
                     leaderboardRunList.any { run ->
@@ -101,10 +99,7 @@ class LeaderboardFragment : BaseFragment() {
             if (leaderboardRunId.isNullOrEmpty())
                 return@Observer
 
-            val intent = Intent(
-                activity,
-                RunDetailsActivity::class.java
-            ).putExtra(Constants.ACTIVITY_EXTRA_RUN_ID, leaderboardRunId)
+            val intent = Intent(activity, RunDetailsActivity::class.java).putExtra(Constants.ACTIVITY_EXTRA_RUN_ID, leaderboardRunId)
             activity?.startActivity(intent)
         })
 
@@ -112,10 +107,8 @@ class LeaderboardFragment : BaseFragment() {
             if (userId.isNullOrEmpty())
                 return@Observer
 
-            val intent = Intent(
-                activity,
-                UserProfileActivity::class.java
-            ).putExtra(Constants.ACTIVITY_EXTRA_USER_ID, userId)
+            val intent = Intent(activity, UserProfileActivity::class.java).putExtra(Constants.ACTIVITY_EXTRA_USER_ID, userId)
+
             activity?.startActivity(intent)
         })
     }

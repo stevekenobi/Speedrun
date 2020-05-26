@@ -14,11 +14,7 @@ import kotlinx.android.synthetic.main.item_user_run.view.*
 class UserRunsAdapter(val viewModel: UserRunsViewModel?, val runs: List<UserRunDto>, val showMills: Boolean): RecyclerView.Adapter<UserRunsAdapter.UserRunViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserRunViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_user_run, parent, false)
-        return UserRunViewHolder(
-            viewModel,
-            view,
-            showMills
-        )
+        return UserRunViewHolder(viewModel, view, showMills)
     }
 
     override fun getItemCount(): Int {

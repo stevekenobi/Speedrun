@@ -37,7 +37,8 @@ object RunTimeConverter {
                 if (showMills)
                     return "${mins}m ${secs}s ${mills}ms"
 
-                return "${mins}m ${secs}s"}
+                return "${mins}m ${secs}s"
+            }
         }
         if (showMills)
             return "${hours}h ${mins}m ${secs}s ${mills}ms"

@@ -7,8 +7,9 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class AndroidSpeedrunDataManager @Inject constructor(override val serviceSpeedrun: SpeedrunService) :
-    SpeedrunDataManager {
+class AndroidSpeedrunDataManager @Inject constructor(
+    override val serviceSpeedrun: SpeedrunService
+) : SpeedrunDataManager {
 
 //    suspend fun getResources(): Map<String, String> {
 //        val resourcesFromServer = service.getResources().data

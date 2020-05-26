@@ -15,17 +15,11 @@ class LeaderboardRunPlayersAdapter(
     val viewModel: LeaderboardViewModel?,
     val players: List<UserDto>
 ) : RecyclerView.Adapter<LeaderboardRunPlayersAdapter.LeaderboardRunPlayerViewHolder>() {
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): LeaderboardRunPlayerViewHolder {
-        val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.item_latest_player, parent, false)
 
-        return LeaderboardRunPlayerViewHolder(
-            viewModel,
-            view
-        )
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LeaderboardRunPlayerViewHolder {
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_latest_player, parent, false)
+
+        return LeaderboardRunPlayerViewHolder(viewModel, view)
     }
 
     override fun getItemCount(): Int {

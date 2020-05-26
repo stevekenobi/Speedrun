@@ -29,7 +29,7 @@ class RunDetailsViewModel @Inject constructor(val datamanager: DataManager) : Ba
         }
     }
 
-    fun getSplits(id: String?) {
+    private fun getSplits(id: String?) {
         if (id.isNullOrEmpty())
             return
 

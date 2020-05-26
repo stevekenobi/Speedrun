@@ -16,8 +16,7 @@ import kotlinx.android.synthetic.main.fragment_latest_runs.*
 class LatestRunsFragment : BaseFragment() {
 
     companion object {
-        fun newInstance() =
-            LatestRunsFragment()
+        fun newInstance() = LatestRunsFragment()
     }
 
     var viewModel: LatestRunsViewModel? = null
@@ -47,11 +46,7 @@ class LatestRunsFragment : BaseFragment() {
 
     private fun initUi() {
         main_rv_latest_runs.layoutManager = LinearLayoutManager(context)
-        main_rv_latest_runs.addItemDecoration(
-            ItemDivideDecorator(
-                80
-            )
-        )
+        main_rv_latest_runs.addItemDecoration(ItemDivideDecorator(80))
     }
 
     override fun initViewModel() {

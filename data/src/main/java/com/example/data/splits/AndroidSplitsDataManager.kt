@@ -6,8 +6,9 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class AndroidSplitsDataManager @Inject constructor(override val serviceSplits: SplitsService) :
-    SplitsDataManager {
+class AndroidSplitsDataManager @Inject constructor(
+    override val serviceSplits: SplitsService
+) : SplitsDataManager {
 
     override suspend fun getSplitsForRun(runId: String): List<SplitsDto> {
         return serviceSplits.getSplitsForRun(runId).run.splits

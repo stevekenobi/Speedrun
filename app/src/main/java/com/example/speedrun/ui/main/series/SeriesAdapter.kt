@@ -13,10 +13,7 @@ import kotlinx.android.synthetic.main.item_popular_game.view.*
 class SeriesAdapter (val viewModel: SeriesViewModel?, val seriesList: List<SeriesDto>): RecyclerView.Adapter<SeriesAdapter.SeriesViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SeriesViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_popular_game, parent, false)
-        return SeriesViewHolder(
-            viewModel,
-            view
-        )
+        return SeriesViewHolder(viewModel, view)
     }
 
     override fun getItemCount(): Int {

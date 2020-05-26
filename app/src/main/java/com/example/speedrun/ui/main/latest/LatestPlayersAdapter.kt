@@ -15,10 +15,7 @@ class LatestPlayersAdapter(val viewModel: LatestRunsViewModel?, private val play
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LatestPlayersViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_latest_player, parent, false)
-        return LatestPlayersViewHolder(
-            viewModel,
-            view
-        )
+        return LatestPlayersViewHolder(viewModel, view)
     }
 
     override fun getItemCount(): Int {

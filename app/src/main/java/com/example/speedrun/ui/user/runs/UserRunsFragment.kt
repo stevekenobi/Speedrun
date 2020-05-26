@@ -55,10 +55,7 @@ class UserRunsFragment : BaseFragment() {
 
     private fun updateUserRuns(gameList: List<UserGameModel>) {
         rv_user_runs.adapter =
-            UserGamesAdapter(
-                viewModel,
-                gameList
-            )
+            UserGamesAdapter(viewModel, gameList)
     }
 
     override fun initViewModel() {

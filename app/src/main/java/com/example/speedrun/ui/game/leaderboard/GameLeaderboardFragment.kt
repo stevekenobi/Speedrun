@@ -18,27 +18,19 @@ class GameLeaderboardFragment : BaseFragment() {
 
         const val KEY_GAME_ID = "game_id"
         const val KEY_LEVEL_ID = "level_id"
-        fun newInstance(gameId: String?): GameLeaderboardFragment {
-            val fragment =
-                GameLeaderboardFragment()
 
-            fragment.withArguments {
+        fun newInstance(gameId: String?): GameLeaderboardFragment {
+
+            return GameLeaderboardFragment().withArguments {
                 putString(KEY_GAME_ID, gameId)
             }
-
-            return fragment
         }
 
         fun newInstance(gameId: String?, levelId: String?): GameLeaderboardFragment {
-            val fragment =
-                GameLeaderboardFragment()
-
-            fragment.arguments = Bundle().apply {
+            return GameLeaderboardFragment().withArguments {
                 putString(KEY_GAME_ID, gameId)
                 putString(KEY_LEVEL_ID, levelId)
             }
-
-            return fragment
         }
     }
 

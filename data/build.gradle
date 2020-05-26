@@ -38,8 +38,11 @@ dependencies {
 
     api deps.google.dagger
     kapt deps.google.daggerProcessor
+
     api deps.reactivex.rxAndroid
+
     api deps.additional.restring
+
     api 'org.apache.commons:commons-lang3:3.10'
     api project(':network')
     api project(':storage')

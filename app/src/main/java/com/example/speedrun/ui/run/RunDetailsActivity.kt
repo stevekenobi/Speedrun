@@ -58,9 +58,7 @@ class RunDetailsActivity : BaseActivity() {
     @SuppressLint("SetTextI18n")
     private fun setDetailsPage(run: RunDto) {
         run_details.text =
-            "${run.category.data.name} in ${RunTimeConverter.from(run.times.primary_t, run.times.primary_t != floor(run.times.primary_t))} by ${RunsTextUtils.setPlayersText(
-                run.players.data
-            )}"
+            "${run.category.data.name} in ${RunTimeConverter.from(run.times.primary_t, run.times.primary_t != floor(run.times.primary_t))} by ${RunsTextUtils.setPlayersText(run.players.data)}"
         run_comment.text = run.comment
     }
 }

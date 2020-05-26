@@ -15,10 +15,7 @@ class LatestGameAdapter(val viewModel: LatestRunsViewModel?, private val latestG
     RecyclerView.Adapter<LatestGameAdapter.LatestGameViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LatestGameViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_latest_game, parent, false)
-        return LatestGameViewHolder(
-            viewModel,
-            view
-        )
+        return LatestGameViewHolder(viewModel, view)
     }
 
     override fun getItemCount() = latestGameList.size
@@ -47,12 +44,7 @@ class LatestGameAdapter(val viewModel: LatestRunsViewModel?, private val latestG
                 }
 
                 latest_game_runs.layoutManager = LinearLayoutManager(context)
-                latest_game_runs.adapter =
-                    LatestRunAdapter(
-                        viewModel,
-                        game.runs,
-                        game.showMills
-                    )
+                latest_game_runs.adapter = LatestRunAdapter(viewModel, game.runs, game.showMills)
             }
         }
     }

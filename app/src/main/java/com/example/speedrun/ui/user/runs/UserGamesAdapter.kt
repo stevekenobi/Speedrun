@@ -14,10 +14,7 @@ import kotlinx.android.synthetic.main.item_user_game.view.*
 class UserGamesAdapter(val viewModel: UserRunsViewModel?, private val gameList: List<UserGameModel>) : RecyclerView.Adapter<UserGamesAdapter.UserGameViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserGameViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_user_game, parent, false)
-        return UserGameViewHolder(
-            viewModel,
-            view
-        )
+        return UserGameViewHolder(viewModel, view)
     }
 
     override fun getItemCount(): Int {
@@ -46,11 +43,7 @@ class UserGamesAdapter(val viewModel: UserRunsViewModel?, private val gameList: 
 
                 user_game_runs.layoutManager = LinearLayoutManager(context)
                 user_game_runs.adapter =
-                    UserRunsAdapter(
-                        viewModel,
-                        game.runs,
-                        game.showMills
-                    )
+                    UserRunsAdapter(viewModel, game.runs, game.showMills)
             }
         }
     }

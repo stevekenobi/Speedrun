@@ -21,14 +21,10 @@ class GameDetailsFragment : BaseFragment() {
         const val KEY_GAME_ID = "game_id"
 
         fun newInstance(gameId: String?): GameDetailsFragment {
-            val fragment =
-                GameDetailsFragment()
 
-            fragment.withArguments {
+            return GameDetailsFragment().withArguments {
                 putString(KEY_GAME_ID, gameId)
             }
-
-            return fragment
         }
     }
 
@@ -69,13 +65,7 @@ class GameDetailsFragment : BaseFragment() {
         val listChild = HashMap<String, List<LevelDto>>()
         listChild[headerList[1]] = levels
 
-        game_levels_list.setAdapter(
-            ExpandableListAdapter(
-                viewModel,
-                headerList,
-                listChild
-            )
-        )
+        game_levels_list.setAdapter(ExpandableListAdapter(viewModel, headerList, listChild))
     }
 
     override fun initViewModel() {

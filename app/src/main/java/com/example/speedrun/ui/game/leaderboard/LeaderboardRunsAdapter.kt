@@ -14,11 +14,7 @@ import kotlinx.android.synthetic.main.item_leaderboard_run.view.*
 class LeaderboardRunsAdapter(val viewModel: LeaderboardViewModel?, val runs: List<LeaderboardRunDto>, val showMills: Boolean) : RecyclerView.Adapter<LeaderboardRunsAdapter.LeaderboardRunViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LeaderboardRunViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_leaderboard_run, parent, false)
-        return LeaderboardRunViewHolder(
-            viewModel,
-            view,
-            showMills
-        )
+        return LeaderboardRunViewHolder(viewModel, view, showMills)
     }
 
     override fun getItemCount(): Int {
@@ -37,11 +33,7 @@ class LeaderboardRunsAdapter(val viewModel: LeaderboardViewModel?, val runs: Lis
                     viewModel?.leaderboardRunClickedLiveData?.value = run.run.id
                 }
                 leaderboard_run_players.layoutManager = LinearLayoutManager(context)
-                leaderboard_run_players.adapter =
-                    LeaderboardRunPlayersAdapter(
-                        viewModel,
-                        run.run.playersToDisplay
-                    )
+                leaderboard_run_players.adapter = LeaderboardRunPlayersAdapter(viewModel, run.run.playersToDisplay)
 
                 leaderboard_run_place.text = RunsTextUtils.setPlaceForLeaderboard(run.place)
 
