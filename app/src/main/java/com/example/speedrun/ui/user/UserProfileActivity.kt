@@ -24,8 +24,8 @@ class UserProfileActivity : BaseActivity(), UserFragmentCommunicator {
 
     private var userId: String? = null
 
-    private var userRunsFragment: UserRunsFragment? = null
-    private var userDetailsFragment: UserDetailsFragment? = null
+    private lateinit var userRunsFragment: UserRunsFragment
+    private lateinit var userDetailsFragment: UserDetailsFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,13 +54,13 @@ class UserProfileActivity : BaseActivity(), UserFragmentCommunicator {
 
     private fun createUserRunsFragment() {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.user_details_fragment, userRunsFragment!!)
+        fragmentTransaction.replace(R.id.user_details_fragment, userRunsFragment)
         fragmentTransaction.commit()
     }
 
     private fun createInfoFragment() {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.user_details_fragment, userDetailsFragment!!)
+        fragmentTransaction.replace(R.id.user_details_fragment, userDetailsFragment)
         fragmentTransaction.commit()
     }
 
@@ -86,7 +86,7 @@ class UserProfileActivity : BaseActivity(), UserFragmentCommunicator {
     }
 
     private fun initMenu() {
-        user_details_menu.setNavigationItemSelectedListener {item ->
+        user_details_menu.setNavigationItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.user_menu_full -> {
                     createUserRunsFragment()

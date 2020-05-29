@@ -6,7 +6,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class CommonDataManager @Inject constructor(
+class CommonDataManager(
     override val splitsDataManager: SplitsDataManager,
     override val speedrunDataManager: SpeedrunDataManager
 ) : DataManager

@@ -35,6 +35,7 @@ abstract class BaseActivity : AppCompatActivity() {
 
     var activityComponent: ActivityComponent? = null
 
+    // TODO wtf is going on here
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(getLayoutId())
@@ -50,9 +51,9 @@ abstract class BaseActivity : AppCompatActivity() {
 
             activityComponent?.inject(this)
 
-            initViewModel()
-            observeViewModel()
         }
+        initViewModel()
+        observeViewModel()
     }
 
     @LayoutRes

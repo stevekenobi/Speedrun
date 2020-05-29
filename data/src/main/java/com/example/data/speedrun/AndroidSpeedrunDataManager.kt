@@ -7,7 +7,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class AndroidSpeedrunDataManager @Inject constructor(
+class AndroidSpeedrunDataManager(
     override val serviceSpeedrun: SpeedrunService
 ) : SpeedrunDataManager {
 

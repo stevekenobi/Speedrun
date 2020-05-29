@@ -6,7 +6,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class AndroidSplitsDataManager @Inject constructor(
+class AndroidSplitsDataManager(
     override val serviceSplits: SplitsService
 ) : SplitsDataManager {
 

@@ -9,7 +9,7 @@ import com.example.network.model.dto.SeriesDto
 import com.example.speedrun.R
 import kotlinx.android.synthetic.main.item_game_series_moderate.view.*
 
-class ItemsModeratedAdapter(val viewModel: UserDetailsViewModel?, val itemList: List<Any>) : RecyclerView.Adapter<ItemsModeratedAdapter.ItemsModeratedViewHolder>() {
+class ItemsModeratedAdapter(val viewModel: UserDetailsViewModel?, private val itemList: List<Any>) : RecyclerView.Adapter<ItemsModeratedAdapter.ItemsModeratedViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemsModeratedViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_game_series_moderate, parent, false)
         return ItemsModeratedViewHolder(viewModel, view)
